@@ -42,12 +42,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
-<<<<<<< HEAD
   gem 'rspec-rails', '~> 5.0.0'
-=======
   gem 'faker'
->>>>>>> 7b709624ba05603226ca549d827129481cc72b49
-
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
@@ -69,8 +65,10 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 4.0'
   gem 'factory_bot_rails'
+  gem 'rexml', '~> 3.2', '>= 3.2.4'
+  gem 'database_cleaner-active_record'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
