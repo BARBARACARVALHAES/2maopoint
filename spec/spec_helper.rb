@@ -27,11 +27,11 @@ Capybara.default_max_wait_time = 10
 RSpec.configure do |config|
 
   config.before(:suite) do
-    # Litting FactoryBot (create all the factory and test if there is no validation/creation problem)
-    FactoryBot.lint
     # Clean the DB before/after the tests
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    # Litting FactoryBot (create all the factory and test if there is no validation/creation problem)
+    FactoryBot.lint
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
