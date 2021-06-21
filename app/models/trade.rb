@@ -3,4 +3,6 @@ class Trade < ApplicationRecord
   belongs_to :item_category
   belongs_to :seller_id, class_name: "User"
   belongs_to :buyer_id, class_name: "User"
+
+  attr_accessor :created_by
 end
