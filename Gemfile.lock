@@ -95,11 +95,16 @@ GEM
       railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.7.0)
+<<<<<<< HEAD
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+=======
+    faker (2.18.0)
+      i18n (>= 1.6, < 2)
+>>>>>>> 7b709624ba05603226ca549d827129481cc72b49
     ffi (1.15.3)
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
@@ -273,7 +278,11 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   dotenv-rails
+<<<<<<< HEAD
   factory_bot_rails
+=======
+  faker
+>>>>>>> 7b709624ba05603226ca549d827129481cc72b49
   font-awesome-sass
   jbuilder (~> 2.7)
   listen (~> 3.3)

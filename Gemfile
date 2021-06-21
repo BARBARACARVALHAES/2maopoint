@@ -42,7 +42,11 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
+<<<<<<< HEAD
   gem 'rspec-rails', '~> 5.0.0'
+=======
+  gem 'faker'
+>>>>>>> 7b709624ba05603226ca549d827129481cc72b49
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
