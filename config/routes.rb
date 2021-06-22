@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :trades
   resources :profiles do
-    get 'profiles/:id/invitations', to: 'profiles#invitations'
+    member do
+      get :invitations
+    end
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

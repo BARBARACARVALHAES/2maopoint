@@ -1,8 +1,6 @@
 <h1>Agendamentos</h1>
 <p>Olá <%= @user.first_name %>, confira todos os seus agendamentos e convites.</p>
 
-<h2>Você marcou:</h2>
-
   <table class="table">
     <thead>
       <tr>
@@ -12,11 +10,17 @@
       </tr>
     </thead>
     <tbody>
-      <%= @authored_trades.each do |trade| %>
+      <% @trades.each do |trade| %>
         <tr>
-          <td><%= trade.receiver_email %></td>
+          <td>
+            <% if trade.author == trade.buyer %>
+              <%= trade.seller.name if trade.seller %>
+            <% else %>
+              <%= trade.buyer.name if trade.buyer%>
+            <% end %>
+          </td>
           <td><%= trade.date %></td>
-          <td><%= trade.carrefour_unit %></td>
+          <td><%= trade.carrefour_unit.name if trade.carrefour_unit%></td>
         </tr>
       <% end %>
     </tbody>

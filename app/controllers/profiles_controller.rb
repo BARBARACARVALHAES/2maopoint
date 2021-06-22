@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   def invitations
     @user = current_user
-    @authored_trades = Trade.where(author: @user.id)
+    @trades = Trade.where(buyer: @user).or(Trade.where(seller: @user))
   end
 end
