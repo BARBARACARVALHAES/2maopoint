@@ -3,5 +3,4 @@ class Trade < ApplicationRecord
   belongs_to :item_category, optional: true
   belongs_to :seller, class_name: "User", optional: true
   belongs_to :buyer, class_name: "User", optional: true
-  attr_accessor :created_by
 end
