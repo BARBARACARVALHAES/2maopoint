@@ -1,5 +1,33 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<section> 
+    <figure>
+        <%= image_tag "bannercarrefour.png", class: "img_banner", alt: "banner" %>
+    </figure>
+    <div class="tittleBanner">
+        <h1>Através do 2ª Mão Point, você pode agendar a sua troca na loja Carrefour mais próxima, realizando seu negócio de forma segura!
+        </h1>
+    </div>
+</section> 
 
-
-
+<section class="containerSegundo">
+    <div class="texto-container">
+        <div>
+            <h1>Troca de usados descomplicada</h1>
+            <p> Acreditamos que a compra e venda de usados deve ser algo seguro e tranquilo para ambos os usuários, de forma que a troca traga benefícios para todos!  </p>
+            <p> Aproveite a intermediação do 2ª Mão Point e faça suas negociações sem dor de cabeça e conte conosco à qualquer momento.</p>
+        </div>
+        <div class="iconesHome">            
+                <%= image_tag "icones-home.png", class: "iconesImg", alt: "icones" %>
+        </div>           
+    </div>
+    <div>
+        <h2>Faça seu login</h2>
+        <%= form_for(:user, :url => session_path(:user)) do |f| %>
+            <%= f.text_field :email %>
+            <%= f.password_field :password %>
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+            <%= f.submit 'Sign in' %>
+            <%= link_to "Forgot your password?", new_password_path(:user) %>
+        <% end %>
+    </div>
+</section>
