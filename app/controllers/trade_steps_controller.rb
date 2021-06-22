@@ -1,36 +1,57 @@
 class TradeStepsController < ApplicationController
   include Wicked::Wizard
-  steps :trade_details, :calendar, :location, :invitation
+  steps :calendar, :location, :invitation, :confirmation
   before_action :authenticate_user!
 
-  def show
-    @user = current_user
-    @trade = Trade.find(params[:trade_id])
+  def new
+    @trade = Trade.new
     @item_categories = ItemCategory.all
-    @carrefour_units = CarrefourUnit.all
-    case step
-    when :trade_details
-      if params[:created_by] == "Vendedor"
-        @trade.seller_id = current_user.id
-      else
-        @trade.buyer_id = current_user.id
-      end
-    when :location
-      render 'invitation' if @trade.save
-    end
+  end
 
-    @trade.save
+  def create
+    @trade = Trade.new(trade_params)
+    if params[:author] == "Vendedor"
+      @trade.seller_id = current_user.id
+    else
+      @trade.buyer_id = current_user.id
+    end
+    if @trade.save
+      session[:trade_id] = @trade.id
+      redirect_to wizard_path(steps.first, trade_id: @trade.id)
+    else
+      render :new
+    end
+  end
+
+  def show
+    @trade = Trade.find(session[:trade])
+    case step
+    when :location
+      @carrefour_units = CarrefourUnit.all
+    end
     render_wizard
   end
 
   def update
-    @trade = Trade.find(params[:trade_id])
-    @trade.update_attributes(params[:trade])
+    @trade = Trade.find(session[:trade])
+    @trade.update(trade_params)
     render_wizard @trade
   end
 
   def create
-    @trade = Trade.new
-    redirect_to wizard_path(steps.first, trade_id: @trade.id)
+    @trade = Trade.new(trade_params)
+    if @trade.save
+      session[:trade_id] = @trade.id
+      redirect_to wizard_path(steps.first, trade_id: @trade.id)
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def trade_params
+    params.require(:trade).permit(:item, :item_category_id, :buyer_id, :seller_id, :carrefour_unit_id, :date,
+                                  :buyer_cep, :seller_cep, :receiver_email, :author)
   end
 end
