@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_165917) do
+ActiveRecord::Schema.define(version: 2021_06_22_155457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2021_06_21_165917) do
   create_table "trades", force: :cascade do |t|
     t.integer "buyer_id"
     t.integer "seller_id"
-    t.bigint "carrefour_unit_id", null: false
-    t.bigint "item_category_id", null: false
+    t.integer "carrefour_unit_id"
+    t.integer "item_category_id"
     t.datetime "date"
     t.string "item"
     t.boolean "buyer_accepted"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_165917) do
     t.string "receiver_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "author"
     t.index ["carrefour_unit_id"], name: "index_trades_on_carrefour_unit_id"
     t.index ["item_category_id"], name: "index_trades_on_item_category_id"
   end
