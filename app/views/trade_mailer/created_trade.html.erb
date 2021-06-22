@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Olà, <%= @user.email %></h1>
+    <p>
+      Você recebeu um agendamento do 2-Mao Carrefour.
+    </p>
+    <p>
+      Para fazer o login, segue o link: <%= link_to 'Clique aqui', profile_url(@user) %>.
+    </p>
+  </body>
+</html>
