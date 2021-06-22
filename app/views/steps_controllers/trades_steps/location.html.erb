@@ -1,0 +1,9 @@
+<%= simple_form_for @trade, url: wizard_path do |f| %>
+  <%= f.input :buyer_cep, label: "CEP do comprador" %>
+  <%= f.input :seller_cep, label: "CEP do vendedor" %>
+  <%= f.input :carrefour_unit_id, lable: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all %>
+  <%= f.input :date, lable: "Data:", as: :datetime %>
+  <%= f.submit "Avançar" %>
+<% end %>
+
+<%= link_to 'Back', trade_step_path(@trade, "infos") %>

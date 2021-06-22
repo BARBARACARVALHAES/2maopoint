@@ -1,6 +1,0 @@
-<%= simple_form_for @trade, url: wizard_path do |f| %>
-  <%= f.association :carrefour_unit, lable: "Unidade do Carrefour:", as: :select, collect: @carrefour_units, label_method: :suburb %>
-  <%= f.submit 'Avançar' %>
-<% end %>
-
-<%= link_to 'Back', :back %>
