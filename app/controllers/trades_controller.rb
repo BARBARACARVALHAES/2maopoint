@@ -22,7 +22,7 @@ class TradesController < ApplicationController
   end
 
   def destroy
-    @trade.destroy
+    redirect_to invitations_profile_path if @trade.destroy
   end
 
   private

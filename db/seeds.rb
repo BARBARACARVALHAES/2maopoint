@@ -34,7 +34,7 @@ end
   p "Create #{u.id} user"
 end
 
-10.times do |_n|
+20.times do |_n|
   buyer = User.all.sample
   seller = User.where.not(id: buyer.id).sample
   t = Trade.create!(
