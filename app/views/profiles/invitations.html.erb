@@ -1,0 +1,27 @@
+<h1>Agendamentos</h1>
+<p>Olá <%= @user.first_name %>, confira todos os seus agendamentos e convites.</p>
+
+<h2>Você marcou:</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Convidado</th>
+        <th scope="col">Data</th>
+        <th scope="col">Local</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= @authored_trades.each do |trade| %>
+        <tr>
+          <td><%= trade.receiver_email %></td>
+          <td><%= trade.date %></td>
+          <td><%= trade.carrefour_unit %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+
+<h2>Você recebeu os convites abaixo:</h2>
