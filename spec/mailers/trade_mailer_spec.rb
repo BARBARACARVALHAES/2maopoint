@@ -1,5 +1,10 @@
 require "rails_helper"
 
 RSpec.describe TradeMailer, type: :mailer do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { create(:user) }
+
+  it '#created_trade' do
+    mailer = described_class.with(user: user).created_trade
+    expect(mailer.to).to eq([user.email])
+  end
 end
