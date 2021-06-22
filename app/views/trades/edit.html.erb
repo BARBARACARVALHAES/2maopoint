@@ -1,0 +1,6 @@
+<div class="container content-container">
+  <%= simple_form_for @trade, method: :put do |f| %>
+    <%= f.input  :date, label: "Data", as: :datetime %>
+    <%= f.submit "Alterar" %>
+  <% end %>
+</div>

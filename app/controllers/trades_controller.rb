@@ -18,7 +18,11 @@ class TradesController < ApplicationController
 
   def update
     @trade = Trade.find(params[:id])
-    @trade.update(trade_params)
+    if @trade.update(trade_params)
+      redirect_to invitations_profile_path
+    else
+      render :edit
+    end
   end
 
   def destroy

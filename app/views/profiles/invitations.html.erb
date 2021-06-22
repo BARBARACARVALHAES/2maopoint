@@ -17,7 +17,7 @@
             <td><%= trade.invited.name %></td>
             <td><%= trade.date.strftime("%d/%m/%Y") %></td>
             <td><%= trade.carrefour_unit.name if trade.carrefour_unit%></td>
-            <td><%= link_to "Reagendar" %></td>
+            <td><%= link_to "Reagendar", edit_trade_path(trade) %></td>
             <td><%= link_to "Cancelar", trade_path(trade), method: :delete, data: { confirm: "Você tem certeza que deseja cancelar este agendamento?"} %></td>
           </tr>
         <% end %>
