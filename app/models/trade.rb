@@ -5,13 +5,17 @@ class Trade < ApplicationRecord
   belongs_to :buyer, class_name: "User", optional: true
 
   enum form_steps: {
-    infos: [:item, :item_category_id, :author],
-    location: [:carrefour_unit_id, :date, :buyer_cep, :seller_cep],
+    infos: %i[item item_category_id author],
+    location: %i[carrefour_unit_id date buyer_cep seller_cep],
     invitation: [:receiver_email]
   }
   attr_accessor :form_step
 
   AUTHOR = ['Vendedor', 'Comprador']
+
+  def invited
+    author == buyer ? seller : buyer
+  end
 
   with_options if: -> { required_for_step?(:infos) } do
     validates :item, presence: true
@@ -33,7 +37,7 @@ class Trade < ApplicationRecord
   def required_for_step?(step)
     # All fields are required if no form step is present
     return true if form_step.nil?
-    
+
     # All fields from previous steps are required
     ordered_keys = self.class.form_steps.keys.map(&:to_sym)
     !!(ordered_keys.index(step) <= ordered_keys.index(form_step))

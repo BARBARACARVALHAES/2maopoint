@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :trades do
     resources :steps, only: %i[show update], controller: 'steps_controllers/trades_steps'
   end
-
-  resources :profiles
+  resources :profiles do
+    member do
+      get :invitations
+    end
+  end
 end
