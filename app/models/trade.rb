@@ -11,6 +11,8 @@ class Trade < ApplicationRecord
   }
   attr_accessor :form_step
 
+  AUTHOR = ['Vendedor', 'Comprador']
+
   with_options if: -> { required_for_step?(:infos) } do
     validates :item, presence: true
     validates :item_category_id, presence: true
