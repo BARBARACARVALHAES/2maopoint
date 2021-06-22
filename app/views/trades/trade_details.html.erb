@@ -1,6 +1,6 @@
 <%= simple_form_for @trade do |f| %>
   <%= f.input :created_by, lable: "Nesta transação, você é o:", as: :radio_buttons, collection: ["Vendedor", "Comprador"] %>
-  <%= f.association :item_category, as: :select, label: "A categoria do item é:", label_method: :name, collection: @item_categories %>
+  <%= f.input :item_category, as: :select, label: "A categoria do item é:", label_method: :name, collection: @item_categories %>
   <%= f.input :item, label: "O item transacionado é:" %>
   <%= f.submit "Avançar" %>
 <% end %>

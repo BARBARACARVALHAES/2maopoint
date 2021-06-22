@@ -1,5 +1,7 @@
 class TradesController < ApplicationController
-  before_action :set_trade, only: %i[edit update destroy]
+  include Wicked::Wizard
+  steps :calendar, :location, :invitation, :confirmation
+  before_action :set_trade, only: %i[edit destroy]
 
   def index
     @trades = policy_scope(Trade)
@@ -13,6 +15,11 @@ class TradesController < ApplicationController
 
   def create
     @trade = Trade.new(trade_params)
+    if params[:author] == "Vendedor"
+      @trade.seller_id = current_user.id
+    else
+      @trade.buyer_id = current_user.id
+    end
     if @trade.save
       session[:trade_id] = @trade.id
       redirect_to wizard_path(steps.first, trade_id: @trade.id)
@@ -21,10 +28,21 @@ class TradesController < ApplicationController
     end
   end
 
+  def show
+    @trade = Trade.find(session[:trade])
+    case step
+    when :location
+      @carrefour_units = CarrefourUnit.all
+    end
+    render_wizard
+  end
+
   def edit; end
 
   def update
+    @trade = Trade.find(session[:trade])
     @trade.update(trade_params)
+    render_wizard @trade
   end
 
   def destroy
