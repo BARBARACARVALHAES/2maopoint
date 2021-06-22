@@ -5,10 +5,16 @@ class TradeStepsController < ApplicationController
 
   def show
     @user = current_user
-    @trade = Trade.new
+    @trade = Trade.find(params[:trade_id])
     @item_categories = ItemCategory.all
     @carrefour_units = CarrefourUnit.all
     case step
+    when :trade_details
+      if params[:created_by] == "Vendedor"
+        @trade.seller_id = current_user.id
+      else
+        @trade.buyer_id = current_user.id
+      end
     when :location
       render 'invitation' if @trade.save
     end
@@ -18,11 +24,13 @@ class TradeStepsController < ApplicationController
   end
 
   def update
+    @trade = Trade.find(params[:trade_id])
+    @trade.update_attributes(params[:trade])
+    render_wizard @trade
   end
 
-  private
-
-  def set_trade
-    @trade = Trade.find(params[:trade_id])
+  def create
+    @trade = Trade.new
+    redirect_to wizard_path(steps.first, trade_id: @trade.id)
   end
 end

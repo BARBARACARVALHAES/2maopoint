@@ -1,5 +1,4 @@
-<%= simple_form_for @trade do |f| %>
+<%= simple_form_for @trade, url: wizard_path do |f| %>
   <%= f.input :date, lable: "Data:", as: :datetime %>
+  <%= f.submit "Avançar" %>
 <% end %>
-
-<%= link_to 'Avançar', next_wizard_path %>

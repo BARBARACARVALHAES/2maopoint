@@ -1,5 +1,5 @@
 class TradesController < ApplicationController
-  before_action :set_trade, only: %i[create edit update destroy]
+  before_action :set_trade, only: %i[edit update destroy]
 
   def index
     @trades = policy_scope(Trade)
@@ -7,12 +7,18 @@ class TradesController < ApplicationController
 
   def new
     @trade = Trade.new
+    @item_categories = ItemCategory.all
     authorize @trade
   end
 
   def create
     @trade = Trade.new(trade_params)
-    @trade.save
+    if @trade.save
+      session[:trade_id] = @trade.id
+      redirect_to trade_trade_steps_path
+    else
+      render :new
+    end
   end
 
   def edit; end
