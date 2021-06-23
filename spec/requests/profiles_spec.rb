@@ -14,9 +14,13 @@ RSpec.describe "Profiles", type: :request do
       expect(response).to have_http_status(200)
     end
 
-    it "can't access profile of another user" do
-      get(profile_path(other_user))
+    it "can access his convites" do
+      get(invitations_profile_path(user))
       expect(response).to have_http_status(200)
+    end
+
+    it "can't access profile of another user" do
+      expect{ get(profile_path(other_user)) }.to raise_error(Pundit::NotAuthorizedError)
     end
   end
 end
