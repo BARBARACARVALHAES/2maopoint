@@ -12,6 +12,7 @@ FactoryBot.define do
     buyer_cep { Faker::Address.postcode }
     seller_cep { Faker::Address.postcode }
     receiver_email { [buyer.email, seller.email].sample }
+    receiver_name { Faker::Name.first_name }
     author_role { Trade::ROLE.sample }
 
     trait :trade_location do
@@ -25,6 +26,7 @@ FactoryBot.define do
       buyer_cep { nil }
       seller_cep { nil }
       receiver_email { nil }
+      receiver_name { nil }
       form_step { :location }
     end
 
@@ -35,6 +37,7 @@ FactoryBot.define do
       buyer_accepted { false }
       seller_accepted { false }
       receiver_email { nil }
+      receiver_name { nil }
       form_step { :invitation }
     end
 

@@ -29,7 +29,7 @@ RSpec.feature "Trades", type: :feature, js: true do
       # Create item categories
       item_categories
       visit(new_trade_path)
-      choose('trade_author_role_vendedor')
+      find('#trade_author_role').find(:xpath, 'option[1]').select_option
       find('#trade_item_category_id').find(:xpath, 'option[2]').select_option
       fill_in('trade_item', with: 'Test item')
       click_on(id: 'avançar')

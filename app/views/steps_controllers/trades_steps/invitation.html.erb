@@ -1,16 +1,21 @@
-<h1>Confirme os dados e faça o convite</h1>
-<p>Confirme a unidade, dia e horário escolhidos para efetivar a negociação.</p>
+<div class="container content-container">
+  <h1>Confirme seus dados</h1>
+  <p class="subtitle">Verifique se a unidade do Carrefour, horário e dia estão corretos e envie o seu convite.</p>
 
-<h2>Unidade Carrefour:</h2>
+<p><strong>Unidade Carrefour:</strong></p>
 <p><%= @trade.carrefour_unit.name %></p>
 
-<h2>Data e horário</h2>
+<p><strong>Data e horário:</strong></p>
 <p><%= @trade.date %></p>
 
-<h2>Envie o convite deste agendamento:</h2>
+<p><strong>Envie o convite deste agendamento:</strong></p>
 <%= simple_form_for @trade, url: wizard_path do |f| %>
-  <%= f.input :receiver_email, label: "Email convite" %>
-  <%= f.submit "Terminar", id: 'terminar'  %>
+  <%= f.input :receiver_name, label: false, placeholder: "Nome do convidado" %>
+  <%= f.input :receiver_email, label: false, placeholder: "nome@email.com" %>
+  <div class="d-flex justify-content-between">
+    <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-outline-primary", style: 'margin-top: 1.8rem;'  %>
+    <%= f.submit "Terminar", class: "btn btn-primary", id: 'terminar' %>
+  </div>
 <% end %>
 
-<%= link_to 'Back', trade_step_path(@trade, "location") %>
+</div>

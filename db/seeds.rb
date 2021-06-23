@@ -53,6 +53,7 @@ end
     buyer_cep: Faker::Address.postcode,
     seller_cep: Faker::Address.postcode,
     receiver_email: [buyer.email, seller.email].sample,
+    receiver_name: Faker::Name.first_name,
     author: author
   )
   p "Create #{t.id} trades"

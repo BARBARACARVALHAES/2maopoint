@@ -21,7 +21,7 @@
     </div>
     <div class= "d-flex flex-column formHome">
         <h2>Faça seu login</h2>
-        <%= form_for(:user, :url => session_path(:user)) do |f| %>
+        <%= form_for(:user, :url => session_path(:user), html: { class: "d-flex flex-column align-items-center" }) do |f| %>
             <%= f.text_field :email, class: "formEmail" %>
             <%= f.password_field :password, class: "formSenha" %>
             <%= f.check_box :remember_me, class: "formBox" %>
