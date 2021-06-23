@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
+  def after_sign_in_path_for(resource)
+    profile_path(resource)
+  end
+
   add_flash_types :success, :failed
 
   include Pundit
@@ -22,3 +26,4 @@ class ApplicationController < ActionController::Base
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 end
+
