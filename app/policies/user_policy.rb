@@ -5,6 +5,10 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    user == record
+  end
+
   def create?
     true
   end
@@ -14,6 +18,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
+    user == record
+  end
+
+  def invitations?
     user == record
   end
 end

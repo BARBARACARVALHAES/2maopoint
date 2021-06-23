@@ -12,6 +12,36 @@ FactoryBot.define do
     buyer_cep { Faker::Address.postcode }
     seller_cep { Faker::Address.postcode }
     receiver_email { [buyer.email, seller.email].sample }
+    receiver_name { Faker::Name.first_name }
     author_role { Trade::ROLE.sample }
+
+    trait :trade_location do
+      author { nil }
+      buyer { nil }
+      seller { nil }
+      carrefour_unit { nil }
+      date { nil }
+      buyer_accepted { false }
+      seller_accepted { false }
+      buyer_cep { nil }
+      seller_cep { nil }
+      receiver_email { nil }
+      receiver_name { nil }
+      form_step { :location }
+    end
+
+    trait :trade_invitation do
+      author { nil }
+      buyer { nil }
+      seller { nil }
+      buyer_accepted { false }
+      seller_accepted { false }
+      receiver_email { nil }
+      receiver_name { nil }
+      form_step { :invitation }
+    end
+
+    factory :trade_location, traits: [:location]
+    factory :trade_invitation, traits: [:invitation]
   end
 end
