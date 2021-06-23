@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  # Change default email !
+  CONTACT_MAIL = 'contact@2mao.com.br'
+  default from: CONTACT_MAIL
   layout 'mailer'
 end
