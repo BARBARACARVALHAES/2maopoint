@@ -1,0 +1,12 @@
+Olà, <%= @user ? @user.first_name : @receiver_email %>
+===============================================
+
+Você recebeu um agendamento do 2-Mao Carrefour do <%= @sender_user.first_name %> (<%= @sender_user.email %>) para um encontro
+<br>
+<b>
+  <div><%= @trade.carrefour_unit.name %></div>
+  <div><%= @trade.date.strftime("%d/%m/%Y") %></div>
+  <div><%= @trade.date.strftime("%H:%M") %></div>
+</b>
+
+<%= @user ? "Para acessar a sua conta" : "Para criar uma conta" %> , segue o link: <%= link_to('Clique aqui', @url) %>.

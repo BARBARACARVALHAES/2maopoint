@@ -19,6 +19,8 @@ ActiveStorage.start();
 
 // External imports
 import "bootstrap";
+
+import { initSwal2 } from '../components/swal2';
 import { initFlatpick } from "../components/flatpick";
 
 // Internal imports, e.g:
@@ -28,4 +30,5 @@ document.addEventListener("turbolinks:load", () => {
   // Call your functions here, e.g:
   // initSelect2();
   initFlatpick();
+  initSwal2();
 });
