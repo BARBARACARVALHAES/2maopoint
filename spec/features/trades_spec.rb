@@ -4,6 +4,9 @@ RSpec.feature "Trades", type: :feature, js: true do
   let(:user) { create(:user) }
   let(:trade_location) { create(:trade_location) }
   let(:trade_invitation) { create(:trade_invitation) }
+  let(:item_categories) { create_list(:item_category, 5) }
+  let(:carrefour_units) { create_list(:carrefour_unit, 5) }
+
 
   context 'Trades new' do
     before do
@@ -17,6 +20,8 @@ RSpec.feature "Trades", type: :feature, js: true do
     end
 
     scenario 'infos' do
+      # Create item categories
+      item_categories
       visit(new_trade_path)
       choose('trade_author_role_vendedor')
       find('#trade_item_category_id').find(:xpath, 'option[2]').select_option
@@ -26,6 +31,8 @@ RSpec.feature "Trades", type: :feature, js: true do
     end
 
     scenario 'location' do
+      # Create carrefour units
+      carrefour_units
       visit(trade_step_path(trade_location, "location"))
       fill_in('trade_buyer_cep', with: '22000-111')
       fill_in('trade_seller_cep', with: '22000-112')
