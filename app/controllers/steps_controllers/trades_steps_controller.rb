@@ -14,6 +14,10 @@ module StepsControllers
       @trade = Trade.find(params[:trade_id])
       authorize @trade
       @trade.assign_attributes(trade_params)
+      @trade.author_role == "Vendedor" ? @trade.update(seller: current_user) : @trade.update(buyer: current_user)
+      receiver = User.find_by(email: @trade.receiver_email)
+      @trade.buyer = receiver if @trade.seller && receiver
+      @trade.seller = receiver if @trade.buyer && receiver
       # If it is the last step
       if @trade.save && params[:id] == Trade.form_steps.keys.last
         TradeMailer.with(receiver_email: @trade.receiver_email, sender_user: current_user, trade: @trade).created_trade.deliver_later
@@ -30,7 +34,6 @@ module StepsControllers
     end
 
     def finish_wizard_path
-      @trade.author_role == "Vendedor" ? @trade.update(seller: current_user) : @trade.update(buyer: current_user)
       profile_path(current_user)
     end
   end
