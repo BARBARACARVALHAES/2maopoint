@@ -1,5 +1,5 @@
 class TradesController < ApplicationController
-  before_action :set_trade, only: %i[edit destroy]
+  before_action :set_trade, only: %i[edit destroy update]
 
   def index
     @trades = policy_scope(Trade)
@@ -20,8 +20,6 @@ class TradesController < ApplicationController
   def edit; end
 
   def update
-    @trade = Trade.find(params[:id])
-    authorize @trade
     if @trade.update(trade_params)
       redirect_to invitations_profile_path
     else
@@ -30,7 +28,6 @@ class TradesController < ApplicationController
   end
 
   def destroy
-    authorize @trade
     redirect_to invitations_profile_path if @trade.destroy
   end
 
