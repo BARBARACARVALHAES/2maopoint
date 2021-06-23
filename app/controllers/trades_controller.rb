@@ -21,7 +21,7 @@ class TradesController < ApplicationController
 
   def update
     if @trade.update(trade_params)
-      redirect_to invitations_profile_path
+      redirect_to invitations_profile_path(current_user)
     else
       render :edit
     end
