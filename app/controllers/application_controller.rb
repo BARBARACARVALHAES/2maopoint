@@ -6,4 +6,6 @@ class ApplicationController < ActionController::Base
     profile_path(resource)
   end
 
+  add_flash_types :success, :failed
 end
+

@@ -7,6 +7,7 @@ class TradesController < ApplicationController
 
   def new
     @trade = Trade.new
+    @trade.author = current_user
     # We save an instance of the trade in database even if not valid
     @trade.save!(validate: false)
     # We redirect to trade_step_path in order to begin the Wizard form
@@ -18,11 +19,15 @@ class TradesController < ApplicationController
 
   def update
     @trade = Trade.find(params[:id])
-    @trade.update(trade_params)
+    if @trade.update(trade_params)
+      redirect_to invitations_profile_path
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @trade.destroy
+    redirect_to invitations_profile_path if @trade.destroy
   end
 
   private

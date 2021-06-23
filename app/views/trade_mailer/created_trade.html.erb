@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Olà, <%= @user ? @user.email : @receiver_email %></h1>
+    <p>
+      Você recebeu um agendamento do 2-Mao Carrefour do <%= @sender_user.first_name %> (<%= @sender_user.email %>) para um encontro
+      <br>
+      <b>
+        <div><%= @trade.carrefour_unit.name %></div>
+        <div><%= @trade.date.strftime("%d/%m/%Y") %></div>
+        <div><%= @trade.date.strftime("%H:%M") %></div>
+      </b>
+    </p>
+    <p>
+    <%= @user ? "Para acessar a sua conta" : "Para criar uma conta e accesar a esse convite" %> , segue o link: <%= link_to('Clique aqui', @url) %>.    </p>
+  </body>
+</html>

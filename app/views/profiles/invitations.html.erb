@@ -1,0 +1,29 @@
+<div class="container content-container">
+  <h1>Agendamentos</h1>
+  <p class="subtitle">Olá <%= @user.first_name %>, confira todos os seus agendamentos e convites.</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Convidado</th>
+          <th scope="col">Data</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Local</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @trades.each do |trade| %>
+          <tr>
+            <td><%= trade.invited.name %></td>
+            <td><%= trade.date.strftime("%d/%m/%Y") %></td>
+            <td><%= trade.date.strftime("%H:%M") %></td>
+            <td><%= trade.carrefour_unit.name if trade.carrefour_unit%></td>
+            <td class="edit-buttons">
+              <p><%= link_to "<i class='far fa-calendar-alt'></i>".html_safe, edit_trade_path(trade), title: "Reagendar", class: "m-right" %>
+              <%= link_to "<i class='far fa-trash-alt'></i>".html_safe, trade_path(trade), method: :delete, data: { confirm: "Você tem certeza que deseja cancelar este agendamento?"}, title: "Cancelar" %> </p> 
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
