@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Trade.destroy_all
 ItemCategory.destroy_all
 CarrefourUnit.destroy_all
-Trade.destroy_all
 p "Destroyed the database"
 
 
@@ -25,7 +25,12 @@ end
 end
 
 5.times do |n|
-  u = User.create!(email: "test#{n+1}@test.com", password: "123456")
+  u = User.create!(
+    email: "test#{n+1}@test.com", 
+    password: "123456",
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name
+  )
   p "Create #{u.id} user"
 end
 

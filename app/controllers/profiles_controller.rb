@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
   def show
-    TradeMailer.with(user: current_user).created_trade.deliver_now
+    @user = User.find(params[:id])
   end
 end

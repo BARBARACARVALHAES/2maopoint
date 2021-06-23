@@ -22,6 +22,7 @@ module StepsControllers
     end
 
     def finish_wizard_path
+      TradeMailer.with(receiver_email: @trade.receiver_email, sender_user: current_user, trade: @trade).created_trade.deliver_later
       profile_path(current_user)
     end
   end
