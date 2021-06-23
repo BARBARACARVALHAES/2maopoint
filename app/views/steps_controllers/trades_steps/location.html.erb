@@ -8,7 +8,7 @@
     <%= f.input :carrefour_unit_id, label: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all, hint: "As unidades aparecem na ordem de proximidade enter você e o #{ params[:author_role] == "Vendedor" ? "comprador" : "vendedor"}." %>
     <%= f.input :date, label: "Data e horário:", as: :datetime %>
     <div class="d-flex justify-content-between">
-      <%= button_to 'Back', trade_step_path(@trade, "infos"), class: "btn btn-outline-primary" %>
+      <%= button_to 'Voltar', trade_step_path(@trade, "infos"), class: "btn btn-outline-primary" %>
       <%= f.submit "Avançar", class: "btn btn-primary" %>
     </div>
   <% end %>
