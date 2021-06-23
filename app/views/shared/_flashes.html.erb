@@ -14,3 +14,14 @@
     </button>
   </div>
 <% end %>
+
+<% if success %>
+  <div id="success">
+    <div class="d-none"><%= success %></div>
+  </div>
+<% end %>
+<% if failed %>
+  <div id="failed">
+    <div class="d-none"><%= failed %></div>
+  </div>
+<% end %>

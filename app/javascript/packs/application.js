@@ -20,11 +20,13 @@ ActiveStorage.start()
 
 // External imports
 import "bootstrap";
+import {initSwal2} from '../components/swal2';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
 document.addEventListener('turbolinks:load', () => {
+  initSwal2();
   // Call your functions here, e.g:
   // initSelect2();
 });
