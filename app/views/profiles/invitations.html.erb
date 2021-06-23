@@ -14,7 +14,7 @@
       <tbody>
         <% @trades.each do |trade| %>
           <tr>
-            <td><%= trade.invited.name %></td>
+            <td><%= trade.invited ? trade.invited.name : trade.receiver_name %></td>
             <td><%= trade.date.strftime("%d/%m/%Y") %></td>
             <td><%= trade.date.strftime("%H:%M") %></td>
             <td><%= trade.carrefour_unit.name if trade.carrefour_unit%></td>

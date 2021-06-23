@@ -1,9 +1,16 @@
-<%= simple_form_for @trade, url: wizard_path do |f| %>
-  <%= f.input :buyer_cep, label: "CEP do comprador" %>
-  <%= f.input :seller_cep, label: "CEP do vendedor" %>
-  <%= f.input :carrefour_unit_id, label: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all %>
-  <%= f.input :date, label: "Data:", as: :datetime %>
-  <%= f.submit "Avançar" %>
-<% end %>
-
-<%= link_to 'Back', trade_step_path(@trade, "infos") %>
+<div class="container content-container">
+  <h1>Realize o seu agendamento</h1>
+  <p class="subtitle">Defina algumas informações e inicie o seu agendamento com a outra parte da negociação.</p>
+    
+  <%= simple_form_for @trade, url: wizard_path do |f| %>
+    <%= f.input :buyer_cep, label: "Digite o seu CEP:", placeholder: "00000-000" %>
+    <%= f.input :seller_cep, label: "Digite o CEP do #{ params[:author_role] == "Vendedor" ? "Comprador" : "Vendedor"}:", placeholder: "00000-000" %>
+    <%= f.input :carrefour_unit_id, label: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all, hint: "As unidades aparecem na ordem de proximidade enter você e o #{ params[:author_role] == "Vendedor" ? "comprador" : "vendedor"}." %>
+    <%= f.input :date, label: "Data e horário:", as: :datetime %>
+    <div class="d-flex justify-content-between">
+      <%= button_to 'Voltar', trade_step_path(@trade, "infos"), class: "btn btn-outline-primary" %>
+      <%= f.submit "Avançar", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+  
