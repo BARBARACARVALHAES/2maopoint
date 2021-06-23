@@ -7,7 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
-
 Trade.destroy_all
 ItemCategory.destroy_all
 CarrefourUnit.destroy_all
@@ -32,7 +31,8 @@ end
     last_name: Faker::Name.last_name,
     cpf: Faker::Number.number(digits: 11),
     birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
-    phone: Faker::PhoneNumber.cell_phone
+    phone: Faker::PhoneNumber.cell_phone,
+    address: Faker::Address.street_address
   )
   p "Create #{u.id} user"
 end
