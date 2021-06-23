@@ -7,6 +7,7 @@ class TradesController < ApplicationController
 
   def new
     @trade = Trade.new
+    @trade.author = current_user
     # We save an instance of the trade in database even if not valid
     @trade.save!(validate: false)
     # We redirect to trade_step_path in order to begin the Wizard form

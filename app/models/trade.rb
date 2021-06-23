@@ -3,15 +3,16 @@ class Trade < ApplicationRecord
   belongs_to :item_category, optional: true
   belongs_to :seller, class_name: "User", optional: true
   belongs_to :buyer, class_name: "User", optional: true
+  belongs_to :author, class_name: "User"
+
+  ROLE = ["Vendedor", "Comprador"]
 
   enum form_steps: {
-    infos: %i[item item_category_id author],
+    infos: %i[item item_category_id author_role],
     location: %i[carrefour_unit_id date buyer_cep seller_cep],
     invitation: [:receiver_email]
   }
   attr_accessor :form_step
-
-  AUTHOR = ['Vendedor', 'Comprador']
 
   def invited
     author == buyer ? seller : buyer
