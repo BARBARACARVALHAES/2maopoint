@@ -7,8 +7,14 @@ RSpec.feature "Trades", type: :feature, js: true do
   let(:item_categories) { create_list(:item_category, 5) }
   let(:carrefour_units) { create_list(:carrefour_unit, 5) }
 
+  context 'Unlogged' do
+    scenario 'get redirect to sign_in' do
+      visit(new_trade_path)
+      expect(page).to have_current_path(new_user_session_path)
+    end
+  end
 
-  context 'Trades new' do
+  context 'Logged' do
     before do
       login_as(user)
     end

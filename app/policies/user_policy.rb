@@ -5,6 +5,10 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    user == record
+  end
+
   def create?
     true
   end
