@@ -65,7 +65,7 @@ jobs:
         PGPASSWORD: postgres
         RAILS_ENV: test
       run: |
-        bin/rails db:drop db:setup
+        bin/rails db:setup
 
     - name: Run Tests
       env:
