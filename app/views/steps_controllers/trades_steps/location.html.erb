@@ -3,7 +3,7 @@
   <%= f.input :seller_cep, label: "CEP do vendedor" %>
   <%= f.input :carrefour_unit_id, label: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all %>
   <%= f.input :date, label: "Data:", as: :datetime %>
-  <%= f.submit "Avançar" %>
+  <%= f.submit "Avançar", id: 'avançar' %>
 <% end %>
 
 <%= link_to 'Back', trade_step_path(@trade, "infos") %>

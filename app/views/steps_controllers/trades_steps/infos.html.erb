@@ -2,5 +2,5 @@
   <%= f.input :author_role, label: "Nesta transação, você é o:", as: :radio_buttons, collection: Trade::ROLE %>
   <%= f.input :item_category_id, as: :select, label: "A categoria do item é:", collection: ItemCategory.all %>
   <%= f.input :item, label: "O item transacionado é:" %>
-  <%= f.submit "Avançar" %>
+  <%= f.submit "Avançar", id: 'avançar'  %>
 <% end %>
