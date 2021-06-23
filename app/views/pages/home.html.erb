@@ -16,16 +16,18 @@
             <p> Aproveite a intermediação do 2ª Mão Point e faça suas negociações sem dor de cabeça e conte conosco à qualquer momento.</p>
         </div>
         <div class="iconesHome">            
-                <%= image_tag "icones-home.png", class: "iconesImg", alt: "icones" %>
+                <%= image_tag "icones-home2.png", class: "iconesImg", alt: "icones" %>
         </div>           
     </div>
-    <div class= "d-flex flex-column formHome">
+    <div class= "d-flex flex-column formHome col-4">
         <h2>Faça seu login</h2>
         <%= form_for(:user, :url => session_path(:user), html: { class: "d-flex flex-column align-items-center" }) do |f| %>
-            <%= f.text_field :email, class: "formEmail" %>
-            <%= f.password_field :password, class: "formSenha" %>
-            <%= f.check_box :remember_me, class: "formBox" %>
-            <%= f.label :remember_me, class: "formRemember" %>
+            <%= f.text_field :email, placeholder: "e-mail", class: "formEmail" %>
+            <%= f.password_field :password, placeholder: "senha", class: "formSenha" %>
+            <div class= "d-flex  rememberForm">
+                <%= f.check_box :remember_me, class: "formBox" %>
+                <%= f.label :remember_me, class: "formRemember" %>
+            </div>
             <%= f.submit 'Entrar', class: "formSign" %>
             <%= link_to "Criar conta", new_user_session_path, class: "formForgot" %>
             <%= link_to "Esqueceu sua senha?", new_password_path(:user), class: "formNew" %>            

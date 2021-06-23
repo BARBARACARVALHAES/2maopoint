@@ -28,7 +28,6 @@
 
 .iconesHome {
   display: flex;
-  margin-top: 5em;
   justify-content: center;
 }
 
@@ -54,25 +53,24 @@
 }
 
 .iconesImg {
-  width: 75%;
+  width: 60%;
 }
 
-// .formHome h2 {
-//   font-family: Roboto;
-//   font-style: normal;
-//   font-weight: 900;
-//   font-size: 25px;
-//   line-height: 21px;
-//   color: #111d5e;
-//   text-align: center;
-//   margin-left: -15px;
-// }
+.formHome h2 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 25px;
+  line-height: 21px;
+  color: #111d5e;
+  text-align: center;
+  margin-left: -15px;
+}
 
-// .formEmail {
-//   position: relative;
-//   margin: 14px;
-//   left: 30%;
-// }
+.formEmail {
+  margin-top: 14px;
+  margin-bottom: 10px;
+}
 
 // .formSenha {
 //   position: relative;
@@ -80,28 +78,26 @@
 //   left: -8%;
 // }
 
-// .formRemember {
-//   position: relative;
-//   top: 60px;
-//   left: -43%;
-// }
+.formRemember {
+  margin-bottom: -9px;
+}
 
-// .formBox {
-//   position: relative;
-//   top: 63px;
-//   left: -43%;
-// }
+.rememberForm {
+  margin-bottom: -10px;
+}
 
-// .formSign {
-//   position: relative;
-//   top: 50px;
-//   left: 15em;
-//   background: #c70039;
-//   border: 1px solid #c70039;
-//   box-sizing: border-box;
-//   color: #fff;
-//   width: 70px;
-// }
+.formBox {
+  margin-top: 6px;
+}
+
+.formSign {
+  background: #c70039;
+  border: 1px solid #c70039;
+  box-sizing: border-box;
+  color: #fff;
+  width: 70px;
+  margin-top: 0rem;
+}
 
 // .formForgot {
 //   position: relative;
