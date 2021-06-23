@@ -26,6 +26,9 @@ gem 'wicked', '~> 1.3', '>= 1.3.4'
 # Authorization gem
 gem 'pundit', '~> 2.1'
 
+# Geolocalisation
+gem 'geocoder', '~> 1.3', '>= 1.3.7'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
