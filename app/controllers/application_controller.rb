@@ -7,5 +7,11 @@ class ApplicationController < ActionController::Base
   end
 
   add_flash_types :success, :failed
+
+  def configure_permitted_parameters
+    # For additional fields in app/views/devise/registrations/new.html.erb
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :cpf, :birthdate, :phone, :address])
+  end
+  
 end
 
