@@ -5,3 +5,46 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+ItemCategory.destroy_all
+CarrefourUnit.destroy_all
+Trade.destroy_all
+p "Destroyed the database"
+
+
+ItemCategory::ITEM_CATEGORIES.each do |item|
+  i = ItemCategory.create!(name: item)
+  p "Created category #{i.name}"
+end
+
+10.times do
+  c = CarrefourUnit.create!(name: Faker::Company.name, address: Faker::Address.street_address, city: Faker::Address.city, cep: Faker::Address.postcode, suburb: 
+    Faker::Address.community)
+  p "Created Unit #{c.name}"
+end
+
+5.times do |n|
+  u = User.create!(email: "test#{n+1}@test.com", password: "123456")
+  p "Create #{u.id} user"
+end
+
+10.times do |n|
+  buyer = User.all.sample
+  seller = User.where.not(id: buyer.id).sample
+  t = Trade.create!(
+    buyer: buyer,
+    seller: seller,
+    date: Faker::Time.between(from: DateTime.now, to: DateTime.now + 30), 
+    item: Faker::Lorem.word, 
+    item_category: ItemCategory.all.sample,
+    carrefour_unit: CarrefourUnit.all.sample,
+    buyer_accepted: [true, false].sample,
+    seller_accepted: [true, false].sample,
+    buyer_cep: Faker::Address.postcode,
+    seller_cep: Faker::Address.postcode,
+    receiver_email: [buyer.email, seller.email].sample,
+    author: Trade::AUTHOR.sample
+  )
+  p "Create #{t.id} trades"
+end

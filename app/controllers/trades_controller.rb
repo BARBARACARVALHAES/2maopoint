@@ -1,5 +1,5 @@
 class TradesController < ApplicationController
-  before_action :set_trade, only: %i[create edit update destroy]
+  before_action :set_trade, only: %i[edit destroy]
 
   def index
     @trades = policy_scope(Trade)
@@ -7,17 +7,17 @@ class TradesController < ApplicationController
 
   def new
     @trade = Trade.new
+    # We save an instance of the trade in database even if not valid
+    @trade.save!(validate: false)
+    # We redirect to trade_step_path in order to begin the Wizard form
+    redirect_to trade_step_path(@trade, Trade.form_steps.keys.first)
     authorize @trade
-  end
-
-  def create
-    @trade = Trade.new(trade_params)
-    @trade.save
   end
 
   def edit; end
 
   def update
+    @trade = Trade.find(params[:id])
     @trade.update(trade_params)
   end
 
@@ -33,7 +33,6 @@ class TradesController < ApplicationController
   end
 
   def trade_params
-    params.require(:trade).permit(:item, :item_category_id, :buyer_id, :seller_id, :carrefour_unit_id, :date,
-                                  :buyer_cep, :seller_cep, :receiver_email)
+    params.require(:trade).permit(:carrefour_unit_id, :date)
   end
 end
