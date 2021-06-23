@@ -28,6 +28,7 @@ module StepsControllers
     end
 
     def finish_wizard_path
+      @trade.author_role == "Vendedor" ? @trade.update(seller: current_user) : @trade.update(buyer: current_user)
       profile_path(current_user)
     end
   end
