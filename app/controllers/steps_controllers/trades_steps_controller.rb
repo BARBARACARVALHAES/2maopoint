@@ -6,11 +6,13 @@ module StepsControllers
 
     def show
       @trade = Trade.find(params[:trade_id])
+      authorize @trade
       render_wizard
     end
 
     def update
       @trade = Trade.find(params[:trade_id])
+      authorize @trade
       @trade.assign_attributes(trade_params)
       # If it is the last step
       if @trade.save && params[:id] == Trade.form_steps.keys.last

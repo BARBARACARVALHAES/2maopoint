@@ -15,7 +15,7 @@ class Trade < ApplicationRecord
   attr_accessor :form_step
 
   def invited
-    author == buyer ? seller : buyer
+    author == buyer ? buyer : seller
   end
 
   with_options if: -> { required_for_step?(:infos) } do
@@ -24,7 +24,7 @@ class Trade < ApplicationRecord
     validates :author, presence: true
   end
 
-  with_options if: -> { required_for_step?(:location) } do
+  with_options if: -> { invitedrequired_for_step?(:location) } do
     validates :carrefour_unit_id, presence: true
     validates :date, presence: true
     validates :buyer_cep, presence: true

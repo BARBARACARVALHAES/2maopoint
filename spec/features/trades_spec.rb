@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.feature "Trades", type: :feature, js: true do
   let(:user) { create(:user) }
-  let(:trade_location) { create(:trade_location) }
-  let(:trade_invitation) { create(:trade_invitation) }
+  let(:trade_location) { create(:trade_location, author: user) }
+  let(:trade_invitation) { create(:trade_invitation, author: user) }
   let(:item_categories) { create_list(:item_category, 5) }
   let(:carrefour_units) { create_list(:carrefour_unit, 5) }
 

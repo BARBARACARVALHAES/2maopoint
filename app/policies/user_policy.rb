@@ -20,4 +20,8 @@ class UserPolicy < ApplicationPolicy
   def destroy?
     user == record
   end
+
+  def invitations?
+    user == record
+  end
 end
