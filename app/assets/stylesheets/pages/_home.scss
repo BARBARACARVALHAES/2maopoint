@@ -3,16 +3,21 @@
   width: 100%;
 }
 
+.tittleBanner {
+  display: flex;
+  justify-content: center;
+}
+
 .tittleBanner h1 {
   font-family: Roboto;
   font-style: normal;
   font-weight: 900;
   font-size: 36px;
   line-height: 42px;
-  display: flex;
   align-items: center;
   text-align: center;
   color: #111d5e;
+  width: 50%;
 }
 
 .containerSegundo {
@@ -50,4 +55,62 @@
 
 .iconesImg {
   width: 75%;
+}
+
+.formHome h2 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 25px;
+  line-height: 21px;
+  color: #111d5e;
+  text-align: center;
+  margin-left: -15px;
+}
+
+.formEmail {
+  position: relative;
+  margin: 14px;
+  left: 30%;
+}
+
+.formSenha {
+  position: relative;
+  top: 33px;
+  left: -8%;
+}
+
+.formRemember {
+  position: relative;
+  top: 60px;
+  left: -43%;
+}
+
+.formBox {
+  position: relative;
+  top: 63px;
+  left: -43%;
+}
+
+.formSign {
+  position: relative;
+  top: 50px;
+  left: 15em;
+  background: #c70039;
+  border: 1px solid #c70039;
+  box-sizing: border-box;
+  color: #fff;
+  width: 70px;
+}
+
+.formForgot {
+  position: relative;
+  top: 80px;
+  left: 28%;
+}
+
+.formNew {
+  position: relative;
+  top: 100px;
+  left: 5%;
 }
