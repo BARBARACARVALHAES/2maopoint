@@ -1,12 +1,10 @@
 class TradesController < ApplicationController
-  before_action :set_trade, only: %i[show edit destroy update]
+  before_action :set_trade, only: %i[show edit destroy update confirm_presence]
 
   def index
     @trades = policy_scope(Trade)
     authorize @trades
   end
-
-  def show;end
 
   def new
     @trade = Trade.new
@@ -31,6 +29,14 @@ class TradesController < ApplicationController
 
   def destroy
     redirect_to invitations_profile_path if @trade.destroy
+  end
+
+  def confirm_presence
+    if current_user == @trade.buyer
+      @trade.update(buyer_accepted: true)
+    else
+      @trade.update(seller_accepted: true)
+    end
   end
 
   private
