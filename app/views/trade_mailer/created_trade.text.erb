@@ -9,4 +9,4 @@ Você recebeu um agendamento do 2-Mao Carrefour do <%= @sender_user.first_name %
   <div><%= @trade.date.strftime("%H:%M") %></div>
 </b>
 
-<%= @user ? "Para acessar a sua conta" : "Para criar uma conta" %> , segue o link: <%= link_to('Clique aqui', trade_path(@trade)) %>.
+<%= @user ? "Para acessar a sua conta" : "Para criar uma conta" %> , segue o link: <%= link_to('Clique aqui', @url) %>.
