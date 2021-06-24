@@ -17,9 +17,14 @@ ItemCategory::ITEM_CATEGORIES.each do |item|
   p "Created category #{i.name}"
 end
 
-10.times do
-  c = CarrefourUnit.create!(name: Faker::Company.name, address: Faker::Address.street_address, city: Faker::Address.city, cep: Faker::Address.postcode, suburb:
-    Faker::Address.community)
+CarrefourUnit::CARREFOUR_UNITS.each do |unit|
+  c = CarrefourUnit.new(
+    name: unit[:name],
+    address: unit[:address], 
+    city: unit[:city], 
+    cep: unit[:cep], 
+    suburb: unit[:suburb])
+  c.save
   p "Created Unit #{c.name}"
 end
 
@@ -37,6 +42,8 @@ end
   p "Create #{u.id} user"
 end
 
+ceps = ("01000000".."05999100").to_a
+
 20.times do |_n|
   buyer = User.all.sample
   seller = User.where.not(id: buyer.id).sample
@@ -50,8 +57,8 @@ end
     carrefour_unit: CarrefourUnit.all.sample,
     buyer_accepted: [true, false].sample,
     seller_accepted: [true, false].sample,
-    buyer_cep: Faker::Address.postcode,
-    seller_cep: Faker::Address.postcode,
+    buyer_cep: ceps.sample,
+    seller_cep: ceps.sample,
     receiver_email: [buyer.email, seller.email].sample,
     author: author
   )

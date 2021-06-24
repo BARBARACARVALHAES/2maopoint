@@ -29,6 +29,9 @@ gem 'pundit', '~> 2.1'
 # Geolocalisation
 gem 'geocoder', '~> 1.3', '>= 1.3.7'
 
+# Htpp requests
+# gem 'httparty', '~> 0.13.7'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
