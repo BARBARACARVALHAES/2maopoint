@@ -4,7 +4,8 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Convidado</th>
+          <th scope="col">Encontrar com</th>
+          <th scope="col">Item</th>
           <th scope="col">Data</th>
           <th scope="col">Hora</th>
           <th scope="col">Local</th>
@@ -14,7 +15,8 @@
       <tbody>
         <% @trades.each do |trade| %>
           <tr>
-            <td><%= trade.invited ? trade.invited.name : trade.receiver_name %></td>
+            <td><%= current_user == trade.buyer ? trade.seller.name : trade.buyer.name %></td>
+            <td><%= link_to trade.seller == current_user ? "Venda de #{trade.item}" : "Compra de #{trade.item}", trade_path(trade) %></td>
             <td><%= trade.date.strftime("%d/%m/%Y") %></td>
             <td><%= trade.date.strftime("%H:%M") %></td>
             <td><%= trade.carrefour_unit.name if trade.carrefour_unit%></td>
