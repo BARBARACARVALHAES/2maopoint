@@ -1,22 +1,43 @@
 <div class="container content-container">
-  <h1>Você recebeu um convite!</h1>
-  <p class="subtitle mb-5"><strong>Olá <%= @user ? @user.first_name : @trade.receiver_name %></strong>, você recebeu um convite para realizar a transação do <%= @trade.item %>. Confira a data, horário e local.
-
-  <div class="mb-5">
-    <p><strong>Unidade Carrefour:</strong></p>
-    <p><%= @trade.carrefour_unit.name %></p>
-    <p><%= @trade.carrefour_unit.address %></p>
-    <p><%= @trade.carrefour_unit.suburb %> - <%= @trade.carrefour_unit.city %></p>
-    <p>CEP: <%= @trade.carrefour_unit.cep %></p>
-  </div>
-  <div class="mb-5">
-    <p><strong>Data e horário:</strong></p>
-    <p>Dia: <%= @trade.date.strftime("%d/%m/%Y") %></p>
-    <p>Horário: <%= @trade.date.strftime("%H:%M") %></p>
-  </div>
-  <div class="d-flex justify-content-between">
-    <%= link_to "Reagendar", edit_trade_path(@trade), class: "btn btn-primary" %>
-    <%= link_to "Confirmar presença", confirm_presence(@trade), class: "btn btn-primary" %>
-  </div>
-
+  
+  <%# TODO: Evento já foi realizado: solicitar confirmação de presença %>
+  <% if DateTime.now > @trade.date %>
+    <h1>Este encontro já foi realizado</h1>
+    <p class="subtitle">Confirme se este evento já foi realizado.</p>
+    <button class="btn btn-primary">Sim, já realizei este encontro</button>
+    <button class="btn btn-outline-primary">Este evento foi cancelado</button>
+  
+  <% else %> <%# Evento ainda não foi realizado %>
+    <h1>Você recebeu um convite!</h1>
+    <% if @trade.author == current_user %>
+      <p class="subtitle mb-5"><strong>Olá <%= current_user ? current_user.first_name : @trade.receiver_name %></strong>, você tem um agendamento marcado para a transação do <%= @trade.item %> no 2ª Mão Point. Confira a data, horário e local.
+    <% else %>  
+      <p class="subtitle mb-5"><strong>Olá <%= current_user ? current_user.first_name : @trade.receiver_name %></strong>, você recebeu um convite para realizar a transação do <%= @trade.item %>. Confira a data, horário e local.
+    <% end %>
+    
+    <div class="mb-5 text-center">
+      <p><strong>Unidade Carrefour:</strong></p>
+      <p><%= @trade.carrefour_unit.name %></p>
+      <p><%= @trade.carrefour_unit.address %></p>
+      <p><%= @trade.carrefour_unit.suburb %> - <%= @trade.carrefour_unit.city %></p>
+      <p>CEP: <%= @trade.carrefour_unit.cep %></p>
+    </div>
+    <div class="mb-5 text-center">
+      <p><strong>Data e horário:</strong></p>
+      <p>Dia: <%= @trade.date.strftime("%d/%m/%Y") %></p>
+      <p>Horário: <%= @trade.date.strftime("%H:%M") %></p>
+    </div>
+    
+    <div class="d-flex justify-content-around">
+      <% if DateTime.now < @trade.date %>
+        <%= link_to "Reagendar", edit_trade_path(@trade), class: "btn btn-outline-primary" %>
+        <% if @trade.buyer_accepted && @trade.seller_accepted %> 
+          <button class="btn btn-success">Confirmado</button>
+        <%# TODO: se a outra parte reagendar, ela vira author? Se não, precisamos mostrar novamente o botão de Confirmar caso haja reagendamento do convidado %>
+        <% elsif @trade.author != current_user %>
+          <%= link_to "Confirmar presença", confirm_presence_trade_path(@trade), method: :patch, class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
