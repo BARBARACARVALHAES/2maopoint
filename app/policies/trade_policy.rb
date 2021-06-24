@@ -9,8 +9,12 @@ class TradePolicy < ApplicationPolicy
     user.present?
   end
 
+  def show?
+    user == record.author
+  end
+
   def update?
-    user == record.seller || user == record.buyer
+    user == record.seller || user == record.buyer || user == record.author
   end
 
   def destroy?

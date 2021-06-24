@@ -1,13 +1,15 @@
 class TradesController < ApplicationController
-  before_action :set_trade, only: %i[edit destroy]
+  before_action :set_trade, only: %i[edit destroy update]
 
   def index
     @trades = policy_scope(Trade)
+    authorize @trades
   end
 
   def new
     @trade = Trade.new
     @trade.author = current_user
+    authorize @trade
     # We save an instance of the trade in database even if not valid
     @trade.save!(validate: false)
     # We redirect to trade_step_path in order to begin the Wizard form
@@ -18,9 +20,8 @@ class TradesController < ApplicationController
   def edit; end
 
   def update
-    @trade = Trade.find(params[:id])
     if @trade.update(trade_params)
-      redirect_to invitations_profile_path
+      redirect_to invitations_profile_path(current_user)
     else
       render :edit
     end

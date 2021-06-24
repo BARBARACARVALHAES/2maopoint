@@ -27,7 +27,7 @@ class Trade < ApplicationRecord
 
   with_options if: -> { required_for_step?(:location) } do
     validates :date, presence: true
-    validates :buyer_cep, presence: true, length: { is: 8 }
+    validates :buyer_cep, presence: true
     validates :seller_cep, presence: true
   end
 
@@ -37,6 +37,7 @@ class Trade < ApplicationRecord
 
   with_options if: -> { required_for_step?(:invitation) } do
     validates :receiver_email, presence: true
+    validates :receiver_name, presence: true
   end
 
   def required_for_step?(step)

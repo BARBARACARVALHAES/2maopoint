@@ -60,6 +60,7 @@ ceps = ("01000000".."05999100").to_a
     buyer_cep: ceps.sample,
     seller_cep: ceps.sample,
     receiver_email: [buyer.email, seller.email].sample,
+    receiver_name: Faker::Name.first_name,
     author: author
   )
   p "Create #{t.id} trades"

@@ -7,9 +7,8 @@
     <%= f.input :seller_cep, label: "Digite o CEP do #{ params[:author_role] == "Vendedor" ? "Comprador" : "Vendedor"}:", placeholder: "00000000" %>
     <%= f.input :date, label: "Data e horário:", as: :datetime %>
     <div class="d-flex justify-content-between">
-      <%= link_to 'Voltar', trade_step_path(@trade, "infos"), class: "btn btn-outline-primary" %>
-      <%= f.submit "Avançar", class: "btn btn-primary" %>
+    <%= link_to 'Voltar', trade_step_path(@trade, "infos"), class: "btn btn-outline-primary btn-action"  %>
+    <%= f.submit "Avançar", class: "btn btn-primary", id: 'avançar' %>
     </div>
   <% end %>
 </div>
-  
