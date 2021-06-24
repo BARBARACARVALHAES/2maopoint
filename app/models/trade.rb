@@ -11,7 +11,7 @@ class Trade < ApplicationRecord
     infos: %i[item item_category_id author_role],
     location: %i[date buyer_cep seller_cep],
     carrefour_unit: %i[carrefour_unit_id],
-    invitation: [:receiver_email]
+    invitation: %i[receiver_email receiver_name]
   }
   attr_accessor :form_step
 
