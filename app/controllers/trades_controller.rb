@@ -37,6 +37,7 @@ class TradesController < ApplicationController
     else
       @trade.update(seller_accepted: true)
     end
+    render :show
   end
 
   private
