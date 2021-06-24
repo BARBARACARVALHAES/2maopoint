@@ -10,12 +10,16 @@ class Trade < ApplicationRecord
   enum form_steps: {
     infos: %i[item item_category_id author_role],
     location: %i[carrefour_unit_id date buyer_cep seller_cep],
-    invitation: [:receiver_email, :receiver_name]
+    invitation: %i[receiver_email receiver_name]
   }
   attr_accessor :form_step
 
   def invited
     author == buyer ? seller : buyer
+  end
+
+  def created_by_seller?
+    author_role == "Vendendor"
   end
 
   with_options if: -> { required_for_step?(:infos) } do
