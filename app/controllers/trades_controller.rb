@@ -1,10 +1,12 @@
 class TradesController < ApplicationController
-  before_action :set_trade, only: %i[edit destroy update]
+  before_action :set_trade, only: %i[show edit destroy update]
 
   def index
     @trades = policy_scope(Trade)
     authorize @trades
   end
+
+  def show;end
 
   def new
     @trade = Trade.new

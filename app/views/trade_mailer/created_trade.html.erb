@@ -15,6 +15,6 @@
       </b>
     </p>
     <p>
-    <%= @user ? "Para acessar a sua conta" : "Para criar uma conta e accesar a esse convite" %> , segue o link: <%= link_to('Clique aqui', @url) %>.    </p>
+    <%= @user ? "Para acessar a sua conta" : "Para criar uma conta e accesar a esse convite" %> , segue o link: <%= link_to('Clique aqui', trade_path(@trade)) %>.    </p>
   </body>
 </html>

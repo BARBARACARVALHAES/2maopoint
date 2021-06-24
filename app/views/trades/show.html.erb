@@ -1,2 +1,22 @@
-<h1>TradeSteps#show</h1>
-<p>Find me in app/views/trade_steps/show.html.erb</p>
+<div class="container content-container">
+  <h1>Você recebeu um convite!</h1>
+  <p class="subtitle mb-5"><strong>Olá <%= @user ? @user.first_name : @trade.receiver_name %></strong>, você recebeu um convite para realizar a transação do <%= @trade.item %>. Confira a data, horário e local.
+
+  <div class="mb-5">
+    <p><strong>Unidade Carrefour:</strong></p>
+    <p><%= @trade.carrefour_unit.name %></p>
+    <p><%= @trade.carrefour_unit.address %></p>
+    <p><%= @trade.carrefour_unit.suburb %> - <%= @trade.carrefour_unit.city %></p>
+    <p>CEP: <%= @trade.carrefour_unit.cep %></p>
+  </div>
+  <div class="mb-5">
+    <p><strong>Data e horário:</strong></p>
+    <p>Dia: <%= @trade.date.strftime("%d/%m/%Y") %></p>
+    <p>Horário: <%= @trade.date.strftime("%H:%M") %></p>
+  </div>
+  <div class="d-flex justify-content-between">
+    <%= link_to "Reagendar", edit_trade_path(@trade), class: "btn btn-primary" %>
+    <%= link_to "Confirmar presença", confirm_presence(@trade), class: "btn btn-primary" %>
+  </div>
+
+</div>
