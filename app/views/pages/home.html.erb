@@ -1,36 +1,47 @@
-<section> 
-    <figure>
-        <%= image_tag "bannercarrefour.png", class: "img_banner", alt: "banner" %>
-    </figure>
+<section class="banner d-flex"> 
     <div class="tittleBanner">
-        <h1>Através do 2ª Mão Point, você pode agendar a sua troca na loja Carrefour mais próxima, realizando seu negócio de forma segura!
-        </h1>
+        <h1>2ª Mão Point Carrefour</h1>
     </div>
+    <div>    
+        <figure>
+            <%= image_tag "mulher_feliz.png", class: "img_banner", alt: "banner" %>
+        </figure>
+    </div>   
 </section> 
 
 <section class="containerSegundo"> 
-    <div class="texto-container">
+    <div class=" col-6">
         <div>
-            <h1>Troca de usados descomplicada</h1>
-            <p> Acreditamos que a compra e venda de usados deve ser algo seguro e tranquilo para ambos os usuários, de forma que a troca traga benefícios para todos!  </p>
-            <p> Aproveite a intermediação do 2ª Mão Point e faça suas negociações sem dor de cabeça e conte conosco à qualquer momento.</p>
+            <h1>Suas transações ainda mais seguras</h1>
+            <p> Se você já é cliente do Banco Carrefour, sabe que segurança é coisa séria pra gente. O 2ª Mão Point é um espaço criado em nossos estabelecimentos para que você receba suas compras e faça entregas pessoalmente, sem frio na barriga. Os points contam com câmeras e a supervisão dos nosso colaboradores.</p>
         </div>
-        <div class="iconesHome">            
-                <%= image_tag "icones-home2.png", class: "iconesImg", alt: "icones" %>
-        </div>           
+                 
     </div>
-    <div class= "d-flex flex-column formHome col-4">
-        <h2>Faça seu login</h2>
-        <%= form_for(:user, :url => session_path(:user), html: { class: "d-flex flex-column align-items-center" }) do |f| %>
-            <%= f.text_field :email, placeholder: "e-mail", class: "formEmail" %>
-            <%= f.password_field :password, placeholder: "senha", class: "formSenha" %>
-            <div class= "d-flex  rememberForm">
-                <%= f.check_box :remember_me, class: "formBox" %>
-                <%= f.label :remember_me, class: "formRemember" %>
-            </div>
-            <%= f.submit 'Entrar', class: "formSign" %>
-            <%= link_to "Criar conta", new_user_session_path, class: "formForgot" %>
-            <%= link_to "Esqueceu sua senha?", new_password_path(:user), class: "formNew" %>            
-        <% end %>
+    <div class=" maisVantagens col-6">
+        <h2>+ economia</h2>
+        <h2>+ segurança</h2>
+        <h2>+comodidade</h2>       
+    </div>
+</section>
+<section class="teste">
+    <div class="containerTerceiro container d-flex justify-content-center">
+        <div class="icone">
+            <%= image_tag "icone-cel.png", class: "", alt: "" %>
+            <p>Compre ou venda um produto de segunda mão em sites como OLX, Mercado Livre, Elo7 e Enjoei.</p>
+        </div>
+        <div class="icone">
+            <%= image_tag "icone-calendario.png", class: "", alt: "" %>
+            <p>Agende um encontro com a outra parte da negociação, que receberá o convite automaticamente.</p>
+        </div>
+        <div class="icone">
+            <%= image_tag "icone-moeda.png", class: "", alt: "" %>
+            <p>Encontre o local mais próximo para as duas partes e realize a transação em um ambiente seguro.</p>
+        </div>
+    </div>
+</section>
+<section class="containerQuarto container d-flex justify-content-center"> 
+    <div>
+        <h3>Já realizou sua compra ou venda?</h3> 
+        <%= link_to "Novo Agendamento", new_trade_path, :class => "btn btn-primary btnHome" %>
     </div>
 </section>

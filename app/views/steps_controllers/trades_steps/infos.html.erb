@@ -7,7 +7,7 @@
     <%= f.input :item_category_id, as: :select, label: "A categoria do item é:", collection: ItemCategory.all %>
     <%= f.input :item, label: "O item transacionado é:" %>
     <div class="d-flex justify-content-end">
-      <%= f.submit "Avançar", class: "btn btn-primary" %>
+      <%= f.submit "Avançar", class: "btn btn-primary", id: 'avançar' %>
     </div>
   <% end %>
 </div>

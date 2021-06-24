@@ -1,23 +1,38 @@
 // Specific CSS for your home-page
 .img_banner {
-  width: 100%;
+  height: 611.87px;
+  position: absolute;
+  width: 851.7px;
+  left: 631.96px;
+  top: 56px;
+}
+
+.banner h1 {
+  font-family: Roboto;
+  font-size: 100px;
+  line-height: 108px;
+  color: #ffffff;
+  text-align: left;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 18px;
+  padding: 35px;
+}
+
+.banner {
+  height: 700px;
+  background: linear-gradient(233.46deg, #ca2e7d 4.26%, #1d5dc3 84.51%);
+  background-blend-mode: darken;
+  mix-blend-mode: normal;
+  margin-top: -90px;
 }
 
 .tittleBanner {
-  display: flex;
-  justify-content: center;
-}
-
-.tittleBanner h1 {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 36px;
-  line-height: 42px;
-  align-items: center;
-  text-align: center;
-  color: #111d5e;
-  width: 50%;
+  position: absolute;
+  width: 673.8px;
+  height: 338.81px;
+  left: 165.46px;
+  top: 145px;
 }
 
 .containerSegundo {
@@ -56,21 +71,63 @@
   width: 60%;
 }
 
-.formHome h2 {
+.maisVantagens h2 {
+  /* + comodidade */
   font-family: Roboto;
   font-style: normal;
-  font-weight: 900;
-  font-size: 25px;
-  line-height: 21px;
-  color: #111d5e;
-  text-align: center;
-  margin-left: -15px;
+  font-weight: normal;
+  font-size: 78px;
+  line-height: 108px;
+  letter-spacing: 0.04em;
+  opacity: 0.36;
 }
 
-.formEmail {
-  margin-top: 14px;
-  margin-bottom: 10px;
+.teste {
+  background: #f6f6f6;
+  padding: 3em;
 }
+
+.icone p {
+  width: 70%;
+}
+
+.containerQuarto h3 {
+  text-align: center;
+}
+
+.btnHome {
+  width: 650px;
+  height: 80px;
+  border-radius: 67px;
+}
+.btnHome {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.containerQuarto {
+  margin-top: 10em;
+  margin-bottom: 10em;
+}
+// .formHome h2 {
+//   font-family: Roboto;
+//   font-style: normal;
+//   font-weight: 900;
+//   font-size: 25px;
+//   line-height: 21px;
+//   color: #111d5e;
+//   text-align: center;
+//   margin-left: -15px;
+// }
+
+// .formEmail {
+//   margin-top: 14px;
+//   margin-bottom: 10px;
+// }
 
 // .formSenha {
 //   position: relative;
@@ -78,35 +135,35 @@
 //   left: -8%;
 // }
 
-.formRemember {
-  margin-bottom: -9px;
-}
-
-.rememberForm {
-  margin-bottom: -10px;
-}
-
-.formBox {
-  margin-top: 6px;
-}
-
-.formSign {
-  background: #c70039;
-  border: 1px solid #c70039;
-  box-sizing: border-box;
-  color: #fff;
-  width: 70px;
-  margin-top: 0rem;
-}
-
-// .formForgot {
-//   position: relative;
-//   top: 80px;
-//   left: 28%;
+// .formRemember {
+//   margin-bottom: -9px;
 // }
 
-// .formNew {
-//   position: relative;
-//   top: 100px;
-//   left: 5%;
+// .rememberForm {
+//   margin-bottom: -10px;
 // }
+
+// .formBox {
+//   margin-top: 6px;
+// }
+
+// .formSign {
+//   background: #c70039;
+//   border: 1px solid #c70039;
+//   box-sizing: border-box;
+//   color: #fff;
+//   width: 70px;
+//   margin-top: 0rem;
+// }
+
+// // .formForgot {
+// //   position: relative;
+// //   top: 80px;
+// //   left: 28%;
+// // }
+
+// // .formNew {
+// //   position: relative;
+// //   top: 100px;
+// //   left: 5%;
+// // }

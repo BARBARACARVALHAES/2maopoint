@@ -10,7 +10,7 @@ class Trade < ApplicationRecord
   enum form_steps: {
     infos: %i[item item_category_id author_role],
     location: %i[carrefour_unit_id date buyer_cep seller_cep],
-    invitation: [:receiver_email]
+    invitation: [:receiver_email, :receiver_name]
   }
   attr_accessor :form_step
 
@@ -33,6 +33,7 @@ class Trade < ApplicationRecord
 
   with_options if: -> { required_for_step?(:invitation) } do
     validates :receiver_email, presence: true
+    validates :receiver_name, presence: true
   end
 
   def required_for_step?(step)
