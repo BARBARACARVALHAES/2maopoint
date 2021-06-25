@@ -1,14 +1,16 @@
 // Specific CSS for your home-page
 .img_banner {
-  height: 611.87px;
+  height: 611px;
   position: absolute;
-  width: 851.7px;
-  left: 631.96px;
-  top: 56px;
+  left: 586px;
+  top: 70px;
+}
+
+.forte {
+  font-weight: 700;
 }
 
 .banner h1 {
-  font-family: Roboto;
   font-size: 100px;
   line-height: 108px;
   color: #ffffff;
@@ -20,7 +22,7 @@
 }
 
 .banner {
-  height: 700px;
+  height: 713px;
   background: linear-gradient(233.46deg, #ca2e7d 4.26%, #1d5dc3 84.51%);
   background-blend-mode: darken;
   mix-blend-mode: normal;
@@ -31,13 +33,37 @@
   position: absolute;
   width: 673.8px;
   height: 338.81px;
-  left: 165.46px;
-  top: 145px;
+  left: 200px;
+  top: 100px;
 }
 
 .containerSegundo {
   display: flex;
-  padding: 3em;
+  margin-top: 20px;
+  margin-bottom: 3em;
+}
+
+.containerSegundo h1 {
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-size: 50px;
+}
+
+.economia {
+  margin-left: 1em;
+}
+
+.comodidade {
+  margin-left: 1.5em;
+}
+
+.containerSegundo p {
+  font-style: normal;
+  font-weight: 300;
+  // font-size: 24px;
+  line-height: 39px;
+  // letter-spacing: 0.04em;
   margin-top: 20px;
 }
 
@@ -47,7 +73,6 @@
 }
 
 .texto-container h1 {
-  font-family: Roboto;
   font-style: normal;
   font-weight: 900;
   font-size: 48px;
@@ -58,7 +83,6 @@
 }
 
 .texto-container p {
-  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
@@ -72,14 +96,11 @@
 }
 
 .maisVantagens h2 {
-  /* + comodidade */
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   font-size: 78px;
-  line-height: 108px;
+  line-height: 100px;
   letter-spacing: 0.04em;
   opacity: 0.36;
+  text-align: center;
 }
 
 .teste {
@@ -87,12 +108,9 @@
   padding: 3em;
 }
 
-.icone p {
-  width: 70%;
-}
-
 .containerQuarto h3 {
   text-align: center;
+  margin-bottom: 35px;
 }
 
 .btnHome {
@@ -101,7 +119,6 @@
   border-radius: 67px;
 }
 .btnHome {
-  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 40px;
@@ -110,11 +127,29 @@
 }
 
 .containerQuarto {
-  margin-top: 10em;
+  margin-top: 6em;
   margin-bottom: 10em;
 }
+
+.icone {
+  text-align: center;
+  margin-right: 50px;
+  line-height: 39px;
+  letter-spacing: 0.04em;
+}
+
+.icone1 {
+  width: 40%;
+}
+
+.icone2 {
+  width: 39%;
+}
+.icone3 {
+  width: 39%;
+}
+
 // .formHome h2 {
-//   font-family: Roboto;
 //   font-style: normal;
 //   font-weight: 900;
 //   font-size: 25px;

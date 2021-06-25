@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :phone, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+  after_create :link_user_to_trades
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -15,5 +16,15 @@ class User < ApplicationRecord
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def link_user_to_trades
+    @user = User.last 
+    Trade.all.each do |trade|
+      if @user.email == trade.receiver_email 
+        trade.update(receiver_name: @user.first_name) if @user.first_name
+        trade.author_role == "Vendedor" ? trade.update(buyer: @user) : trade.update(seller: @user)
+      end
+    end
   end
 end

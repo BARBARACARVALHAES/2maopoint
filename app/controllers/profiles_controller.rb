@@ -7,6 +7,6 @@ class ProfilesController < ApplicationController
   def invitations
     @user = current_user
     authorize @user
-    @trades = Trade.where(buyer: @user).or(Trade.where(seller: @user))
+    @trades = Trade.where(buyer: @user).or(Trade.where(seller: @user)).order(date: :asc)
   end
 end
