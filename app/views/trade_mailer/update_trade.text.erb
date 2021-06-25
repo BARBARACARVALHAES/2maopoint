@@ -1,7 +1,7 @@
 Olá, <%= @user ? @user.first_name : @receiver_name %>
 ===============================================
 
-Você recebeu um agendamento do 2ª Mão Point Carrefour do <%= @sender_user.first_name %> para um encontro
+O usuário <%= @sender_user.first_name %> precisou reagendar o encontro marcado. Você pode verificar os dados abaixo e confirmar novamente este agendamento. 
 <br>
 <b>
   <div><%= @trade.carrefour_unit.name %></div>
