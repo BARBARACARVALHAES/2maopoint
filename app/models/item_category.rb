@@ -1,5 +1,6 @@
 class ItemCategory < ApplicationRecord
   has_many :trades
+  validates :name, presence: true
 
   ITEM_CATEGORIES = [
     'Para a sua casa',
