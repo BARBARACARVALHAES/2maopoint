@@ -28,7 +28,10 @@
     <%= f.input  :birthdate,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "birthdate" }%>
+                  input_html: { autocomplete: "birthdate" },
+                  as: :string,
+                  input_html: { id: 'flat_date' }
+                  %>
     <%= f.input  :address,
                   required: true,
                   autofocus: true,
