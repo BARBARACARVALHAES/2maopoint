@@ -26,6 +26,7 @@ module StepsControllers
       @trade.seller = receiver if @trade.buyer && receiver
       # If it is the last step
       if @trade.save && params[:id] == Trade.form_steps.keys.last
+        @trade.created_by_seller? ? @trade.update(seller_accepted: true) : @trade.update(buyer_accepted: true)
         TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).created_trade.deliver_later
         redirect_to(finish_wizard_path, success: "O pedido foi enviado para #{@trade.receiver_email}!")
       else

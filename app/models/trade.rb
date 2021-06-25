@@ -19,6 +19,10 @@ class Trade < ApplicationRecord
     author == buyer ? seller : buyer
   end
 
+  def created_by_seller?
+    author_role == "Vendendor"
+  end
+
   with_options if: -> { required_for_step?(:infos) } do
     validates :item, presence: true
     validates :item_category_id, presence: true

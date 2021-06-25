@@ -10,7 +10,7 @@ class TradePolicy < ApplicationPolicy
   end
 
   def show?
-    user == record.author
+    user == record.buyer || user == record.seller
   end
 
   def update?
@@ -18,6 +18,10 @@ class TradePolicy < ApplicationPolicy
   end
 
   def destroy?
+    user == record.seller || user == record.buyer
+  end
+
+  def confirm_presence?
     user == record.seller || user == record.buyer
   end
 end
