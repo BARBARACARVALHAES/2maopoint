@@ -18,8 +18,23 @@
   border-radius: 25px;
   margin-right: 5px;
   color: #f4f4f4;
+  transition: background-color .5s ease-in;
+  transition: color .5s ease-in;
+  &:hover a {
+    background-color: white;
+  }
+}
+
+.nav-item a {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .navbar-light .navbar-nav .nav-link {
   color: #f4f4f4;
+}
+
+.start-button:hover {
+  background-color: white;
+
 }
