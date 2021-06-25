@@ -28,7 +28,7 @@ class TradesController < ApplicationController
       @trade.update(buyer_accepted: true)
     end
     if @trade.update(trade_params)
-      redirect_to(invitations_profile_path(current_user), success: "As informações foram modificadas com sucesso, um email foi mandado para a outra para confirmação !")
+      redirect_to(confirm_screen_trade_path(@trade), success: "As informações foram modificadas com sucesso, um email foi mandado para a outra para confirmação !")
     else
       render :edit
     end
@@ -41,7 +41,7 @@ class TradesController < ApplicationController
 
   def confirm_presence
     current_user == @trade.buyer ? @trade.update(buyer_accepted: true) : @trade.update(seller_accepted: true)
-    redirect_to trade_path(@trade)
+    redirect_to confirm_screen_trade_path(@trade)
   end
 
   def confirm_screen; end
