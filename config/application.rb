@@ -11,7 +11,7 @@ module Carrefour2aMao
     # Bakcground jobs with SideKiq
     config.active_job.queue_adapter = :sidekiq
 
-    config.i18n.default_locale = :pt
+    config.i18n.default_locale = :'pt-BR'
 
     config.generators do |generate|
       generate.assets false
