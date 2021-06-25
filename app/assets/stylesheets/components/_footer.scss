@@ -1,0 +1,19 @@
+.footer p {
+  height: 20px;
+  color: #a5abaf;
+  font-family: Ubuntu;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.footer {
+  border-top: 1px solid #a5abaf;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  z-index: -10000px;
+  padding-top: 10px;
+}
