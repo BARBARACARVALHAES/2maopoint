@@ -22,10 +22,14 @@ class TradesController < ApplicationController
   def update
     if current_user == @trade.seller
       @trade.update(seller_accepted: true, buyer_accepted: false)
-      TradeMailer.with(receiver_email: @trade.buyer.email, receiver_name: @trade.buyer.name, sender_user: current_user, trade: @trade).update_trade.deliver_later
+      receiver_email = @trade.buyer ? @trade.buyer.email : @trade.receiver_email
+      receiver_name = @trade.buyer ? @trade.buyer.name : @trade.receiver_name
+      TradeMailer.with(receiver_email: receiver_email, receiver_name: receiver_name, sender_user: current_user, trade: @trade).update_trade.deliver_later
     else
       @trade.update(seller_accepted: false, buyer_accepted: true)
-      TradeMailer.with(receiver_email: @trade.seller.email, receiver_name: @trade.seller.name, sender_user: current_user, trade: @trade).update_trade.deliver_later
+      receiver_email = @trade.seller ? @trade.seller.email : @trade.receiver_email
+      receiver_name = @trade.seller ? @trade.seller.name : @trade.receiver_name
+      TradeMailer.with(receiver_email: receiver_email, receiver_name: receiver_name, sender_user: current_user, trade: @trade).update_trade.deliver_later
     end
     if @trade.update(trade_params)
       redirect_to(confirm_screen_trade_path(@trade), success: "As informações foram modificadas com sucesso, um email foi mandado para a outra para confirmação !")
