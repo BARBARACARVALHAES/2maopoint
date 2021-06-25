@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
     profile_path(resource)
   end
 
+  def default_url_options
+    { host: ENV["DOMAIN"] || "localhost:3000" }
+  end
+
   add_flash_types :success, :failed
 
   # Uncomment when you *really understand* Pundit!
