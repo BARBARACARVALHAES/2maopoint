@@ -5,12 +5,12 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
   
-  devise_for :users
+  devise_for :users, controllers: { confirmations: 'confirmations' }
   root to: 'pages#home'
-  resources :trades
   resources :trades do
     resources :steps, only: %i[show update], controller: 'steps_controllers/trades_steps'
   end
+
   resources :profiles do
     member do
       get :invitations
