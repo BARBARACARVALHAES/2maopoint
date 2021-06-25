@@ -32,12 +32,8 @@ class TradesController < ApplicationController
   end
 
   def confirm_presence
-    if current_user == @trade.buyer
-      @trade.update(buyer_accepted: true)
-    else
-      @trade.update(seller_accepted: true)
-    end
-    render :show
+    current_user == @trade.buyer ? @trade.update(buyer_accepted: true) : @trade.update(seller_accepted: true)
+    redirect_to trade_path(@trade)
   end
 
   private

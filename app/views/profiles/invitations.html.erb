@@ -15,7 +15,13 @@
       <tbody>
         <% @trades.each do |trade| %>
           <tr>
-            <td><%= current_user == trade.buyer ? trade.seller.name : trade.buyer.name %></td>
+            <td>
+              <% if current_user == trade.buyer %>
+                <%= trade.seller ? trade.seller.name : trade.receiver_name %>
+              <% else %>
+                <%= trade.buyer ? trade.buyer.name : trade.receiver_name %>
+              <% end %>
+            </td>
             <td><%= link_to trade.seller == current_user ? "Venda de #{trade.item}" : "Compra de #{trade.item}", trade_path(trade) %></td>
             <td><%= trade.date.strftime("%d/%m/%Y") %></td>
             <td><%= trade.date.strftime("%H:%M") %></td>

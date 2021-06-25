@@ -10,7 +10,7 @@ class TradePolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    user == record.buyer || user == record.seller
   end
 
   def update?
