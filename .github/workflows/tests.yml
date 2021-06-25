@@ -59,7 +59,7 @@ jobs:
 
     - name: Build App
       env:
-        # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
         PGHOST: localhost
         PGUSER: postgres
         PGPASSWORD: postgres
@@ -69,7 +69,7 @@ jobs:
 
     - name: Run Tests
       env:
-        # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
         REDIS_URL: redis://localhost:6379/0
         REDIS_PORT: ${{ job.services.redis.ports[6379] }}
         PGHOST: localhost

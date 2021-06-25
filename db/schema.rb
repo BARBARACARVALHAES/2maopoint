@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_144941) do
+ActiveRecord::Schema.define(version: 2021_06_24_144308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2021_06_23_144941) do
     t.string "city"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "item_categories", force: :cascade do |t|
@@ -48,6 +50,10 @@ ActiveRecord::Schema.define(version: 2021_06_23_144941) do
     t.string "receiver_name"
     t.integer "author_id"
     t.string "author_role"
+    t.float "lat_buyer"
+    t.float "long_buyer"
+    t.float "lat_seller"
+    t.float "long_seller"
     t.index ["carrefour_unit_id"], name: "index_trades_on_carrefour_unit_id"
     t.index ["item_category_id"], name: "index_trades_on_item_category_id"
   end
