@@ -41,6 +41,7 @@ class TradesController < ApplicationController
 
   def confirm_presence
     current_user == @trade.buyer ? @trade.update(buyer_accepted: true) : @trade.update(seller_accepted: true)
+    TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).confirm_trade.deliver_later
     redirect_to confirm_screen_trade_path(@trade)
   end
 
