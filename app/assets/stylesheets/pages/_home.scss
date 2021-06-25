@@ -1,39 +1,78 @@
 // Specific CSS for your home-page
 .img_banner {
-  width: 100%;
+  height: 611px;
+  position: absolute;
+  left: 586px;
+  top: 70px;
+}
+
+.forte {
+  font-weight: 700;
+}
+
+.banner h1 {
+  font-size: 100px;
+  line-height: 108px;
+  color: #ffffff;
+  text-align: left;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 18px;
+  padding: 35px;
+}
+
+.banner {
+  height: 713px;
+  background: linear-gradient(233.46deg, #ca2e7d 4.26%, #1d5dc3 84.51%);
+  background-blend-mode: darken;
+  mix-blend-mode: normal;
+  margin-top: -90px;
 }
 
 .tittleBanner {
-  display: flex;
-  justify-content: center;
-}
-
-.tittleBanner h1 {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 36px;
-  line-height: 42px;
-  align-items: center;
-  text-align: center;
-  color: #111d5e;
-  width: 50%;
+  position: absolute;
+  width: 673.8px;
+  height: 338.81px;
+  left: 200px;
+  top: 100px;
 }
 
 .containerSegundo {
   display: flex;
-  padding: 3em;
+  margin-top: 20px;
+  margin-bottom: 3em;
+}
+
+.containerSegundo h1 {
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-size: 50px;
+}
+
+.economia {
+  margin-left: 1em;
+}
+
+.comodidade {
+  margin-left: 1.5em;
+}
+
+.containerSegundo p {
+  font-style: normal;
+  font-weight: 300;
+  // font-size: 24px;
+  line-height: 39px;
+  // letter-spacing: 0.04em;
   margin-top: 20px;
 }
 
 .iconesHome {
   display: flex;
-  margin-top: 5em;
   justify-content: center;
 }
 
 .texto-container h1 {
-  font-family: Roboto;
   font-style: normal;
   font-weight: 900;
   font-size: 48px;
@@ -44,7 +83,6 @@
 }
 
 .texto-container p {
-  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
@@ -54,11 +92,64 @@
 }
 
 .iconesImg {
-  width: 75%;
+  width: 60%;
+}
+
+.maisVantagens h2 {
+  font-size: 78px;
+  line-height: 100px;
+  letter-spacing: 0.04em;
+  opacity: 0.36;
+  text-align: center;
+}
+
+.teste {
+  background: #f6f6f6;
+  padding: 3em;
+}
+
+.containerQuarto h3 {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.btnHome {
+  width: 650px;
+  height: 80px;
+  border-radius: 67px;
+}
+.btnHome {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.containerQuarto {
+  margin-top: 6em;
+  margin-bottom: 10em;
+}
+
+.icone {
+  text-align: center;
+  margin-right: 50px;
+  line-height: 39px;
+  letter-spacing: 0.04em;
+}
+
+.icone1 {
+  width: 40%;
+}
+
+.icone2 {
+  width: 39%;
+}
+.icone3 {
+  width: 39%;
 }
 
 // .formHome h2 {
-//   font-family: Roboto;
 //   font-style: normal;
 //   font-weight: 900;
 //   font-size: 25px;
@@ -69,9 +160,8 @@
 // }
 
 // .formEmail {
-//   position: relative;
-//   margin: 14px;
-//   left: 30%;
+//   margin-top: 14px;
+//   margin-bottom: 10px;
 // }
 
 // .formSenha {
@@ -81,36 +171,34 @@
 // }
 
 // .formRemember {
-//   position: relative;
-//   top: 60px;
-//   left: -43%;
+//   margin-bottom: -9px;
+// }
+
+// .rememberForm {
+//   margin-bottom: -10px;
 // }
 
 // .formBox {
-//   position: relative;
-//   top: 63px;
-//   left: -43%;
+//   margin-top: 6px;
 // }
 
 // .formSign {
-//   position: relative;
-//   top: 50px;
-//   left: 15em;
 //   background: #c70039;
 //   border: 1px solid #c70039;
 //   box-sizing: border-box;
 //   color: #fff;
 //   width: 70px;
+//   margin-top: 0rem;
 // }
 
-// .formForgot {
-//   position: relative;
-//   top: 80px;
-//   left: 28%;
-// }
+// // .formForgot {
+// //   position: relative;
+// //   top: 80px;
+// //   left: 28%;
+// // }
 
-// .formNew {
-//   position: relative;
-//   top: 100px;
-//   left: 5%;
-// }
+// // .formNew {
+// //   position: relative;
+// //   top: 100px;
+// //   left: 5%;
+// // }
