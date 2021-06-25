@@ -17,15 +17,17 @@ ItemCategory::ITEM_CATEGORIES.each do |item|
   p "Created category #{i.name}"
 end
 
-CarrefourUnit::CARREFOUR_UNITS.each do |unit|
-  c = CarrefourUnit.new(
-    name: unit[:name],
-    address: unit[:address], 
-    city: unit[:city], 
-    cep: unit[:cep], 
-    suburb: unit[:suburb])
-  c.save
-  p "Created Unit #{c.name}"
+CSV.foreach('./database-lojas-carrefour.csv', headers: true, encoding:'utf-8', col_sep: ",") do |row|
+  # Create a hash for each MOA with the header of the CSV file
+  unit = row.to_h  
+  u = CarrefourUnit.create!(
+    name: unit["Nome"], 
+    address: "#{unit['Endereço']}, #{unit['Número']}",
+    city: unit['Cidade'],
+    cep: unit['CEP'],
+    suburb: unit['Bairro'],
+    )
+  p "Create #{u.id} Carrefour Unit"
 end
 
 5.times do |n|
