@@ -4,8 +4,8 @@
   <% if DateTime.now > @trade.date %>
     <h1>Este encontro já foi realizado</h1>
     <p class="subtitle">Confirme se este evento já foi realizado.</p>
-    <button class="btn btn-primary">Sim, já realizei este encontro</button>
-    <button class="btn btn-outline-primary">Este evento foi cancelado</button>
+    <div class="btn btn-primary">Sim, já realizei este encontro</div>
+    <div class="btn btn-outline-primary">Este evento foi cancelado</div>
   
   <% else %> <%# Evento ainda não foi realizado %>
     <% if @trade.author == current_user %>
@@ -35,7 +35,7 @@
         <% if (current_user == @trade.buyer && @trade.buyer_accepted == false) || (current_user == @trade.seller && @trade.seller_accepted == false) %> 
           <%= link_to "Confirmar presença", confirm_presence_trade_path(@trade), method: :patch, class: "btn btn-primary" %>
         <% else %>
-          <button class="btn btn-success disabled">Confirmado</button>
+          <div class="btn btn-success disabled">Confirmado</div>
         <% end %>
     </div>
 

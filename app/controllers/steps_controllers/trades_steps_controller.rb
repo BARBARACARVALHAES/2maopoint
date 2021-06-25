@@ -22,8 +22,8 @@ module StepsControllers
       @trade.assign_attributes(trade_params)
       @trade.author_role == "Vendedor" ? @trade.update(seller: current_user) : @trade.update(buyer: current_user)
       receiver = User.find_by(email: @trade.receiver_email)
-      @trade.buyer = receiver if @trade.seller && receiver
-      @trade.seller = receiver if @trade.buyer && receiver
+      @trade.buyer = receiver if @trade.seller == current_user && receiver
+      @trade.seller = receiver if @trade.buyer == current_user && receiver
       # If it is the last step
       if @trade.save && params[:id] == Trade.form_steps.keys.last
         @trade.created_by_seller? ? @trade.update(seller_accepted: true) : @trade.update(buyer_accepted: true)
