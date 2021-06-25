@@ -1,7 +1,7 @@
 <div class="container content-container">
   <%= simple_form_for @trade, method: :put do |f| %>
-    <%= f.input  :date, label: "Data", as: :datetime %>
+    <%= f.input :date, label: "Data", as: :string, input_html: { id: 'flat_date' } %>
     <%= f.input :carrefour_unit_id, label: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all %>
-    <%= f.submit "Alterar" %>
+    <%= f.submit "Alterar", class: "btn btn-primary" %>
   <% end %>
 </div>
