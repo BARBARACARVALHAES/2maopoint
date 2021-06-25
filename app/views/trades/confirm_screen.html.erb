@@ -34,6 +34,8 @@
         <%# TODO: se a outra parte reagendar, ela vira author? Se não, precisamos mostrar novamente o botão de Confirmar caso haja reagendamento do convidado %>
         <% if (current_user == @trade.buyer && @trade.buyer_accepted == false) || (current_user == @trade.seller && @trade.seller_accepted == false) %> 
           <%= link_to "Confirmar presença", confirm_presence_trade_path(@trade), method: :patch, class: "btn btn-primary" %>
+        <% elsif (current_user == @trade.buyer && @trade.seller_accepted == false) || (current_user == @trade.seller && @trade.buyer_accepted == false) %>
+          <div class="btn btn-warning disabled">Aguardando confirmação</div>
         <% else %>
           <div class="btn btn-success disabled">Confirmado</div>
         <% end %>
