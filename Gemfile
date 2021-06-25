@@ -29,8 +29,7 @@ gem 'pundit', '~> 2.1'
 # Geolocalisation
 gem 'geocoder', '~> 1.3', '>= 1.3.7'
 
-# Htpp requests
-# gem 'httparty', '~> 0.13.7'
+gem 'faker'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -53,7 +52,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 5.0.0'
-  gem 'faker'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
