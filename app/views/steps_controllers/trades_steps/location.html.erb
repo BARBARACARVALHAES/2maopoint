@@ -3,7 +3,7 @@
   <p class="subtitle">Defina algumas informações e inicie o seu agendamento com a outra parte da negociação.</p>
     
   <%= simple_form_for @trade, url: wizard_path do |f| %>
-    <%= f.input :buyer_cep, label: "Digite o seu CEP:", placeholder: "00000000" %>
+    <%= f.input :buyer_cep, label: "Digite o seu CEP:", placeholder: "00000-000" %>
     <%= f.input :seller_cep, label: "Digite o CEP do #{ params[:author_role] == "Vendedor" ? "Comprador" : "Vendedor"}:", placeholder: "00000-000" %>
     <%= f.input :date, as: :string, label: "Data e horário:", input_html: {id: "flat_date"}  %>
     <div class="d-flex justify-content-between">

@@ -47,6 +47,7 @@ RSpec.feature "Trades", type: :feature, js: true do
       fill_in('trade_seller_cep', with: '22000-112')
       click_on(id: 'avançar')
       expect(Trade.all.order(updated_at: :desc).first.buyer_cep).to eq("22000-111")
+      expect(Trade.all.order(updated_at: :desc).first.seller_cep).to eq("22000-112")
     end
 
     scenario 'carrefour_unit + verify first option with geolocalisation' do
@@ -64,8 +65,20 @@ RSpec.feature "Trades", type: :feature, js: true do
     scenario 'invitation' do
       visit(trade_step_path(trade_invitation, "invitation"))
       fill_in('trade_receiver_email', with: 'test@test.com')
+      fill_in('trade_receiver_name', with: 'name Test')
       click_on(id: 'terminar')
       expect(Trade.all.order(updated_at: :desc).first.receiver_email).to eq("test@test.com")
+      expect(Trade.all.order(updated_at: :desc).first.receiver_name).to eq("name Test")
+    end
+
+    scenario 'flatpickr works !' do
+      # Create carrefour units
+      carrefour_units
+      visit(trade_step_path(trade_location, "location"))
+      # complete the flatpickr date
+      page.execute_script("document.querySelector('#flat_date').value = '2021-12-12 11:00'")
+      click_on(id: 'avançar')
+      expect(Trade.all.order(updated_at: :desc).first.date.strftime('%d/%m/%y - %H:%M')).to eq("12/12/21 - 11:00")
     end
   end
 end
