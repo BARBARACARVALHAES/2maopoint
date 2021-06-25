@@ -1,5 +1,5 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to "#", class: "navbar-brand" do %>
+  <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "logo-car.png" %>
     <% end %>
 
@@ -12,7 +12,7 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to "ACESSAR", new_trade_path, class: "nav-link" %>
+          <%= link_to "INICE UM AGENDAMENTO", new_trade_path, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
           <%= image_tag "icone-usuario.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -23,8 +23,9 @@
           </div>
         </li>
       <% else %>
-        <li class="nav-item">
-          <%= link_to "INICIE UM AGENDAMENTO", new_user_session_path, class: "nav-link start-button" %>
+        <li class="nav-item d-flex">
+          <%= link_to "CRIAR UMA CONTA", new_user_registration_path, class: "nav-link" %>
+          <%= link_to "ACESSAR", new_user_session_path, class: "nav-link start-button" %>
         </li>
       <% end %>
     </ul>

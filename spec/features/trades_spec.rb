@@ -76,7 +76,7 @@ RSpec.feature "Trades", type: :feature, js: true do
       carrefour_units
       visit(trade_step_path(trade_location, "location"))
       # complete the flatpickr date
-      page.execute_script("document.querySelector('#flat_date').value = '2021-12-12 11:00'")
+      page.execute_script("document.querySelector('#flat_datetime').value = '2021-12-12 11:00'")
       click_on(id: 'avançar')
       expect(Trade.all.order(updated_at: :desc).first.date.strftime('%d/%m/%y - %H:%M')).to eq("12/12/21 - 11:00")
     end
