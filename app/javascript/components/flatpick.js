@@ -1,8 +1,8 @@
 import flatpickr from "flatpickr";
 
 const initFlatpick = () => {
-  const el = document.getElementById("flat_date");
   if(document.getElementById("flat_date")) {
+    const el = document.getElementById("flat_date");
     flatpickr(el, {
       enableTime: true,
       altInput: true,
