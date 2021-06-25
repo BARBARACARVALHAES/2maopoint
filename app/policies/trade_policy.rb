@@ -9,8 +9,13 @@ class TradePolicy < ApplicationPolicy
     user.present?
   end
 
+  # Usado para a gem wicked para mostrar o form em varios paginas (qualquer usuario pode acessar)
   def show?
-    user == record.buyer || user == record.seller
+    user.present?
+  end
+
+  def confirm_screen?
+    confirm_presence?
   end
 
   def update?
