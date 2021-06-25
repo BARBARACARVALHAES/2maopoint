@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   
   devise_for :users, controllers: { confirmations: 'confirmations' }
+
   root to: 'pages#home'
   resources :trades do
     resources :steps, only: %i[show update], controller: 'steps_controllers/trades_steps'
