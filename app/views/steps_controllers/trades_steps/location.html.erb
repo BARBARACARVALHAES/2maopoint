@@ -1,14 +1,22 @@
 <div class="container content-container">
-  <h1>Realize o seu agendamento</h1>
-  <p class="subtitle">Defina algumas informações e inicie o seu agendamento com a outra parte da negociação.</p>
+    <div class="steps">
+    <div class="step active-step"><p>1</p></div>
+    <div class="step active-step"><p>2</p></div>
+    <div class="step"><p>3</p></div>
+    <div class="step"><p>4</p></div>
+  </div>
+
+  <h1 class="title">Localização</h1>
+  <p class="subtitle">Preenchendo com os dois CEPs, vamos encontrar a unidade mais perto para as duas partes.</p>
     
   <%= simple_form_for @trade, url: wizard_path do |f| %>
-    <%= f.input :buyer_cep, label: "Digite o seu CEP:", placeholder: "00000-000" %>
-    <%= f.input :seller_cep, label: "Digite o CEP do #{ params[:author_role] == "Vendedor" ? "Comprador" : "Vendedor"}:", placeholder: "00000-000" %>
-    <%= f.input :date, as: :string, label: "Data e horário:", input_html: {id: "flat_datetime"}  %>
+    <%= f.input :buyer_cep, label: "SEU CEP", placeholder: "00000-000", wrapper_html: { class: "question" }, id: "cep" %>
+    <%= f.input :seller_cep, label: "CEP DO #{ params[:author_role] == "VENDENDOR" ? "COMPRADOR" : "VENDENDOR"}", placeholder: "00000-000", wrapper_html: { class: "question" }  %>
+    <%= f.input :date, as: :string, label: "DATA E HORÁRIO", wrapper_html: {id: "flat_datetime", class: "question" }, input_html: { class: "question" }  %>
     <div class="d-flex justify-content-between">
-    <%= link_to 'Voltar', trade_step_path(@trade, "infos"), class: "btn btn-outline-primary btn-action"  %>
-    <%= f.submit "Avançar", class: "btn btn-primary", id: 'avançar' %>
+      <%= link_to 'Voltar', trade_step_path(@trade, "infos"), class: "btn btn-outline-primary btn-action rounded-button-secondary"  %>
+      <%= f.submit "Avançar", class: "btn btn-primary rounded-button", id: 'avançar' %>
     </div>
   <% end %>
 </div>
+
