@@ -26,6 +26,19 @@ Capybara.default_max_wait_time = 10
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
 
+  # Stub Twilio
+  # config.expect_with :rspec do |expectations|
+  #   expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  # end
+
+  # config.mock_with :rspec do |mocks|
+  #   mocks.verify_partial_doubles = true
+  # end
+
+  # config.before(:each) do
+  #   stub_const("TwilioClient", TwilioStub)
+  # end
+
   config.before(:suite) do
     # Clean the DB before/after the tests
     DatabaseCleaner.strategy = :transaction
