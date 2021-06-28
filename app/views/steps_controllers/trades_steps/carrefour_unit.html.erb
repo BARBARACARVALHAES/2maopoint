@@ -5,17 +5,19 @@
   <%= simple_form_for @trade, url: wizard_path do |f| %>
     <div class="form-group select optional trade_carrefour_unit_id">
       <label class="select optional" for="trade_carrefour_unit_id">Unidade do Carrefour:</label>
-      <select class="form-control select optional" name="trade[carrefour_unit_id]" id="trade_carrefour_unit_id">
-        <option value="" label=" "></option>
-        <% @carrefour_units.each do |unit| %>
-          <option value= <%= unit.id %>><%= unit.name %></option>
+      <div data-controller="map" data-action="change->map#selectUnit">
+        <select class="form-control select optional" name="trade[carrefour_unit_id]" id="trade_carrefour_unit_id" data-map-target= 'select'>
+          <option value="" label=" "></option>
+          <% @carrefour_units.each do |unit| %>
+            <option value= <%= unit.id %>><%= unit.name %></option>
+          <% end %>
+        </select>
+        <% if @geoloc_success %>
+          <small class="form-text text-muted">As unidades aparecem na ordem de proximidade entre você e o <%=  @trade.author_role == "Vendedor" ? "comprador" : "vendedor" %>.</small>
+        <% else %>
+          <small class="form-text" style='color: red'>A geolocalização não funcionou com os CEP registrados na etapa anterior, as lojas aparecem por nome (você pode voltar na página anterior para tentar mudar os CEPs).</small>
         <% end %>
-      </select>
-      <% if @geoloc_success %>
-        <small class="form-text text-muted">As unidades aparecem na ordem de proximidade entre você e o <%=  @trade.author_role == "Vendedor" ? "comprador" : "vendedor" %>.</small>
-      <% else %>
-        <small class="form-text" style='color: red'>A geolocalização não funcionou com os CEP registrados na etapa anterior, as lojas aparecem por nome (você pode voltar na página anterior para tentar mudar os CEPs).</small>
-      <% end %>
+      </div>
     </div>
     <div id="map"
       style="width: 100%; height: 400px;"

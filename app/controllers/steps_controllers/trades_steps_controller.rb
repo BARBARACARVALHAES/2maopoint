@@ -50,7 +50,8 @@ module StepsControllers
         {
           lat: unit.latitude,
           lng: unit.longitude,
-          info_window: render_to_string(partial: "info_window", locals: { unit: unit })
+          info_window: render_to_string(partial: "info_window", locals: { unit: unit }),
+          id: unit.id
         }
       end
 
