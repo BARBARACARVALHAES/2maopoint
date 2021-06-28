@@ -1,13 +1,19 @@
 <div class="container content-container">
-  <h1>Realize o seu agendamento</h1>
-  <p class="subtitle">Defina algumas informações e inicie o seu agendamento com a outra parte da negociação.</p>
+  <div class="steps">
+    <div class="step active-step"><p>1</p></div>
+    <div class="step"><p>2</p></div>
+    <div class="step"><p>3</p></div>
+    <div class="step"><p>4</p></div>
+  </div>
+  <h1 class="title">Inicie o seu agendamento</h1>
+  <p class="subtitle">Para você ter mais segurança, conte pra gente o que você está comercializando.</p>
   
-  <%= simple_form_for(@trade, url: wizard_path) do |f| %>
-    <%= f.input :author_role, label: "Nesta transação, você é o:", as: :select, collection: Trade::ROLE %>
-    <%= f.input :item_category_id, as: :select, label: "A categoria do item é:", collection: ItemCategory.all %>
-    <%= f.input :item, label: "O item transacionado é:" %>
+  <%= simple_form_for(@trade, url: wizard_path, html: { class: "carrefour-form" } ) do |f| %>
+    <%= f.input :author_role, label: "VOCÊ É...", as: :select, collection: Trade::ROLE, wrapper_html: { class: "question" } %>
+    <%= f.input :item_category_id, as: :select, label: "TIPO DE PRODUTO", collection: ItemCategory.all, wrapper_html: { class: "question" } %>
+    <%= f.input :item, label: "NOME DO PRODUTO", wrapper_html: { class: "question" } %>
     <div class="d-flex justify-content-end">
-      <%= f.submit "Avançar", class: "btn btn-primary", id: 'avançar' %>
+      <%= f.submit "Avançar", class: "btn btn-primary rounded-button", id: 'avançar' %>
     </div>
   <% end %>
 </div>
