@@ -15,8 +15,8 @@
     padding-left: 4px;
   }
   select, input, input:focus, select:focus {
-    background-color: #fff;
-    border: none; 
+    background-color: #fff !important;
+    border: none;
     padding: 0;
     font-size: 1.3rem;
     outline: none !important;
