@@ -13,7 +13,7 @@
     <%= f.input :buyer_cep, label: "SEU CEP", placeholder: "00000-000", wrapper_html: { class: "question" }, id: "cep" %>
     <%= f.input :seller_cep, label: "CEP DO #{ params[:author_role] == "VENDENDOR" ? "COMPRADOR" : "VENDENDOR"}", placeholder: "00000-000", wrapper_html: { class: "question" }  %>
     <div class="calendar">
-      <%= f.input :date, as: :string, label: "DATA E HORÁRIO", input_html: {id: "flat_datetime", class: "question" }, wrapper_html: { class: "question" } %>
+      <%= f.input :date, as: :string, label: "DATA E HORÁRIO", input_html: {id: "flat_datetime" }, wrapper_html: { class: "question" } %>
     </div>
     <div class="d-flex justify-content-between">
       <%= link_to 'Voltar', trade_step_path(@trade, "infos"), class: "btn btn-outline-primary btn-action rounded-button-secondary"  %>
