@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2021_06_25_115503) do
     t.integer "item_category_id"
     t.datetime "date"
     t.string "item"
-    t.boolean "buyer_accepted", default: false
-    t.boolean "seller_accepted", default: false
+    t.boolean "buyer_accepted"
+    t.boolean "seller_accepted"
     t.string "buyer_cep"
     t.string "seller_cep"
     t.string "receiver_email"
