@@ -39,7 +39,8 @@ end
     cpf: Faker::Number.number(digits: 11),
     birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
     phone: Faker::PhoneNumber.cell_phone,
-    address: Faker::Address.street_address
+    address: Faker::Address.street_address,
+    confirmed_at: Time.now
   )
   p "Create #{u.id} user"
 end

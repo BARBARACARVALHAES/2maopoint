@@ -1,5 +1,5 @@
 <div class="container content-container">
-  
+  <%= link_to "Volta para os agendamentos", invitations_profile_path(current_user) %>
   <%# TODO: Evento já foi realizado: solicitar confirmação de presença %>
   <% if DateTime.now > @trade.date %>
     <h1>Este encontro já foi realizado</h1>
