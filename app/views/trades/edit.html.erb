@@ -2,6 +2,6 @@
   <%= simple_form_for @trade, method: :put do |f| %>
     <%= f.input  :date, label: "Data", as: :string, input_html: { id: 'flat_datetime' } %>
     <%= f.input :carrefour_unit_id, label: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all %>
-    <%= f.submit "Alterar", class: "btn btn-primary" %>
+    <%= f.submit "Alterar", class: "btn btn-primary", data: { confirm: "Você tem certeza que deseja modificar este agendamento ? No caso, uma mensagem Whatsapp será enviada para o otro usúario pedindo para confirmar as novas informações." } %>
   <% end %>
 </div>

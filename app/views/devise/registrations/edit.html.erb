@@ -10,15 +10,60 @@
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "name" },
+                placeholder: "João"
+                %>
+    <%= f.input :last_name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "last name" },
+                placeholder: "Machado"
+                %>
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" },
+                placeholder: "joao.machado@2mao.com.br"
+                %>
+    <%= f.input :cpf,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "cpf" },
+                placeholder: "000.000.000-00"
+                %>
+    <%= f.input  :phone,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "phone" },
+                  placeholder: "+5521000000000"
+                  %>
+    <%= f.input  :birthdate,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "birthdate" },
+                  as: :string,
+                  input_html: { id: 'flat_date' }
+                  %>
+    <%= f.input  :address,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "address" },
+                  placeholder: "Meu endereço"
+                  %>                             
     <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" }
+                hint: "Deixa em branco se você não quer modificar ele",
+                %>
     <%= f.input :password_confirmation,
-                required: false,
+                required: true,
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
+                hint: "Precisamos da sua senha atual para confirmar as mudançãs",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
   </div>

@@ -11,7 +11,7 @@ class Trade < ApplicationRecord
     infos: %i[item item_category_id author_role],
     location: %i[date buyer_cep seller_cep],
     carrefour_unit: %i[carrefour_unit_id],
-    invitation: %i[receiver_email receiver_name]
+    invitation: %i[receiver_name receiver_phone]
   }
   attr_accessor :form_step
 
@@ -40,8 +40,8 @@ class Trade < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:invitation) } do
-    validates :receiver_email, presence: true
     validates :receiver_name, presence: true
+    validates :receiver_phone, presence: true, phone: true
   end
 
   def required_for_step?(step)

@@ -28,8 +28,7 @@
             <td><%= trade.carrefour_unit.name if trade.carrefour_unit%></td>
             <td class="edit-buttons">
               <p>
-                <%= link_to "<i class='far fa-calendar-alt'></i>".html_safe, edit_trade_path(trade), title: "Reagendar", class: "m-right" %>
-                <%= link_to "<i class='far fa-trash-alt'></i>".html_safe, trade_path(trade), method: :delete, data: { confirm: "Você tem certeza que deseja cancelar este agendamento?"}, title: "Cancelar" %> 
+                <%= link_to "<i class='far fa-trash-alt'></i>".html_safe, trade_path(trade), method: :delete, data: { confirm: "Você tem certeza que deseja cancelar este agendamento ? Essa ação cancelará deifnitivamente o agendamento as duas partes."}, title: "Cancelar" %> 
               </p> 
             </td>
           </tr>

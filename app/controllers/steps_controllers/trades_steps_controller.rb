@@ -21,14 +21,19 @@ module StepsControllers
       authorize @trade
       @trade.assign_attributes(trade_params)
       @trade.author_role == "Vendedor" ? @trade.update(seller: current_user) : @trade.update(buyer: current_user)
-      receiver = User.find_by(email: @trade.receiver_email)
+      receiver = User.find_by(phone: @trade.receiver_phone)
       @trade.buyer = receiver if @trade.seller == current_user && receiver
       @trade.seller = receiver if @trade.buyer == current_user && receiver
       # If it is the last step
       if @trade.save && params[:id] == Trade.form_steps.keys.last
         @trade.created_by_seller? ? @trade.update(seller_accepted: true) : @trade.update(buyer_accepted: true)
-        TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).created_trade.deliver_later
-        redirect_to(finish_wizard_path, success: "O pedido foi enviado para #{@trade.receiver_email}!")
+        user = User.find_by(phone: @trade.receiver_phone)
+        url = user ? confirm_screen_trade_url(@trade) : new_user_registration_url
+        receiver_name = user ? user.first_name : @trade.receiver_name
+        WhatsappCreateTradeJob.perform_later(phone: @trade.receiver_phone, receiver_name: receiver_name, sender_user: current_user, trade: @trade, url: url)
+        # TwilioClient.new.created_trade(phone: @trade.receiver_phone, receiver_name: receiver_name, sender_user: current_user, trade: @trade, url: url)
+        # TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).created_trade.deliver_later
+        redirect_to(finish_wizard_path, success: "O pedido foi enviado pelo WhatsApp para #{@trade.receiver_phone}!")
       else
         render_wizard @trade
       end
