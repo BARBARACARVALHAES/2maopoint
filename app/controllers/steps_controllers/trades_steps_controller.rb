@@ -9,9 +9,9 @@ module StepsControllers
     def show
       @trade = Trade.find(params[:trade_id])
       # On the page of the carrefour unit f1zemos tudo ligado à geoloclização
-      search_for_localisation if params[:id] == 'carrefour_unit'
       @geoloc_success = true if @carrefour_units
       @carrefour_units ||= CarrefourUnit.all.order(name: :asc)
+      search_for_localisation if params[:id] == 'carrefour_unit'
       authorize @trade
       render_wizard
     end
@@ -50,16 +50,6 @@ module StepsControllers
     end
 
     def search_for_localisation
-      # Generate API MAP
-      @markers = CarrefourUnit.all.geocoded.map do |unit|
-        {
-          lat: unit.latitude,
-          lng: unit.longitude,
-          info_window: render_to_string(partial: "info_window", locals: { unit: unit }),
-          id: unit.id
-        }
-      end
-
       # Get the localisation of the buyer_cep and seller_cep
       if @trade.seller_cep.present? && @trade.buyer_cep.present?
         # Transform CEP into lat / long
@@ -87,6 +77,16 @@ module StepsControllers
 
         if @trade.lat_seller.present? && @trade.long_seller.present? && @trade.lat_buyer.present? && @trade.long_buyer.present?
           order_by_loc(@trade)
+        end
+
+        # Generate API MAP
+        @markers = @carrefour_units.all.geocoded.map do |unit|
+          {
+            lat: unit.latitude,
+            lng: unit.longitude,
+            info_window: render_to_string(partial: "info_window", locals: { unit: unit }),
+            id: unit.id
+          }
         end
       end
     end
