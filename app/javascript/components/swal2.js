@@ -9,8 +9,8 @@ const initSwal2 = () => {
     }
   };
 
-  initSweetalert('#success', { title: "Done", icon: "success"});
-  initSweetalert('#failed', { title: "Failed", icon: "warning"});
+  initSweetalert('#success', { title: "Pronto!", icon: "success" });
+  initSweetalert('#failed', { title: "Oh no!", icon: "warning" });
 }
 
-export {initSwal2};
+export { initSwal2 };

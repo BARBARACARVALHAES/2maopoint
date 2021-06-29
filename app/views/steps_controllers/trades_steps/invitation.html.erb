@@ -1,20 +1,28 @@
 <div class="container content-container">
-  <h1>Confirme seus dados</h1>
+  <div class="steps">
+    <div class="step active-step"><p>1</p></div>
+    <div class="step active-step"><p>2</p></div>
+    <div class="step active-step"><p>3</p></div>
+    <div class="step active-step"><p>4</p></div>
+  </div>
+
+  <h1 class="title">Envie o convite</h1>
   <p class="subtitle">Verifique se a unidade do Carrefour, horário e dia estão corretos e envie o seu convite.</p>
 
-<p><strong>Unidade Carrefour:</strong></p>
-<p><%= @trade.carrefour_unit.name %></p>
+<div class="confirmation-card mb-5">
+  <label for="">INFORMAÇÕES DO ENCONTRO</label>
+  <p><strong>Unidade: </strong><%=@trade.carrefour_unit.name %></p>
+  <p><strong>Endereço: </strong><%= @trade.carrefour_unit.address %></p>
+  <p><strong>Data e horário: </strong><%=@trade.date.strftime("%d/%m/%Y às %Hh%M") %></p>
+</div>
 
-<p><strong>Data e horário:</strong></p>
-<p><%= @trade.date %></p>
-
-<p><strong>Envie o convite deste agendamento:</strong></p>
+<p class="subtitle"><strong>Envie o convite deste agendamento:</strong></p>
 <%= simple_form_for @trade, url: wizard_path do |f| %>
-  <%= f.input :receiver_name, label: false, placeholder: "Nome do convidado" %>
-  <%= f.input :receiver_phone, label: false, placeholder: "+5521000000000" %>
+  <%= f.input :receiver_name, label: "NOME", placeholder: "Nome do convidado", wrapper_html: { class: "question" } %>
+  <%= f.input :receiver_phone, label: "PHONE", placeholder: "+5521000000000", wrapper_html: { class: "question" } %>
   <div class="d-flex justify-content-between">
-  <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-outline-primary btn-action" %>
-  <%= f.submit "Concluir", class: "btn btn-primary", id: 'terminar' %>
+  <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-outline-primary btn-action rounded-button-secondary" %>
+  <%= f.submit "Concluir", class: "btn btn-primary rounded-button", id: 'terminar' %>
   </div>
 <% end %>
 
