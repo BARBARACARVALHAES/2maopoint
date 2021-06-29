@@ -6,12 +6,13 @@ import { initMapbox } from '../components/init_mapbox';
 export default class extends Controller {
   static targets = [ "select", "mapbox" ]
 
-  async connect() {
+  connect() {
     this.markers = JSON.parse(this.mapboxTarget.dataset.markers)
     this.accessToken = this.mapboxTarget.dataset.mapboxApiKey
     // Wait for controller to connect before activate the function
-    await initMapbox()
-    this.clickablePopup()
+    initMapbox()
+    // Change with async await after, cant make it work right now
+    setTimeout(() => this.clickablePopup(), 500)
   }
 
   async selectUnit() {
