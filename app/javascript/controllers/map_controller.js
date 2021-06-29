@@ -37,6 +37,7 @@ export default class extends Controller {
           .addTo(map);
       });
 
+    // Se a gente selecionou uma opção
     if(this.selectTarget.value) {
       const selectedMarker = this.markers.find(marker => marker.id === +this.selectTarget.value)
       this.mapboxTarget.dataset.markers = selectedMarker
@@ -57,7 +58,6 @@ export default class extends Controller {
         .addTo(map);
 
       fitMapToMarkers(map, markersUsers.concat(selectedMarker));
-
     } else {
       // Seleciona só os 10 mais próximos
       const markersClose = this.markers.slice(0, 10)
@@ -81,44 +81,6 @@ export default class extends Controller {
       fitMapToMarkers(map, markersClose);
     }
     this.clickablePopup()
-
-    // example origin and destination
-    // const start = {lat: markersUsers[0].lat, lng: markersUsers[0].lng}; 
-    // const finish = {lat: selectedMarker.lat, lng: selectedMarker.lng};
-
-    // const routes = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${start.lat},${start.lng};${finish.lat},${finish.lng}?alternatives=true&geometries=geojson&steps=true&access_token=${this.accessToken}`)
-    //   .then(response => response.json())
-    //   .then(data => data)
-
-
-    // console.log(routes)
-
-      // map.on('load', function () {
-      //   map.addSource('route', {
-      //     'type': 'geojson',
-      //     'data': {
-      //       'type': 'Feature',
-      //       'properties': {},
-      //       'geometry': {
-      //         'type': 'LineString',
-      //         'coordinates': routes.routes[0].geometry.coordinates
-      //       }
-      //     }
-      //   });
-      //   map.addLayer({
-      //   'id': 'route',
-      //   'type': 'line',
-      //   'source': 'route',
-      //   'layout': {
-      //   'line-join': 'round',
-      //   'line-cap': 'round'
-      //   },
-      //   'paint': {
-      //   'line-color': '#888',
-      //   'line-width': 8
-      //   }
-      //   });
-      //   });
   }
 
   clickablePopup() {
