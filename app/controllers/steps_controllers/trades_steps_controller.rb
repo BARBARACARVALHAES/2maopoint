@@ -9,9 +9,9 @@ module StepsControllers
     def show
       @trade = Trade.find(params[:trade_id])
       # On the page of the carrefour unit f1zemos tudo ligado à geoloclização
-      @geoloc_success = true if @carrefour_units
       @carrefour_units ||= CarrefourUnit.all.order(name: :asc)
       search_for_localisation if params[:id] == 'carrefour_unit'
+      @geoloc_success = true if @carrefour_units != CarrefourUnit.all.order(name: :asc)
       authorize @trade
       render_wizard
     end
