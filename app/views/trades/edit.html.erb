@@ -6,7 +6,7 @@
     <%= f.input :carrefour_unit_id, label: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all, wrapper_html: { class: 'question' } %>
     <div class="d-flex justify-content-between">
       <%= button_to "Voltar", invitations_profile_path(current_user), class: "btn btn-outline-primary rounded-button-secondary" %>
-      <%= f.submit "Alterar", class: "btn btn-primary rounded-button" %>
+      <%= f.submit "Alterar", class: "btn btn-primary rounded-button", data: { confirm: "Você tem certeza que deseja modificar este agendamento? Uma mensagem será enviada para o otro usúario pedindo para confirmar as novas informações." } %>
     </div>
   <% end %>
 </div>

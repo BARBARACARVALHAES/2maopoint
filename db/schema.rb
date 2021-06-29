@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_25_115503) do
+ActiveRecord::Schema.define(version: 2021_06_28_143926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_06_25_115503) do
     t.boolean "seller_accepted", default: false
     t.string "buyer_cep"
     t.string "seller_cep"
-    t.string "receiver_email"
+    t.string "receiver_phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "receiver_name"

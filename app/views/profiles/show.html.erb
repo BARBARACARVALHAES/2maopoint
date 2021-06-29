@@ -1,11 +1,11 @@
-<div class="profile-container d-flex justify-content-center">
+<div class="container d-flex justify-content-center">
         <%= image_tag "icone-usuario.png", class: "profile" %>
-        <h3>Olá, <%= @user.first_name %></h3>
 </div>
 <div class="profile-buttons d-flex justify-content-center">
     <div class="d-flex flex-column">
-        <%= link_to "Novo Agendamento", new_trade_path, :class => "btn btn-light botoeProflile" %>
-        <%= link_to "Convites", invitations_profile_path(:user), :class => "btn btn-light botoeProflile" %>
-        <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => "btn btn-light botoeProflile" %>
+        <h3>Olá,</hr><br><h3> <%= @user.first_name %></h3>
+        <%= link_to "Novo Agendamento", new_trade_path, :class => "btn botoeProflile" %>
+        <%= link_to "Convites", invitations_profile_path(:user), :class => "btn botoeProflile" %>
+        <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => "btn botoeProflile" %>
     </div>
 </div>

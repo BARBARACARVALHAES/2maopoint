@@ -6,25 +6,26 @@
         <figure>
             <%= image_tag "mulher_feliz.png", class: "img_banner", alt: "banner" %>
         </figure>
+        <figure>
+            <%= image_tag "artboard_transparente2.png", class: "img_banner_mobile", alt: "banner" %>
+        </figure>
     </div>   
 </section> 
-
 <section class="containerSegundo container"> 
-    <div class="col-6">
+    <div class="col-12 col-md-6">
         <div>
             <h1>Suas transações ainda mais seguras</h1>
             <p> Se você já é cliente do <strong class= "forte"> Banco Carrefour </strong>, sabe que segurança é coisa séria pra gente. O 2ª Mão Point é um espaço criado em nossos estabelecimentos para que você receba suas compras e faça entregas pessoalmente, sem frio na barriga. Os points contam com câmeras e a supervisão dos nosso colaboradores.</p>
-        </div>
-                 
+        </div>                 
     </div>
-    <div class="maisVantagens col-6">
-        <h2 class="economia">+economia</h2>
+    <div class="maisVantagens col-12 col-md-6">
+        <h2>+economia</h2>
         <h2>+segurança</h2>
-        <h2 class="comodidade">+comodidade</h2>       
+        <h2>+comodidade</h2>       
     </div>
 </section>
 <section class="teste">
-    <div class="containerTerceiro container d-flex justify-content-between">
+    <div class="containerTerceiro container">
         <div class="icone">
             <%= image_tag "icone-cel.png", class: "icone1", alt: "" %>
             <p>Compre ou venda um produto de segunda mão em sites como <strong>OLX, Mercado Livre, Elo7 e Enjoei.</strong></p>
@@ -40,7 +41,7 @@
     </div>
 </section>
 <section class="containerQuarto container d-flex justify-content-center"> 
-    <div>
+    <div class="agendamentoHome">
         <h3>Já realizou sua compra ou venda?</h3> 
         <%= link_to "Novo Agendamento", new_trade_path, :class => "btn btn-primary btnHome" %>
     </div>
