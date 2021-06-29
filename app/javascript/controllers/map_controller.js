@@ -72,9 +72,8 @@ export default class extends Controller {
       const responseBuyer = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${markersUsers[1].lng},${markersUsers[1].lat};${selectedMarker.lng},${selectedMarker.lat}?geometries=geojson&access_token=${this.accessToken }`)
         .then(response => response.json())
 
-      map.on('load', function () {
-        // Add a source and layer displaying a point which will be animated in a circle.
-        
+      // Add path and labels on the map
+      map.on('load', function () {        
         map.addLayer({
           'id': 'routeSeller',
           'type': 'line',
@@ -180,7 +179,10 @@ export default class extends Controller {
         });
       });  
       
-    } else {
+    } 
+    // Se nada for selecionado botamos de novo as 10 opções mais próximas
+    else 
+    {
       // Seleciona só os 10 mais próximos
       const markersClose = this.markers.slice(0, 10)
       markersClose.forEach((marker) => {
