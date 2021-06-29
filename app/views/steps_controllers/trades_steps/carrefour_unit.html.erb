@@ -1,11 +1,10 @@
 <div class="container content-container">
   <h1>Ache a unidade carrefour mais próximo de vocês</h1>
   <p class="subtitle">Usando os ceps que você entrou no applicativo, fizemos uma classificaçao das lojas carrefour mais proximas de vocês.</p>
-    
-  <%= simple_form_for @trade, url: wizard_path do |f| %>
-    <div class="form-group select optional trade_carrefour_unit_id">
-      <label class="select optional" for="trade_carrefour_unit_id">Unidade do Carrefour:</label>
-      <div data-controller="map" data-action="change->map#selectUnit">
+  <div data-controller="map" data-action="change->map#selectUnit"> 
+    <%= simple_form_for @trade, url: wizard_path do |f| %>
+      <div class="form-group select optional trade_carrefour_unit_id">
+        <label class="select optional" for="trade_carrefour_unit_id">Unidade do Carrefour:</label>
         <select class="form-control select optional" name="trade[carrefour_unit_id]" id="trade_carrefour_unit_id" data-map-target= 'select'>
           <option value="" label=" "></option>
           <% @carrefour_units.each do |unit| %>
@@ -18,15 +17,17 @@
           <small class="form-text" style='color: red'>A geolocalização não funcionou com os CEP registrados na etapa anterior, as lojas aparecem por nome (você pode voltar na página anterior para tentar mudar os CEPs).</small>
         <% end %>
       </div>
-    </div>
-    <div id="map"
-      style="width: 100%; height: 400px;"
-      data-markers="<%= @markers.to_json %>"
-      data-mapbox-api-key="<%= Rails.application.credentials.mapbox[:api] %>">
-    </div>
-    <div class="d-flex justify-content-between">
-      <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-outline-primary btn-action" %>
-      <%= f.submit "Avançar", class: "btn btn-primary", id: "avançar" %>
-    </div>
-  <% end %>
+      <div id="map"
+        style="width: 100%; height: 400px;"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= Rails.application.credentials.mapbox[:api] %>"
+        data-map-target= 'mapbox'
+      >
+      </div>
+      <div class="d-flex justify-content-between">
+        <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-outline-primary btn-action" %>
+        <%= f.submit "Avançar", class: "btn btn-primary", id: "avançar" %>
+      </div>
+    <% end %>
+  </div>
 </div>
