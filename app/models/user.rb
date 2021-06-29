@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :address, presence: true
   validates :cpf, presence: true
   validates :birthdate, presence: true
-  validates :phone, presence: true
+  validates :phone, presence: true, uniqueness: true, phone: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   after_create :link_user_to_trades
@@ -21,7 +21,7 @@ class User < ApplicationRecord
   def link_user_to_trades
     @user = User.last 
     Trade.all.each do |trade|
-      if @user.email == trade.receiver_email 
+      if @user.phone == trade.receiver_phone 
         trade.update(receiver_name: @user.first_name) if @user.first_name
         trade.author_role == "Vendedor" ? trade.update(buyer: @user) : trade.update(seller: @user)
       end

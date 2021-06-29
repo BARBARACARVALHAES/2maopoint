@@ -7,7 +7,7 @@ FactoryBot.define do
     password { '123456' }
     birthdate { Faker::Date.between(from: '1993-09-23', to: '1993-09-25') }
     cpf { '00000000000' }
-    phone { Faker::PhoneNumber.cell_phone }
+    phone { Faker::PhoneNumber.cell_phone_in_e164 }
     confirmed_at { Time.now }
   end
 end
