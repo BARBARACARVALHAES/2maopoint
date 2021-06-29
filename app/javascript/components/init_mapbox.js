@@ -23,11 +23,18 @@ const initMapbox = () => {
 
     const markersUsers = JSON.parse(mapElement.dataset.markersUsers);
     markersUsers.forEach((marker) => {
+      if(marker.current) {
+        var popup = new mapboxgl.Popup()
+        .setText('Você està aqui')
+        .addTo(map);
+      }
+
       new mapboxgl.Marker({
-        color: "red",
+        color: marker.current ? 'red' : 'purple',
       })
         .setLngLat([ marker.lng, marker.lat ])
-        .addTo(map);
+        .addTo(map)
+        .setPopup(popup)
     });
   
     const addMarkersToMap = (map, markers) => {

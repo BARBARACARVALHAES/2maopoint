@@ -73,7 +73,17 @@ module StepsControllers
           @trade.long_seller = coordinates[1]
         end
 
-        @markers_users = [{lat: @trade.lat_seller, lng: @trade.long_seller, current: @trade.seller == current_user}, {lat: @trade.lat_buyer, lng: @trade.long_buyer, current: @trade.buyer == current_user} ]
+        @markers_users = [{
+            lat: @trade.lat_seller,
+            lng: @trade.long_seller,
+            current: @trade.seller == current_user
+          },
+          {
+            lat: @trade.lat_buyer,
+            lng: @trade.long_buyer,
+            current: @trade.buyer == current_user
+          }
+        ]
 
         if @trade.lat_seller.present? && @trade.long_seller.present? && @trade.lat_buyer.present? && @trade.long_buyer.present?
           order_by_loc(@trade)
