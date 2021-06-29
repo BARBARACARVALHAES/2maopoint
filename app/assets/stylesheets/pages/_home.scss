@@ -23,7 +23,7 @@
 
 .banner {
   height: 713px;
-  background: linear-gradient(233.46deg, #ca2e7d 4.26%, #1d5dc3 84.51%);
+  background: linear-gradient(233.46deg, #1e5bc6 4.26%, #59b9af 84.51%);
   background-blend-mode: darken;
   mix-blend-mode: normal;
   margin-top: -90px;
@@ -50,20 +50,10 @@
   font-size: 50px;
 }
 
-.economia {
-  margin-left: 1em;
-}
-
-.comodidade {
-  margin-left: 1.5em;
-}
-
 .containerSegundo p {
   font-style: normal;
   font-weight: 300;
-  // font-size: 24px;
   line-height: 39px;
-  // letter-spacing: 0.04em;
   margin-top: 20px;
 }
 
@@ -100,7 +90,7 @@
   line-height: 100px;
   letter-spacing: 0.04em;
   opacity: 0.36;
-  text-align: center;
+  text-align: left;
 }
 
 .teste {
@@ -117,13 +107,12 @@
   width: 650px;
   height: 80px;
   border-radius: 67px;
-}
-.btnHome {
   font-style: normal;
   font-weight: 500;
   font-size: 40px;
   text-align: center;
   color: #ffffff;
+  background: linear-gradient(260.18deg, #1e5ec3 47.59%, #249ef0 99.01%);
 }
 
 .containerQuarto {
@@ -140,65 +129,112 @@
 
 .icone1 {
   width: 40%;
+  margin-bottom: 20px;
 }
 
 .icone2 {
   width: 39%;
+  margin-bottom: 20px;
 }
 .icone3 {
   width: 39%;
+  margin-bottom: 20px;
 }
 
-// .formHome h2 {
-//   font-style: normal;
-//   font-weight: 900;
-//   font-size: 25px;
-//   line-height: 21px;
-//   color: #111d5e;
-//   text-align: center;
-//   margin-left: -15px;
-// }
+.containerTerceiro {
+  display: flex;
+  justify-content: space-between;
+}
 
-// .formEmail {
-//   margin-top: 14px;
-//   margin-bottom: 10px;
-// }
+@media (max-width: 600px) {
+  .img_banner {
+    display: none;
+  }
+  .containerSegundo {
+    display: block;
+  }
+  .tittleBanner {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    height: 0;
+    left: 0;
+  }
+  .banner h1 {
+    font-size: 63px;
+    line-height: 70px;
+  }
+  .banner {
+    height: auto;
+  }
 
-// .formSenha {
-//   position: relative;
-//   top: 33px;
-//   left: -8%;
-// }
+  .banner svg {
+    position: absolute;
+    top: 389px;
+    width: 100%;
+  }
 
-// .formRemember {
-//   margin-bottom: -9px;
-// }
+  .containerSegundo {
+    text-align: center;
+  }
 
-// .rememberForm {
-//   margin-bottom: -10px;
-// }
+  .maisVantagens h2 {
+    font-size: 38px;
+    line-height: 50px;
+  }
 
-// .formBox {
-//   margin-top: 6px;
-// }
+  .containerSegundo p {
+    font-size: 20px;
+  }
 
-// .formSign {
-//   background: #c70039;
-//   border: 1px solid #c70039;
-//   box-sizing: border-box;
-//   color: #fff;
-//   width: 70px;
-//   margin-top: 0rem;
-// }
+  .containerTerceiro {
+    display: block;
+  }
 
-// // .formForgot {
-// //   position: relative;
-// //   top: 80px;
-// //   left: 28%;
-// // }
+  .btnHome {
+    width: 100%;
+    height: 30%;
+    font-size: 20px;
+  }
 
-// // .formNew {
-// //   position: relative;
-// //   top: 100px;
-// //   left: 5%;
-// // }
+  .agendamentoHome {
+    padding: 24px;
+  }
+  .icone {
+    margin-right: 0px;
+  }
+
+  .containerQuarto {
+    margin-top: 1em;
+    margin-bottom: 6em;
+  }
+
+  .tittleBanner {
+    width: 95%;
+  }
+
+  .tittleBanner h1 {
+    display: none;
+  }
+  .img_banner_mobile {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: -1rem;
+  }
+  .maisVantagens {
+    max-width: 100%;
+  }
+  .maisVantagens h2 {
+    text-align: center;
+  }
+
+  .containerSegundo h1 {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 601px) {
+  .img_banner_mobile {
+    display: none;
+  }
+}
