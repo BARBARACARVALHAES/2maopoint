@@ -3,7 +3,7 @@ class TwilioClient
 
   def initialize
     @client = Twilio::REST::Client.new account_sid, auth_token
-  end
+  end  
 
   def created_trade(args = {})
     client.messages.create(
