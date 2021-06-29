@@ -48,6 +48,17 @@ pt-BR:
         address: Endereço
         password_confirmation: Confirmação da senha
         remember_me: Lembrar de mim
+      trade:
+        item: Produto
+        item_category_id: Tipo de produto
+        seller_id: Vendedor(a)
+        buyer_id: Comprador(a)
+        carrefour_unit_id: Unidade do Carrefour
+        date: Hora e data
+        buyer_cep: CEP do Vendedor
+        seller_cep: CEP do Comprador
+        receiver_email: E-mail do convidado
+        receiver_name: Nome do convidado
   date:
     abbr_day_names:
     - dom
