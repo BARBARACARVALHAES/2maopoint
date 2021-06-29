@@ -23,7 +23,7 @@
 
 .banner {
   height: 713px;
-  background: linear-gradient(233.46deg, #ca2e7d 4.26%, #1d5dc3 84.51%);
+  background: linear-gradient(233.46deg, #1e5bc6 4.26%, #59b9af 84.51%);
   background-blend-mode: darken;
   mix-blend-mode: normal;
   margin-top: -90px;
@@ -50,20 +50,10 @@
   font-size: 50px;
 }
 
-.economia {
-  margin-left: 1em;
-}
-
-.comodidade {
-  margin-left: 1.5em;
-}
-
 .containerSegundo p {
   font-style: normal;
   font-weight: 300;
-  // font-size: 24px;
   line-height: 39px;
-  // letter-spacing: 0.04em;
   margin-top: 20px;
 }
 
@@ -100,7 +90,7 @@
   line-height: 100px;
   letter-spacing: 0.04em;
   opacity: 0.36;
-  text-align: center;
+  text-align: left;
 }
 
 .teste {
@@ -117,13 +107,12 @@
   width: 650px;
   height: 80px;
   border-radius: 67px;
-}
-.btnHome {
   font-style: normal;
   font-weight: 500;
   font-size: 40px;
   text-align: center;
   color: #ffffff;
+  background: linear-gradient(260.18deg, #1e5ec3 47.59%, #249ef0 99.01%);
 }
 
 .containerQuarto {
@@ -140,22 +129,21 @@
 
 .icone1 {
   width: 40%;
+  margin-bottom: 20px;
 }
 
 .icone2 {
   width: 39%;
+  margin-bottom: 20px;
 }
 .icone3 {
   width: 39%;
+  margin-bottom: 20px;
 }
 
 .containerTerceiro {
   display: flex;
   justify-content: space-between;
-}
-
-.banner svg {
-  display: none;
 }
 
 @media (max-width: 600px) {
@@ -177,7 +165,7 @@
     line-height: 70px;
   }
   .banner {
-    height: 500px;
+    height: auto;
   }
 
   .banner svg {
@@ -221,11 +209,32 @@
     margin-bottom: 6em;
   }
 
-  .comodidade {
-    margin-left: 2rem;
-  }
-
   .tittleBanner {
     width: 95%;
+  }
+
+  .tittleBanner h1 {
+    display: none;
+  }
+  .img_banner_mobile {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: -1rem;
+  }
+  .maisVantagens {
+    max-width: 100%;
+  }
+  .maisVantagens h2 {
+    text-align: center;
+  }
+
+  .containerSegundo h1 {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 601px) {
+  .img_banner_mobile {
+    display: none;
   }
 }

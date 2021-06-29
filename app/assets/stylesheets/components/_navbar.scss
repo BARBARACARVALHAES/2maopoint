@@ -18,8 +18,8 @@
   border-radius: 25px;
   margin-right: 5px;
   color: #f4f4f4;
-  transition: background-color .5s ease-in;
-  transition: color .5s ease-in;
+  transition: background-color 0.5s ease-in;
+  transition: color 0.5s ease-in;
   &:hover a {
     background-color: white;
   }
@@ -36,5 +36,18 @@
 
 .start-button:hover {
   background-color: white;
+}
 
+.bg-new {
+  background: linear-gradient(233.46deg, #1e5bc6 4.26%, #59b9af 84.51%);
+}
+
+.nav-item {
+  list-style: none;
+}
+
+@media (max-width: 600px) {
+  .nav-link {
+    display: none;
+  }
 }

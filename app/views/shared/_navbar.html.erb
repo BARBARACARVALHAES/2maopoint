@@ -1,17 +1,10 @@
-<div class="navbar navbar-expand-sm navbar-light <%= "bg-dark mb-5" if !@home%> navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light <%= "bg-new mb-5" if !@home%> navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "logo-car.png" %>
+    <%= image_tag "logo-hackaton.png" %>
     <% end %>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+  <div class="bd-highlight d-flex" >
       <% if user_signed_in? %>
-        <li class="nav-item">
           <%= link_to "INICIE UM AGENDAMENTO", new_trade_path, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
