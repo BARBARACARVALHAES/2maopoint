@@ -1,43 +1,41 @@
 <div class="container content-container">
-  <%= link_to "Volta para os agendamentos", invitations_profile_path(current_user) %>
+  <%= link_to "<i class='far fa-arrow-alt-circle-left'></i> Voltar para os agendamentos".html_safe, invitations_profile_path(current_user), class: "text-decoration-none" %>
   <%# TODO: Evento já foi realizado: solicitar confirmação de presença %>
   <% if DateTime.now > @trade.date %>
-    <h1>Este encontro já foi realizado</h1>
+    <h1 class="title" style="margin-top:2rem;">Este encontro já foi realizado</h1>
     <p class="subtitle">Confirme se este evento já foi realizado.</p>
-    <div class="btn btn-primary">Sim, já realizei este encontro</div>
-    <div class="btn btn-outline-primary">Este evento foi cancelado</div>
+    <div class="d-flex justify-content-between">
+      <div class="btn btn-outline-primary rounded-button-secondary">Este evento foi cancelado</div>
+      <div class="btn btn-primary rounded-button">Sim, já realizei este encontro</div>
+    </div>
+    
   
   <% else %> <%# Evento ainda não foi realizado %>
     <% if @trade.author == current_user %>
-    <h1>Você tem um agendamento!</h1>
+    <h1 class="title" style="margin-top:2rem;">Você tem um agendamento!</h1>
       <p class="subtitle mb-5"><strong>Olá <%= current_user ? current_user.first_name : @trade.receiver_name %></strong>, você tem um agendamento marcado para a transação do <%= @trade.item %> no 2ª Mão Point. Confira a data, horário e local.
     <% else %>
-    <h1>Você recebeu um convite!</h1>  
+    <h1 class="title" style="margin-top: 2rem;">Você recebeu um convite!</h1>  
       <p class="subtitle mb-5"><strong>Olá <%= current_user ? current_user.first_name : @trade.receiver_name %></strong>, você recebeu um convite para realizar a transação do <%= @trade.item %>. Confira a data, horário e local.
     <% end %>
     
-    <div class="mb-5 text-center">
-      <p><strong>Unidade Carrefour:</strong></p>
-      <p><%= @trade.carrefour_unit.name %></p>
-      <p><%= @trade.carrefour_unit.address %></p>
-      <p><%= @trade.carrefour_unit.suburb %> - <%= @trade.carrefour_unit.city %></p>
-      <p>CEP: <%= @trade.carrefour_unit.cep %></p>
-    </div>
-    <div class="mb-5 text-center">
-      <p><strong>Data e horário:</strong></p>
-      <p>Dia: <%= @trade.date.strftime("%d/%m/%Y") %></p>
-      <p>Horário: <%= @trade.date.strftime("%H:%M") %></p>
+    <div class="confirmation-card mb-5 text-center">
+      <p><strong>Unidade Carrefour:</strong> <%= @trade.carrefour_unit.name %></p>
+      <p><strong>Endereço:</strong> <%= @trade.carrefour_unit.address %></p>
+      <p><strong>Bairro</strong> <%= @trade.carrefour_unit.suburb %> - <%= @trade.carrefour_unit.city %></p>
+      <p><strong>CEP:</strong> <%= @trade.carrefour_unit.cep %></p>
+      <p><strong>Data e horário:</strong> <%= @trade.date.strftime("%d/%m/%Y, às %H:%M") %></p>
     </div>
     
     <div class="d-flex justify-content-around">      
-        <%= link_to "Reagendar", edit_trade_path(@trade), class: "btn btn-outline-primary" %>
+        <%= link_to "Reagendar", edit_trade_path(@trade), class: "btn btn-outline-primary rounded-button-secondary" %>
         <%# TODO: se a outra parte reagendar, ela vira author? Se não, precisamos mostrar novamente o botão de Confirmar caso haja reagendamento do convidado %>
         <% if (current_user == @trade.buyer && @trade.buyer_accepted == false) || (current_user == @trade.seller && @trade.seller_accepted == false) %> 
-          <%= link_to "Confirmar presença", confirm_presence_trade_path(@trade), method: :patch, class: "btn btn-primary" %>
+          <%= link_to "Confirmar presença", confirm_presence_trade_path(@trade), method: :patch, class: "btn btn-primary rounded-button" %>
         <% elsif (current_user == @trade.buyer && @trade.seller_accepted == false) || (current_user == @trade.seller && @trade.buyer_accepted == false) %>
-          <div class="btn btn-warning disabled">Aguardando confirmação</div>
+          <div class="btn btn-warning disabled rounded-button-waiting">Aguardando confirmação</div>
         <% else %>
-          <div class="btn btn-success disabled">Confirmado</div>
+          <div class="btn btn-success rounded-button-confirmed">Confirmado</div>
         <% end %>
     </div>
 

@@ -1,7 +1,12 @@
 <div class="container content-container">
+  <h1 class="title">Reagendamento</h1>
+  <p class="subtitle">Após a mudança de data ou unidade, enviaremos uma mensagem para a outra parte da negociação para confirmação.</p>
   <%= simple_form_for @trade, method: :put do |f| %>
-    <%= f.input  :date, label: "Data", as: :string, input_html: { id: 'flat_datetime' } %>
-    <%= f.input :carrefour_unit_id, label: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all %>
-    <%= f.submit "Alterar", class: "btn btn-primary" %>
+    <%= f.input  :date, label: "Data", as: :string, input_html: { id: 'flat_datetime' }, wrapper_html: { class: 'question'} %>
+    <%= f.input :carrefour_unit_id, label: "Unidade do Carrefour:", as: :select, collection: CarrefourUnit.all, wrapper_html: { class: 'question' } %>
+    <div class="d-flex justify-content-between">
+      <%= button_to "Voltar", invitations_profile_path(current_user), class: "btn btn-outline-primary rounded-button-secondary" %>
+      <%= f.submit "Alterar", class: "btn btn-primary rounded-button" %>
+    </div>
   <% end %>
 </div>
