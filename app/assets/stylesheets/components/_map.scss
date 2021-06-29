@@ -5,4 +5,10 @@
 .mapboxgl-popup-content {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  border-radius: 8px !important;
+}
+
+.title-popup {
+  font-weight: 600;
+  font-size: 1.2rem;
 }

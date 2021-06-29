@@ -23,6 +23,15 @@ const initMapbox = () => {
         .setLngLat([ marker.lng, marker.lat ])
         .addTo(map);
     });
+
+    const markersUsers = JSON.parse(mapElement.dataset.markersUsers);
+    markersUsers.forEach((marker) => {
+      new mapboxgl.Marker({
+        color: "red",
+      })
+        .setLngLat([ marker.lng, marker.lat ])
+        .addTo(map);
+    });
   
     const addMarkersToMap = (map, markers) => {
       markers.forEach((marker) => {
