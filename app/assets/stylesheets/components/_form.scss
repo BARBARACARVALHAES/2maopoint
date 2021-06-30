@@ -9,12 +9,16 @@
   border-radius: 6px;
   box-shadow: 2px 2px 10px #e0dfdf;
   label {
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: rgb(13, 101, 173);
     font-weight: 800;
     padding-left: 4px;
   }
-  select, input, input:focus, select:focus {
+
+  select,
+  input,
+  input:focus,
+  select:focus {
     background-color: #fff !important;
     border: none;
     padding: 0;
@@ -22,8 +26,25 @@
     outline: none !important;
     border: 0;
     box-shadow: none;
-
   }
+}
+
+.question2 {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 2px 2px 10px #e0dfdf;
+}
+
+.suaData {
+  font-size: 0.8rem;
+  color: rgb(13, 101, 173);
+  font-weight: 800;
+  padding-left: 4px;
+}
+.reagendamento {
+  font-size: 1.3rem;
+  color: #000;
 }
 
 .confirmation-card {
@@ -42,11 +63,11 @@
     font-size: 1rem;
     padding-left: 4px;
     line-height: 1rem;
-    color: #6C757D;
+    color: #6c757d;
   }
 }
 
-.steps{
+.steps {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 2.6rem;
@@ -73,3 +94,79 @@
     mix-blend-mode: normal;
   }
 }
+
+.loading-bckg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(206, 206, 206, 0.8);
+  // Will be modify through JS
+  display: none;
+  align-items: center;
+
+  .box-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 8px 8px;
+    border-radius: 8px;
+    margin: auto;
+  }
+
+  p {
+    padding: 0 12px;
+    text-align: center;
+    font-weight: 800;
+    color: rgb(13, 101, 173);
+    font-size: 18px;
+  }
+
+  .lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ripple div {
+    position: absolute;
+    border: 4px solid rgb(13, 101, 173);
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  @keyframes lds-ripple {
+    0% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacity: 0;
+    }
+  }
+}
+
+// @media (max-width: 600px) {
+//   .content-container h1 {
+//     margin-bottom: 0.5rem;
+//   }
+//   .question2 {
+//     margin-top: -20px;
+//   }
+
+//   .suaData {
+//     font-size: 1rem;
+//   }
+// }
