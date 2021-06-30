@@ -1,4 +1,4 @@
-class WhatsappConfirmTradeJob < ApplicationJob
+class WhatsappRememberTradeJob < ApplicationJob
   queue_as :default
 
   def perform(args = {})

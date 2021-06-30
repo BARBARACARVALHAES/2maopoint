@@ -58,7 +58,7 @@ class TradesController < ApplicationController
     receiver_infos = get_receiver_infos
     if @trade.buyer_accepted == true && @trade.seller_accepted == true
       WhatsappConfirmTradeJob.perform_now(phone: receiver_infos[:receiver_phone], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade, url: @url)
-      set_reminder
+      # set_reminder
     end
     # TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).confirm_trade.deliver_later
     redirect_to(confirm_screen_trade_path(@trade), success: "Você confirmou a sua presença para esse encontro !")
