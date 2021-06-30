@@ -19,10 +19,10 @@
 <p class="subtitle"><strong>Envie o convite deste agendamento:</strong></p>
 <%= simple_form_for @trade, url: wizard_path do |f| %>
   <%= f.input :receiver_name, label: "NOME", placeholder: "Nome do convidado", wrapper_html: { class: "question" } %>
-  <%= f.input :receiver_phone, label: "PHONE", placeholder: "+5521000000000", wrapper_html: { class: "question" }, hint: 'O outro usuario será avisado por WhatsApp desse agendamento' %>
-  <%= f.input :receiver_email, label: "EMAIL (OPTIONAL)", placeholder: "joão@carrefour.com", wrapper_html: { class: "question" }, hint: 'O outro usuario será avisado por email desse agendamento' %>
+  <%= f.input :receiver_phone, label: "TELEFONE", placeholder: "+5521000000000", wrapper_html: { class: "question" }, hint: 'O outro usuário será avisado por WhatsApp' %>
+  <%= f.input :receiver_email, label: "E-MAIL (OPCIONAL)", placeholder: "joao@carrefour.com", wrapper_html: { class: "question" }, hint: 'O outro usuário será avisado por email' %>
   <div class="d-flex justify-content-around">
-  <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-outline-primary btn-action rounded-button" %>
+  <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-primary btn-action rounded-button" %>
   <%= f.submit "Concluir", class: "btn btn-primary rounded-button", id: 'terminar' %>
   </div>
 <% end %>

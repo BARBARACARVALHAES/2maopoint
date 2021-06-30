@@ -59,4 +59,7 @@
 
 .btn-start {
   margin-right: 2rem;
+  &:hover {
+    background-color: white;
+  }
 }
