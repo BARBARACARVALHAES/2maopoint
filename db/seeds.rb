@@ -45,12 +45,42 @@ end
   p "Create #{u.id} user"
 end
 
-ceps = ("01000000".."03000000").to_a
+
+ceps = [
+  '08090-284', 
+  '04849-529', 
+  '04843-425', 
+  '08226-021', 
+  '04180-112', 
+  '04236-094', 
+  '02317-262', 
+  '03047-000', 
+  '03807-020', 
+  '08240-001', 
+  '08240-001', 
+  '08421-510', 
+  '08150-640', 
+  '18190-000', 
+  '08081-511', 
+  '04852-410',
+  '01517-100',
+  '04849-309',
+  '08475-250',
+  '08412-120',
+  '04849-333',
+  '08344-010',
+  '04893-052',
+  '04894-017',
+  '02012-030',
+  '03195-105'
+]
 
 20.times do |_n|
   buyer = User.all.sample
   seller = User.where.not(id: buyer.id).sample
   author = [buyer, seller].sample
+  buyer_cep = ceps.sample
+  seller_cep = (ceps - [buyer_cep]).sample
   t = Trade.create!(
     buyer: buyer,
     seller: seller,
@@ -60,8 +90,8 @@ ceps = ("01000000".."03000000").to_a
     carrefour_unit: CarrefourUnit.all.sample,
     buyer_accepted: [true, false].sample,
     seller_accepted: [true, false].sample,
-    buyer_cep: ceps.sample,
-    seller_cep: ceps.sample,
+    buyer_cep: buyer_cep,
+    seller_cep: seller_cep,
     receiver_phone: [buyer.phone, seller.phone].sample,
     receiver_name: Faker::Name.first_name,
     author: author,
