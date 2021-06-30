@@ -20,3 +20,22 @@
     background: linear-gradient(260.18deg, #9a9c9c 47.59%, #a0a0a1 99.01%);
   }
 }
+
+
+.rounded-button-waiting {
+  border-radius: 4em;
+  background: linear-gradient(260.18deg, #f08204 47.59%, #f5cc19 99.01%);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.rounded-button-confirmed {
+  border-radius: 4em;
+  background: linear-gradient(260.18deg, #08b843 47.59%, #3dc55f 99.01%);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1.2rem;
+}

@@ -18,25 +18,46 @@ const initMapbox = () => {
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
-    markers.forEach((marker) => {
-      new mapboxgl.Marker()
-        .setLngLat([ marker.lng, marker.lat ])
+    // Seleciona só os 10 mais próximos
+    const markersClose = markers.slice(0, 10)
+
+    const markersUsers = JSON.parse(mapElement.dataset.markersUsers);
+    markersUsers.forEach((marker) => {
+      if(marker.current) {
+        var popup = new mapboxgl.Popup()
+        .setText('Você està aqui')
         .addTo(map);
+      }
+
+      new mapboxgl.Marker({
+        color: marker.current ? 'red' : 'purple',
+      })
+        .setLngLat([ marker.lng, marker.lat ])
+        .addTo(map)
+        .setPopup(popup)
     });
   
     const addMarkersToMap = (map, markers) => {
       markers.forEach((marker) => {
+        const el = document.createElement('div');
+        el.setAttribute('class', 'mapboxgl-marker mapboxgl-marker-anchor-center marker-carrefour')
+        el.setAttribute('id', marker.id);
+        el.style.backgroundImage = `url(${require('../../assets/images/marker-carrefour.png')})`;
+        el.style.width = '40px';
+        el.style.height = '25px';
+        el.style.cursor = 'pointer';
+        el.style.backgroundSize = 'cover';
         const popup = new mapboxgl.Popup().setHTML(marker.info_window); // add this
     
-        new mapboxgl.Marker()
+        new mapboxgl.Marker(el)
           .setLngLat([ marker.lng, marker.lat ])
           .setPopup(popup) // add this
           .addTo(map);
       });
     };
 
-    fitMapToMarkers(map, markers);
-    addMarkersToMap(map, markers)
+    fitMapToMarkers(map, markersClose);
+    addMarkersToMap(map, markersClose)
   }
 };
 
