@@ -30,7 +30,7 @@ module StepsControllers
         receiver_infos = get_receiver_infos
         WhatsappCreateTradeJob.perform_later(phone: receiver_infos[:receiver_phone], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade, url: @url)
         if receiver_infos[:receiver_email]
-          TradeMailer.with(email: receiver_infos[:receiver_email], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade).created_trade.deliver_now
+          TradeMailer.with(email: receiver_infos[:receiver_email], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade).created_trade.deliver_later
         end
         # TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).created_trade.deliver_later
         redirect_to(finish_wizard_path, success: "O pedido foi enviado pelo WhatsApp para #{@trade.receiver_phone}!")
