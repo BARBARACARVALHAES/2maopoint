@@ -59,7 +59,7 @@ pt-BR:
         seller_cep: CEP do Comprador
         receiver_email: E-mail do convidado
         receiver_name: Nome do convidado
-        receiver_name: Telfone do convidado
+        receiver_name: Telfeone do convidado
   date:
     abbr_day_names:
     - dom
