@@ -9,12 +9,12 @@ const initFlatpick = () => {
       altInput: true,
       minDate: "today",
       altFormat: "F j, Y - h:i K",
-      dateFormat: "d-m-Y H:M",
-      defaultHour: 23,
-      defaultMinute: 59,
+      dateFormat: "d-m-Y H:i",
       minuteIncrement: 1,
       locale: Portuguese,
     });
+
+    document.querySelector('.trade_date').childNodes[2].setAttribute('value', document.getElementById("flat_datetime").value)
   }
   if (document.getElementById("flat_date")) {
     const el = document.getElementById("flat_date");
