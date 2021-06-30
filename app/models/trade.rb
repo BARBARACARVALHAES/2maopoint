@@ -9,8 +9,8 @@ class Trade < ApplicationRecord
 
   enum form_steps: {
     infos: %i[item item_category_id author_role],
-    location: %i[date buyer_cep seller_cep],
-    carrefour_unit: %i[carrefour_unit_id lat_seller long_seller lat_buyer long_buyer],
+    location: %i[date buyer_cep seller_cep lat_seller long_seller lat_buyer long_buyer],
+    carrefour_unit: %i[carrefour_unit_id],
     invitation: %i[receiver_name receiver_phone receiver_email]
   }
   attr_accessor :form_step
