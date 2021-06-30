@@ -11,7 +11,7 @@
     
   <%= simple_form_for @trade, url: wizard_path do |f| %>
     <%= f.input :buyer_cep, label: "SEU CEP", placeholder: "00000-000", wrapper_html: { class: "question" }, id: "cep" %>
-    <%= f.input :seller_cep, label: "CEP DO #{ params[:author_role] == "VENDENDOR" ? "COMPRADOR" : "VENDENDOR"}", placeholder: "00000-000", wrapper_html: { class: "question" }  %>
+    <%= f.input :seller_cep, label: "CEP DO #{ params[:author_role] == "VENDENDOR" ? "COMPRADOR" : "VENDENDOR"}",  input_html: {class: "cep" } wrapper_html: { class: "question" }  %>
     <div class="calendar">
       <%= f.input :date, as: :string, label: "DATA E HORÁRIO", input_html: {id: "flat_datetime" }, wrapper_html: { class: "question" } %>
     </div>

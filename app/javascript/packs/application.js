@@ -19,10 +19,12 @@ ActiveStorage.start();
 
 // External imports
 import "bootstrap";
+import "jquery";
 
-import { initSwal2 } from '../components/swal2';
+import { initSwal2 } from "../components/swal2";
 import { initFlatpick } from "../components/flatpick";
-import { initMapbox } from '../components/init_mapbox';
+import { initMapbox } from "../components/init_mapbox";
+import { initiMask } from "../components/mask.js";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -33,4 +35,5 @@ document.addEventListener("turbolinks:load", () => {
   initFlatpick();
   initSwal2();
   initMapbox();
+  initiMask();
 });
