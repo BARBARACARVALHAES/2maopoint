@@ -24,6 +24,8 @@ import "bootstrap";
 
 import { initSwal2 } from '../components/swal2';
 import { initFlatpick } from "../components/flatpick";
+import { initMapbox } from '../components/init_mapbox';
+import { loadingSpinner } from '../components/loading-spinner';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -33,4 +35,6 @@ document.addEventListener("turbolinks:load", () => {
   // initSelect2();
   initFlatpick();
   initSwal2();
+  initMapbox();
+  loadingSpinner();
 });
