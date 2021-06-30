@@ -3,11 +3,13 @@ import mapboxgl from 'mapbox-gl';
 
 
 export default class extends Controller {
-  static targets = [ "select", "mapbox" ]
+  static targets = [ "select", "mapbox", 'text', 'h1' ]
 
   async connect() {
     this.markers = JSON.parse(this.mapboxTarget.dataset.markers)
     this.accessToken = this.mapboxTarget.dataset.mapboxApiKey
+    this.defaultText = this.textTarget.innerHTML
+    this.defaultH1 = this.h1Target.innerText
     // Wait for controller to connect before activate the function
     setTimeout(() => {
       this.clickablePopup()
@@ -178,7 +180,9 @@ export default class extends Controller {
           }
         });
       });  
-      
+
+      // Change text at the top of the page
+      this.changeText()
     } 
     // Se nada for selecionado botamos de novo as 10 opções mais próximas
     else 
@@ -203,8 +207,25 @@ export default class extends Controller {
       });
       
       fitMapToMarkers(map, markersClose);
+      
+      // Put default text
+      this.textTarget.innerHTML = this.defaultText
+      this.h1Target.innerText = this.defaultH1
+    
     }
     this.clickablePopup()
+  }
+
+  changeText() {
+    // Change text at the top of the page
+    const optionArray = []
+    document.querySelectorAll('option').forEach(option => {
+      if(option.value == this.selectTarget.value) {
+        optionArray.push(option) 
+      }
+    })
+    this.textTarget.innerHTML = `<b>${optionArray[0].innerText}</b> que fica em <b>${optionArray[0].dataset.address}</b>`
+    this.h1Target.innerText = 'Você escolheu'
   }
 
   clickablePopup() {
@@ -212,6 +233,8 @@ export default class extends Controller {
     markers.forEach(marker => {
       marker.addEventListener('click', () => {
         this.selectTarget.value = marker.id
+
+        setTimeout(() => this.changeText(), 200)
       })
     })
   }

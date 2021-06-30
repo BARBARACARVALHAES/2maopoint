@@ -8,10 +8,14 @@
         <select class="form-control select optional" name="trade[carrefour_unit_id]" id="trade_carrefour_unit_id" data-map-target= 'select' data-action="change->map#selectUnit">
           <option value="" label="">Selecione uma unidade</option>
           <% @carrefour_units.each do |unit| %>
-            <option value= <%= unit.id %>><%= unit.name %></option>
+            <option value= <%= unit.id %> <%= @trade.carrefour_unit == unit ? 'selected' : '' %>><%= unit.name %></option>
           <% end %>
         </select>
       </div>
+      <h5 class='text-center' data-map-target= 'h1'>A unidade mais próxima é...</h5>
+      <p class="subtitle" data-map-target= 'text'>
+        O <b><%= @carrefour_units.first.name %></b> fica em <b><%= @carrefour_units.first.address %></b>, mas você pode escolher outro local se preferir.
+      </p>
       <div 
         id="map"
         data-markers="<%= @markers.to_json %>"
