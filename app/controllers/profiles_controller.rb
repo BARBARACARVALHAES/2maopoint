@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
   def invitations
     @user = current_user
     authorize @user
-    @trades = Trade.where(buyer: @user).or(Trade.where(seller: @user)).order(date: :asc)
+    # receiver_name é o ultmo campo obrigatorio, se ele existe quer dizer que o trade foi completo inteiro
+    @trades = Trade.where(buyer: @user).where.not(receiver_name: nil).or(Trade.where(seller: @user).where.not(receiver_name: nil)).order(date: :asc)
   end
 end
