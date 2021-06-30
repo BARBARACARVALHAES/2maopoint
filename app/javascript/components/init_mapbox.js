@@ -56,7 +56,7 @@ const initMapbox = () => {
       });
     };
 
-    fitMapToMarkers(map, markersClose);
+    fitMapToMarkers(map, markersClose.concat(markersUsers));
     addMarkersToMap(map, markersClose)
   }
 };

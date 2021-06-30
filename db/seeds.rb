@@ -45,7 +45,7 @@ end
   p "Create #{u.id} user"
 end
 
-ceps = ("01000000".."05999100").to_a
+ceps = ("01000000".."03000000").to_a
 
 20.times do |_n|
   buyer = User.all.sample
@@ -64,7 +64,11 @@ ceps = ("01000000".."05999100").to_a
     seller_cep: ceps.sample,
     receiver_phone: [buyer.phone, seller.phone].sample,
     receiver_name: Faker::Name.first_name,
-    author: author
+    author: author,
+    lat_buyer: rand(-23.701420495330392..-23.458942508769738),
+    long_buyer: rand(-46.8124555391923..-46.457071538413445),
+    lat_seller: rand(-23.701420495330392..-23.458942508769738),
+    long_seller: rand(-46.8124555391923..-46.457071538413445)
   )
   p "Create #{t.id} trades"
 end

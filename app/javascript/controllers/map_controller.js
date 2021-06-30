@@ -1,6 +1,5 @@
 import { Controller } from 'stimulus'; 
 import mapboxgl from 'mapbox-gl';
-import { initMapbox } from '../components/init_mapbox';
 
 
 export default class extends Controller {
@@ -10,8 +9,9 @@ export default class extends Controller {
     this.markers = JSON.parse(this.mapboxTarget.dataset.markers)
     this.accessToken = this.mapboxTarget.dataset.mapboxApiKey
     // Wait for controller to connect before activate the function
-    await initMapbox()
-    this.clickablePopup()
+    setTimeout(() => {
+      this.clickablePopup()
+    }, 500);
   }
 
   async selectUnit() {
