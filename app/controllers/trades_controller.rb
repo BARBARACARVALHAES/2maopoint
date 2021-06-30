@@ -1,7 +1,7 @@
 class TradesController < ApplicationController
   before_action :set_trade, only: %i[edit destroy update confirm_presence confirm_screen set_reminder]
   before_action :search_user, only: %i[update destroy confirm_presence]
-  before_action :get_markers_users, only: %i[confirm_screen edit]
+  before_action :get_markers_users, only: %i[confirm_screen edit update]
   before_action :get_uniq_marker, only: %i[confirm_screen]
 
   def index
@@ -26,6 +26,8 @@ class TradesController < ApplicationController
   end
 
   def update
+    @carrefour_units ||= CarrefourUnit.all
+    get_markers
     if @trade.update(trade_params)
       if current_user == @trade.seller
         @trade.update(seller_accepted: true, buyer_accepted: false)
