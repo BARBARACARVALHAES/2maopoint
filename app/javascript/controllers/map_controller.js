@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl';
 export default class extends Controller {
   static targets = [ "select", "mapbox", 'text', 'h1' ]
 
-  async connect() {
+  connect() {
     this.markers = JSON.parse(this.mapboxTarget.dataset.markers)
     this.accessToken = this.mapboxTarget.dataset.mapboxApiKey
     this.defaultText = this.textTarget.innerHTML
