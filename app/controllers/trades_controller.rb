@@ -111,11 +111,13 @@ class TradesController < ApplicationController
     if current_user == @trade.seller
       receiver_phone = @trade.buyer ? @trade.buyer.phone : @trade.receiver_phone
       receiver_name = @trade.buyer ? @trade.buyer.name : @trade.receiver_name
+      receiver_email = @trade.buyer ? @trade.buyer.email : @trade.receiver_email
     else
       receiver_phone = @trade.seller ? @trade.seller.phone : @trade.receiver_phone
       receiver_name = @trade.seller ? @trade.seller.name : @trade.receiver_name
+      receiver_email = @trade.seller ? @trade.seller.email : @trade.receiver_email
     end
-    { receiver_phone: receiver_phone, receiver_name: receiver_name }
+    { receiver_phone: receiver_phone, receiver_name: receiver_name, receiver_email: receiver_email }
   end
 
   def set_trade
