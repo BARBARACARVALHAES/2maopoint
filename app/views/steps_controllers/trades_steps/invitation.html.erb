@@ -22,7 +22,7 @@
   <%= f.input :receiver_phone, label: "PHONE", placeholder: "+5521000000000", wrapper_html: { class: "question" }, hint: 'O outro usuario será avisado por WhatsApp desse agendamento' %>
   <%= f.input :receiver_email, label: "EMAIL (OPTIONAL)", placeholder: "joão@carrefour.com", wrapper_html: { class: "question" }, hint: 'O outro usuario será avisado por email desse agendamento' %>
   <div class="d-flex justify-content-around">
-  <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-outline-primary btn-action rounded-button-secondary" %>
+  <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-outline-primary btn-action rounded-button" %>
   <%= f.submit "Concluir", class: "btn btn-primary rounded-button", id: 'terminar' %>
   </div>
 <% end %>

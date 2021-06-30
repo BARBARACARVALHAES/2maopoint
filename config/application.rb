@@ -35,5 +35,9 @@ module Carrefour2aMao
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    #Fix simple form authenticity issue
+    Rails.configuration.action_controller.per_form_csrf_tokens = true
+
   end
 end
