@@ -51,7 +51,7 @@ module StepsControllers
         receiver_name = @trade.seller ? @trade.seller.name : @trade.receiver_name
         receiver_email = @trade.seller ? @trade.seller.email : @trade.receiver_email
       end
-      @url = User.find_by(email: receiver_email) ? confirm_screen_trade_url(@trade) : new_user_registration_url
+      @url = confirm_screen_trade_url(@trade)
       { receiver_phone: receiver_phone, receiver_name: receiver_name, receiver_email: receiver_email }
     end
 
