@@ -1,6 +1,6 @@
 class TradesController < ApplicationController
-  before_action :set_trade, only: %i[edit destroy update confirm_presence confirm_screen]
-  before_action :search_user, only: %i[update destroy confirm_presence]
+  before_action :set_trade, only: %i[edit destroy update confirm_presence confirm_screen set_reminder]
+  before_action :search_user, only: %i[update destroy confirm_presence set_reminder]
 
   def index
     @trades = policy_scope(Trade)
@@ -53,9 +53,15 @@ class TradesController < ApplicationController
     receiver_infos = get_receiver_infos
     if @trade.buyer_accepted == true && @trade.seller_accepted == true
       WhatsappConfirmTradeJob.perform_now(phone: receiver_infos[:receiver_phone], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade, url: @url)
+      set_reminder
     end
     # TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).confirm_trade.deliver_later
     redirect_to(confirm_screen_trade_path(@trade), success: "Você confirmou a sua presença para esse encontro !")
+  end
+
+  def set_reminder
+    WhatsappRememberTradeJob.set(wait_until: @trade.date.advance(days: -1)).perform_later.(phone: @trade.buyer.phone, name: @trade.buyer.first_name, other_trader: @trade.seller.first_name, trade: @trade, url: confirm_screen_trade_url(@trade))
+    WhatsappRememberTradeJob.set(wait_until: @trade.date.advance(days: -1)).perform_later.(phone: @trade.seller.phone, name: @trade.seller.first_name, other_trader: @trade.buyer.first_name, trade: @trade, url: confirm_screen_trade_url(@trade))
   end
 
   def confirm_screen
