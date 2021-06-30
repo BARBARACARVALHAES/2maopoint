@@ -15,6 +15,10 @@ class Trade < ApplicationRecord
   }
   attr_accessor :form_step
 
+  def confirmed?
+    buyer_accepted && seller_accepted
+  end
+
   def invited
     author == buyer ? seller : buyer
   end

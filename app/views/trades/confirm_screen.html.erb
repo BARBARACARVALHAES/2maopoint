@@ -34,10 +34,17 @@
       >
     </div>
 
-    <div class="confirmation-card d-flex flex-column align-items-center mb-5">
-      <p class="mt-4 subtitle">Para sua segurança, você deve apresentar este QR Code ao chegar no 2ª Mão Point. Você também receberá por Whatsapp no dia do encontro. </p>
-        <%= @svg.html_safe %>
-    </div>
+
+    <% if @trade.confirmed? %>
+      <div class="confirmation-card d-flex flex-column align-items-center mb-5">
+        <p class="mt-4 subtitle">Para sua segurança, você deve apresentar este QR Code ao chegar no 2ª Mão Point. Você também receberá por Whatsapp no dia do encontro. </p>
+          <%= @svg.html_safe %>
+      </div>
+    <% else %>
+      <div class="confirmation-card d-flex flex-column align-items-center mb-5">
+        <p style='color: red;'>Você receberá um QR code uma vez que os dois partes terão aceitado o agendamento</p>
+      </div>
+    <% end %>
     
     <div class="d-flex justify-content-around">      
         <%= link_to "Reagendar", edit_trade_path(@trade), class: "btn btn-outline-primary rounded-button-secondary" %>
@@ -46,7 +53,7 @@
           <%= link_to "Confirmar presença", confirm_presence_trade_path(@trade), method: :patch, class: "btn btn-primary rounded-button" %>
         <% elsif (current_user == @trade.buyer && @trade.seller_accepted == false) || (current_user == @trade.seller && @trade.buyer_accepted == false) %>
           <div class="btn btn-warning disabled rounded-button-waiting">Aguardando confirmação</div>
-        <% else %>
+        <% elsif @trade.confirmed? %>
           <div class="btn btn-success rounded-button-confirmed">Confirmado</div>
         <% end %>
     </div>
