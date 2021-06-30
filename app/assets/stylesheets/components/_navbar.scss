@@ -47,7 +47,12 @@
 }
 
 @media (max-width: 600px) {
+  .navbar {
+    padding: 0.5rem 0.5rem;
+    display: flex;
+    justify-content: space-around;
+  }
   .nav-link {
-    display: none;
+    font-size: 14px;
   }
 }

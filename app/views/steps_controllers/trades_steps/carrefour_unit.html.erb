@@ -6,18 +6,19 @@
     <div class="step active-step"><p>3</p></div>
     <div class="step"><p>4</p></div>
   </div>
-
-  <h1 class="title">A unidade mais próxima é...</h1>
-  <p class="subtitle">O <%= @carrefour_units.first.name %> fica em <%= @carrefour_units.first.address %>, mas você pode escolher outro local se preferir.</p>
   
   <div data-controller="map" data-action="change->map#selectUnit"> 
+    <h1 class="title" data-map-target= 'h1'>A unidade mais próxima é...</h1>
+    <p class="subtitle" data-map-target= 'text'>
+      O <b><%= @carrefour_units.first.name %></b> fica em <b><%= @carrefour_units.first.address %></b>, mas você pode escolher outro local se preferir.
+    </p>
     <%= simple_form_for @trade, url: wizard_path do |f| %>
       <div class="form-group select optional trade_carrefour_unit_id question">
         <label class="select optional" for="trade_carrefour_unit_id">UNIDADE DO CARREFOUR</label>
         <select class="form-control select optional" name="trade[carrefour_unit_id]" id="trade_carrefour_unit_id" data-map-target= 'select'>
           <option value="" label="">Selecione uma unidade</option>
           <% @carrefour_units.each do |unit| %>
-            <option value= <%= unit.id %>><%= unit.name %></option>
+            <option value= <%= unit.id %> data-address= <%= unit.address.gsub(' ', '&nbsp') %> ><%= unit.name %></option>
           <% end %>
         </select>
         <% if @geoloc_success %>

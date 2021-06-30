@@ -1,6 +1,8 @@
 class TradesController < ApplicationController
   before_action :set_trade, only: %i[edit destroy update confirm_presence confirm_screen]
   before_action :search_user, only: %i[update destroy confirm_presence]
+  before_action :get_markers_users, only: %i[confirm_screen edit]
+  before_action :get_uniq_marker, only: %i[confirm_screen]
 
   def index
     @trades = policy_scope(Trade)
@@ -18,7 +20,10 @@ class TradesController < ApplicationController
     authorize @trade
   end
 
-  def edit; end
+  def edit
+    order_by_loc
+    get_markers
+  end
 
   def update
     if @trade.update(trade_params)
@@ -61,6 +66,46 @@ class TradesController < ApplicationController
   def confirm_screen; end
 
   private
+
+  def get_markers_users
+    @markers_users = [{
+      lat: @trade.lat_seller,
+      lng: @trade.long_seller,
+      current: @trade.seller == current_user
+    },
+    {
+      lat: @trade.lat_buyer,
+      lng: @trade.long_buyer,
+      current: @trade.buyer == current_user
+    }]
+  end
+
+  def get_uniq_marker
+    # Generate API MAP
+    @markers = [{
+      lat: @trade.carrefour_unit.latitude,
+      lng: @trade.carrefour_unit.longitude,
+      info_window: render_to_string(partial: "steps_controllers/trades_steps/info_window", locals: { unit: @trade.carrefour_unit }),
+      id: @trade.carrefour_unit.id
+    }]
+  end
+
+  def get_markers
+    @markers = @carrefour_units.all.geocoded.map do |unit|
+      {
+        lat: unit.latitude,
+        lng: unit.longitude,
+        info_window: render_to_string(partial: "steps_controllers/trades_steps/info_window", locals: { unit: unit }),
+        id: unit.id
+      }
+    end
+  end
+
+  def order_by_loc
+    # Get the center point between the two users
+    center_point = Geocoder::Calculations.geographic_center([[@trade.lat_buyer, @trade.long_buyer], [@trade.lat_seller, @trade.long_seller]])
+    @carrefour_units = CarrefourUnit.near(center_point, 1_000_000, order: :distance)
+  end
 
   def get_receiver_infos
     if current_user == @trade.seller
