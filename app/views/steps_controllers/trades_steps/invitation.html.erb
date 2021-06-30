@@ -19,7 +19,7 @@
 <p class="subtitle"><strong>Envie o convite deste agendamento:</strong></p>
 <%= simple_form_for @trade, url: wizard_path do |f| %>
   <%= f.input :receiver_name, label: "NOME", placeholder: "Nome do convidado", wrapper_html: { class: "question" } %>
-  <%= f.input :receiver_email, label: "EMAIL", placeholder: "nome@email.com", wrapper_html: { class: "question" } %>
+  <%= f.input :receiver_phone, label: "PHONE", placeholder: "+5521000000000", wrapper_html: { class: "question" } %>
   <div class="d-flex justify-content-between">
   <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-outline-primary btn-action rounded-button-secondary" %>
   <%= f.submit "Concluir", class: "btn btn-primary rounded-button", id: 'terminar' %>

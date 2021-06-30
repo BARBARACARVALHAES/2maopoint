@@ -9,9 +9,9 @@ module StepsControllers
     def show
       @trade = Trade.find(params[:trade_id])
       # On the page of the carrefour unit f1zemos tudo ligado à geoloclização
-      search_for_localisation if params[:id] == 'carrefour_unit'
-      @geoloc_success = true if @carrefour_units
       @carrefour_units ||= CarrefourUnit.all.order(name: :asc)
+      search_for_localisation if params[:id] == 'carrefour_unit'
+      @geoloc_success = true if @carrefour_units != CarrefourUnit.all.order(name: :asc)
       authorize @trade
       render_wizard
     end
@@ -21,14 +21,19 @@ module StepsControllers
       authorize @trade
       @trade.assign_attributes(trade_params)
       @trade.author_role == "Vendedor" ? @trade.update(seller: current_user) : @trade.update(buyer: current_user)
-      receiver = User.find_by(email: @trade.receiver_email)
+      receiver = User.find_by(phone: @trade.receiver_phone)
       @trade.buyer = receiver if @trade.seller == current_user && receiver
       @trade.seller = receiver if @trade.buyer == current_user && receiver
       # If it is the last step
       if @trade.save && params[:id] == Trade.form_steps.keys.last
         @trade.created_by_seller? ? @trade.update(seller_accepted: true) : @trade.update(buyer_accepted: true)
-        TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).created_trade.deliver_later
-        redirect_to(finish_wizard_path, success: "O pedido foi enviado para #{@trade.receiver_email}!")
+        user = User.find_by(phone: @trade.receiver_phone)
+        url = user ? confirm_screen_trade_url(@trade) : new_user_registration_url
+        receiver_name = user ? user.first_name : @trade.receiver_name
+        WhatsappCreateTradeJob.perform_later(phone: @trade.receiver_phone, receiver_name: receiver_name, sender_user: current_user, trade: @trade, url: url)
+        # TwilioClient.new.created_trade(phone: @trade.receiver_phone, receiver_name: receiver_name, sender_user: current_user, trade: @trade, url: url)
+        # TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).created_trade.deliver_later
+        redirect_to(finish_wizard_path, success: "O pedido foi enviado pelo WhatsApp para #{@trade.receiver_phone}!")
       else
         render_wizard @trade
       end
@@ -45,15 +50,6 @@ module StepsControllers
     end
 
     def search_for_localisation
-      # Generate API MAP
-      @markers = CarrefourUnit.all.geocoded.map do |unit|
-        {
-          lat: unit.latitude,
-          lng: unit.longitude,
-          info_window: render_to_string(partial: "info_window", locals: { unit: unit })
-        }
-      end
-
       # Get the localisation of the buyer_cep and seller_cep
       if @trade.seller_cep.present? && @trade.buyer_cep.present?
         # Transform CEP into lat / long
@@ -77,8 +73,30 @@ module StepsControllers
           @trade.long_seller = coordinates[1]
         end
 
+        @markers_users = [{
+            lat: @trade.lat_seller,
+            lng: @trade.long_seller,
+            current: @trade.seller == current_user
+          },
+          {
+            lat: @trade.lat_buyer,
+            lng: @trade.long_buyer,
+            current: @trade.buyer == current_user
+          }
+        ]
+
         if @trade.lat_seller.present? && @trade.long_seller.present? && @trade.lat_buyer.present? && @trade.long_buyer.present?
           order_by_loc(@trade)
+        end
+
+        # Generate API MAP
+        @markers = @carrefour_units.all.geocoded.map do |unit|
+          {
+            lat: unit.latitude,
+            lng: unit.longitude,
+            info_window: render_to_string(partial: "info_window", locals: { unit: unit }),
+            id: unit.id
+          }
         end
       end
     end

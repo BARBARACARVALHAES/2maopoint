@@ -31,6 +31,10 @@ gem 'geocoder', '~> 1.3', '>= 1.3.7'
 
 gem 'faker'
 
+# Twillio
+gem 'twilio-ruby', '~> 5.55.0'
+gem 'phonelib'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

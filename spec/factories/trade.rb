@@ -11,7 +11,7 @@ FactoryBot.define do
     item { Faker::Lorem.word }
     buyer_cep { TestCeps::TEST_CEPS.sample }
     seller_cep { TestCeps::TEST_CEPS.sample }
-    receiver_email { [buyer.email, seller.email].sample }
+    receiver_phone { [buyer.phone, seller.phone].sample }
     receiver_name { Faker::Name.first_name }
     author_role { Trade::ROLE.sample }
 
@@ -22,7 +22,7 @@ FactoryBot.define do
       carrefour_unit { nil }
       buyer_accepted { false }
       seller_accepted { false }
-      receiver_email { nil }
+      receiver_phone { nil }
       receiver_name { nil }
       form_step { :location }
     end
@@ -36,7 +36,7 @@ FactoryBot.define do
       seller { nil }
       buyer_accepted { false }
       seller_accepted { false }
-      receiver_email { nil }
+      receiver_phone { nil }
       receiver_name { nil }
       lat_buyer { -23.51228463954499 }
       long_buyer { -46.6447953022994 }
