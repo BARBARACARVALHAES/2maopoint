@@ -3,7 +3,7 @@
   <p class="subtitle">Após a mudança de data ou unidade, enviaremos uma mensagem para a outra parte da negociação para confirmação.</p>
   <div data-controller="map"> 
     <%= simple_form_for @trade, method: :put do |f| %>
-      <%= f.input :date, label: "Data", as: :string, input_html: { id: 'flat_datetime' }, wrapper_html: { class: 'question'} %>
+      <%= f.input :date, label: "Sua data de agendamento atual é", as: :string, input_html: { id: 'flat_datetime' }, wrapper_html: { class: 'question'} %>
       <div class="form-group select optional trade_carrefour_unit_id question">
         <select class="form-control select optional" name="trade[carrefour_unit_id]" id="trade_carrefour_unit_id" data-map-target= 'select' data-action="change->map#selectUnit">
           <option value="" label="">Selecione uma unidade</option>
