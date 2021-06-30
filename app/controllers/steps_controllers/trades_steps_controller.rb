@@ -27,11 +27,11 @@ module StepsControllers
       # If it is the last step
       if @trade.save && params[:id] == Trade.form_steps.keys.last
         @trade.created_by_seller? ? @trade.update(seller_accepted: true) : @trade.update(buyer_accepted: true)
-        user = User.find_by(phone: @trade.receiver_phone)
-        url = user ? confirm_screen_trade_url(@trade) : new_user_registration_url
-        receiver_name = user ? user.first_name : @trade.receiver_name
-        WhatsappCreateTradeJob.perform_later(phone: @trade.receiver_phone, receiver_name: receiver_name, sender_user: current_user, trade: @trade, url: url)
-        # TwilioClient.new.created_trade(phone: @trade.receiver_phone, receiver_name: receiver_name, sender_user: current_user, trade: @trade, url: url)
+        receiver_infos = get_receiver_infos
+        WhatsappCreateTradeJob.perform_later(phone: receiver_infos[:receiver_phone], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade, url: @url)
+        if receiver_infos[:receiver_email]
+          TradeMailer.with(email: receiver_infos[:receiver_email], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade).created_trade.deliver_now
+        end
         # TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).created_trade.deliver_later
         redirect_to(finish_wizard_path, success: "O pedido foi enviado pelo WhatsApp para #{@trade.receiver_phone}!")
       else
@@ -40,6 +40,20 @@ module StepsControllers
     end
 
     private
+
+    def get_receiver_infos
+      if current_user == @trade.seller
+        receiver_phone = @trade.buyer ? @trade.buyer.phone : @trade.receiver_phone
+        receiver_name = @trade.buyer ? @trade.buyer.name : @trade.receiver_name
+        receiver_email = @trade.buyer ? @trade.buyer.email : @trade.receiver_email
+      else
+        receiver_phone = @trade.seller ? @trade.seller.phone : @trade.receiver_phone
+        receiver_name = @trade.seller ? @trade.seller.name : @trade.receiver_name
+        receiver_email = @trade.seller ? @trade.seller.email : @trade.receiver_email
+      end
+      @url = User.find_by(email: receiver_email) ? confirm_screen_trade_url(@trade) : new_user_registration_url
+      { receiver_phone: receiver_phone, receiver_name: receiver_name, receiver_email: receiver_email }
+    end
 
     def trade_params
       params.require(:trade).permit(Trade.form_steps[step]).merge(form_step: step.to_sym)
