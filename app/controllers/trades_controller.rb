@@ -65,8 +65,8 @@ class TradesController < ApplicationController
   end
 
   def set_reminder
-    WhatsappRememberTradeJob.set(wait_until: @trade.date.advance(days: -1)).perform_later.(phone: @trade.buyer.phone, name: @trade.buyer.first_name, other_trader: @trade.seller.first_name, trade: @trade, url: confirm_screen_trade_url(@trade))
-    WhatsappRememberTradeJob.set(wait_until: @trade.date.advance(days: -1)).perform_later.(phone: @trade.seller.phone, name: @trade.seller.first_name, other_trader: @trade.buyer.first_name, trade: @trade, url: confirm_screen_trade_url(@trade))
+    # WhatsappRememberTradeJob.set(wait_until: @trade.date.advance(days: -1)).perform_later.(phone: @trade.buyer.phone, name: @trade.buyer.first_name, other_trader: @trade.seller.first_name, trade: @trade, url: confirm_screen_trade_url(@trade))
+    # WhatsappRememberTradeJob.set(wait_until: @trade.date.advance(days: -1)).perform_later.(phone: @trade.seller.phone, name: @trade.seller.first_name, other_trader: @trade.buyer.first_name, trade: @trade, url: confirm_screen_trade_url(@trade))
   end
 
   def confirm_screen

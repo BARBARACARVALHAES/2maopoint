@@ -23,8 +23,15 @@
 
 .canceled {
   background: linear-gradient(260.18deg, #c70b0b 47.59%, #811010 99.01%);
-}
+  &:hover {
+    background: linear-gradient(260.18deg, #c70b0b 47.59%, #811010 99.01%);
+  }
+} 
 
+.stacked-button {
+  max-width: 300px;
+  margin-bottom: 2rem;
+}
 
 .rounded-button-waiting {
   border-radius: 4em;
