@@ -58,7 +58,16 @@ class TradesController < ApplicationController
     redirect_to(confirm_screen_trade_path(@trade), success: "Você confirmou a sua presença para esse encontro !")
   end
 
-  def confirm_screen; end
+  def confirm_screen
+    @qr_code = RQRCode::QRCode.new("http://segunda-mao-carrefour.herokuapp.com/trades/#{@trade.id}/confirm_screen")
+    @svg = @qr_code.as_svg(
+      standalone: true,
+      use_path: true,
+      viewbox: true,
+      offset: 15
+    )
+  end
+
 
   private
 

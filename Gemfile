@@ -29,6 +29,10 @@ gem 'pundit', '~> 2.1'
 # Geolocalisation
 gem 'geocoder', '~> 1.3', '>= 1.3.7'
 
+# QR code
+gem "rqrcode", "~> 2.0"
+
+# Fake Seeds
 gem 'faker'
 
 # Twillio

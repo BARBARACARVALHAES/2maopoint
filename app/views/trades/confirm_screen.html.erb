@@ -26,6 +26,11 @@
       <p><strong>CEP:</strong> <%= @trade.carrefour_unit.cep %></p>
       <p><strong>Data e horário:</strong> <%= @trade.date.strftime("%d/%m/%Y, às %H:%M") %></p>
     </div>
+
+    <div class="confirmation-card d-flex flex-column align-items-center mb-5">
+      <p class="mt-4 subtitle">Para sua segurança, você deve apresentar este QR Code ao chegar no 2ª Mão Point. Você também receberá por Whatsapp no dia do encontro. </p>
+        <%= @svg.html_safe %>
+    </div>
     
     <div class="d-flex justify-content-around">      
         <%= link_to "Reagendar", edit_trade_path(@trade), class: "btn btn-outline-primary rounded-button-secondary" %>
