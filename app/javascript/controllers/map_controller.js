@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 
 
 export default class extends Controller {
-  static targets = [ "select", "mapbox", 'text', 'h1' ]
+  static targets = [ "select", "mapbox", 'text', 'h1', 'firstOption' ]
 
   connect() {
     this.markers = JSON.parse(this.mapboxTarget.dataset.markers)
@@ -23,6 +23,7 @@ export default class extends Controller {
       map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
     };
 
+    // Reset the markers on the map
     document.querySelector('.mapboxgl-canvas-container').innerHTML = ''
       
     const map = new mapboxgl.Map({
@@ -30,27 +31,29 @@ export default class extends Controller {
       style: 'mapbox://styles/mapbox/streets-v10'
     });
 
-    const markersUsers = JSON.parse(this.mapboxTarget.dataset.markersUsers);
+    let markersUsers = JSON.parse(this.mapboxTarget.dataset.markersUsers);
+    markersUsers = markersUsers.filter(marker => marker.lat && marker.lng)
       markersUsers.forEach((marker) => {
         if(marker.current) {
           var popup = new mapboxgl.Popup()
           .setText('Você està aqui')
           .addTo(map);
         }
-
-        new mapboxgl.Marker({
-          color: marker.current ? 'red' : 'purple',
-        })
-          .setLngLat([ marker.lng, marker.lat ])
-          .addTo(map)
-          .setPopup(popup)
+        if(marker.hasOwnProperty('lng') && marker.hasOwnProperty('lat')) {
+          new mapboxgl.Marker({
+            color: marker.current ? 'red' : 'purple',
+          })
+            .setLngLat([ marker.lng, marker.lat ])
+            .addTo(map)
+            .setPopup(popup)
+        }
       });
 
     // Se a gente selecionou uma opção
     if(this.selectTarget.value) {
       const selectedMarker = this.markers.find(marker => marker.id === +this.selectTarget.value)
+
       this.mapboxTarget.dataset.markers = selectedMarker
-      // Reset the markers on the map
 
       const popup = new mapboxgl.Popup().setHTML(selectedMarker.info_window);
       const el = document.createElement('div');
@@ -66,129 +69,141 @@ export default class extends Controller {
         .setPopup(popup) // add this
         .addTo(map);
 
-      fitMapToMarkers(map, markersUsers.concat(selectedMarker));
+      const markersAll = markersUsers.concat(selectedMarker)
 
-      const responseSeller = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${markersUsers[0].lng},${markersUsers[0].lat};${selectedMarker.lng},${selectedMarker.lat}?geometries=geojson&access_token=${this.accessToken }`)
+      fitMapToMarkers(map, markersAll);
+
+      // Se o primeiro usuario tem lng and lat
+      if(markersUsers.length > 0 && markersUsers[0].hasOwnProperty('lng') && markersUsers[0].hasOwnProperty('lat')) {
+        const responseSeller = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${markersUsers[0].lng},${markersUsers[0].lat};${selectedMarker.lng},${selectedMarker.lat}?geometries=geojson&access_token=${this.accessToken }`)
         .then(response => response.json())
 
-      const responseBuyer = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${markersUsers[1].lng},${markersUsers[1].lat};${selectedMarker.lng},${selectedMarker.lat}?geometries=geojson&access_token=${this.accessToken }`)
+        // Add path and labels on the map
+        map.on('load', function () {        
+          map.addLayer({
+            'id': 'routeSeller',
+            'type': 'line',
+            'source': {
+              'type': 'geojson',
+              'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                  'type': 'LineString',
+                  'coordinates': responseSeller.routes[0].geometry.coordinates
+                }
+              }
+            },
+            'paint': {
+              'line-width': 2,
+              'line-color': markersUsers[0].current ? 'red' : 'purple'
+            },
+          });
+
+          map.addLayer({
+            'id': 'label-route-seller',
+            'type': 'symbol',
+            'source': {
+              'type': 'geojson',
+              'data': {
+                'type': 'Feature',
+                'properties': {
+                  'distance': `${Math.round(responseSeller.routes[0].distance / 100) / 10} km - ${Math.round(responseSeller.routes[0].duration / 60)} min`,
+                  'icon': 'car-15'
+                },
+                'geometry': {
+                  'type': 'Point',
+                  // middle of the array
+                  'coordinates': responseSeller.routes[0].geometry.coordinates[Math.floor(responseSeller.routes[0].geometry.coordinates.length / 2)]
+                }
+              }
+            },
+            'layout': {
+              'text-field': ['get', 'distance'],
+              'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+              'text-radial-offset': 0.5,
+              'text-justify': 'auto',
+              'icon-image': ['get', 'icon'],
+              'icon-size': 1.5
+            },
+            'paint': {
+              "text-halo-color": "white",
+              "text-halo-width": 5
+            }
+          });
+        });  
+      }
+
+      // Se o segundo usuario tem lng and lat
+      if (markersUsers.length > 1 && (markersUsers[1].hasOwnProperty('lng') && markersUsers[1].hasOwnProperty('lat'))) {
+        const responseBuyer = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${markersUsers[1].lng},${markersUsers[1].lat};${selectedMarker.lng},${selectedMarker.lat}?geometries=geojson&access_token=${this.accessToken }`)
         .then(response => response.json())
 
-      // Add path and labels on the map
-      map.on('load', function () {        
-        map.addLayer({
-          'id': 'routeSeller',
-          'type': 'line',
-          'source': {
-            'type': 'geojson',
-            'data': {
-              'type': 'Feature',
-              'properties': {},
-              'geometry': {
-                'type': 'LineString',
-                'coordinates': responseSeller.routes[0].geometry.coordinates
+        // Add path and labels on the map
+        map.on('load', function () {        
+          map.addLayer({
+            'id': 'routeBuyer',
+            'type': 'line',
+            'source': {
+              'type': 'geojson',
+              'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                  'type': 'LineString',
+                  'coordinates': responseBuyer.routes[0].geometry.coordinates
+                }
               }
+            },
+            'paint': {
+              'line-width': 2,
+              'line-color': markersUsers[1].current ? 'red' : 'purple'
             }
-          },
-          'paint': {
-            'line-width': 2,
-            'line-color': markersUsers[0].current ? 'red' : 'purple'
-          },
-        });
+          });
 
-        map.addLayer({
-          'id': 'routeBuyer',
-          'type': 'line',
-          'source': {
-            'type': 'geojson',
-            'data': {
-              'type': 'Feature',
-              'properties': {},
-              'geometry': {
-                'type': 'LineString',
-                'coordinates': responseBuyer.routes[0].geometry.coordinates
+          map.addLayer({
+            'id': 'label-route-buyer',
+            'type': 'symbol',
+            'source': {
+              'type': 'geojson',
+              'data': {
+                'type': 'Feature',
+                'properties': {
+                  'distance': `${Math.round(responseBuyer.routes[0].distance / 100) / 10} km - ${Math.round(responseBuyer.routes[0].duration / 60)} min`,
+                  'icon': 'car-15'
+                },
+                'geometry': {
+                  'type': 'Point',
+                  // middle of the array
+                  'coordinates': responseBuyer.routes[0].geometry.coordinates[Math.floor(responseBuyer.routes[0].geometry.coordinates.length / 2)]
+                }
               }
+            },
+            'layout': {
+              'text-field': ['get', 'distance'],
+              'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+              'text-radial-offset': 0.5,
+              'text-justify': 'auto',
+              'icon-image': ['get', 'icon'],
+              'icon-size': 1.5
+            },
+            'paint': {
+              "text-halo-color": "white",
+              "text-halo-width": 5,
             }
-          },
-          'paint': {
-            'line-width': 2,
-            'line-color': markersUsers[1].current ? 'red' : 'purple'
-          }
-        });
-
-        map.addLayer({
-          'id': 'label-route-seller',
-          'type': 'symbol',
-          'source': {
-            'type': 'geojson',
-            'data': {
-              'type': 'Feature',
-              'properties': {
-                'distance': `${Math.round(responseSeller.routes[0].distance / 100) / 10} km - ${Math.round(responseSeller.routes[0].duration / 60)} min`,
-                'icon': 'car-15'
-              },
-              'geometry': {
-                'type': 'Point',
-                // middle of the array
-                'coordinates': responseSeller.routes[0].geometry.coordinates[Math.floor(responseSeller.routes[0].geometry.coordinates.length / 2)]
-              }
-            }
-          },
-          'layout': {
-            'text-field': ['get', 'distance'],
-            'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
-            'text-radial-offset': 0.5,
-            'text-justify': 'auto',
-            'icon-image': ['get', 'icon'],
-            'icon-size': 1.5
-          },
-          'paint': {
-            "text-halo-color": "white",
-            "text-halo-width": 5
-          }
-        });
-
-        map.addLayer({
-          'id': 'label-route-buyer',
-          'type': 'symbol',
-          'source': {
-            'type': 'geojson',
-            'data': {
-              'type': 'Feature',
-              'properties': {
-                'distance': `${Math.round(responseBuyer.routes[0].distance / 100) / 10} km - ${Math.round(responseBuyer.routes[0].duration / 60)} min`,
-                'icon': 'car-15'
-              },
-              'geometry': {
-                'type': 'Point',
-                // middle of the array
-                'coordinates': responseBuyer.routes[0].geometry.coordinates[Math.floor(responseBuyer.routes[0].geometry.coordinates.length / 2)]
-              }
-            }
-          },
-          'layout': {
-            'text-field': ['get', 'distance'],
-            'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
-            'text-radial-offset': 0.5,
-            'text-justify': 'auto',
-            'icon-image': ['get', 'icon'],
-            'icon-size': 1.5
-          },
-          'paint': {
-            "text-halo-color": "white",
-            "text-halo-width": 5,
-          }
-        });
-      });  
+          });
+        });  
+      }
 
       // Change text at the top of the page
       this.changeText()
+      this.firstOptionTarget.innerText = 'Ver as 3 opções mais perto de vocês'
     } 
-    // Se nada for selecionado botamos de novo as 10 opções mais próximas
+    // Se nada for selecionado botamos de novo as 3 opções mais próximas
     else 
     {
-      // Seleciona só os 10 mais próximos
-      const markersClose = this.markers.slice(0, 10)
+      // Seleciona só os 3 mais próximos
+      const markersClose = this.markers.length > 3 ? this.markers.slice(0, 3) : markers
       markersClose.forEach((marker) => {
       // Add carrefour unit ID to the marker
         const popup = new mapboxgl.Popup().setHTML(marker.info_window); // add this

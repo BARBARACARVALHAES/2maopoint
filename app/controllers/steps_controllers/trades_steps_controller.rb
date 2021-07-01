@@ -10,7 +10,8 @@ module StepsControllers
       @trade = Trade.find(params[:trade_id])
       # On the page of the carrefour unit f1zemos tudo ligado à geoloclização
       @carrefour_units ||= CarrefourUnit.all.order(name: :asc)
-      search_for_localisation if params[:id] == 'carrefour_unit'
+      search_for_localisation if step == 'carrefour_unit'
+      get_markers_user && get_trade_marker if step == 'invitation'
       @geoloc_success = true if @carrefour_units != CarrefourUnit.all.order(name: :asc)
       authorize @trade
       render_wizard
@@ -25,7 +26,7 @@ module StepsControllers
       @trade.buyer = receiver if @trade.seller == current_user && receiver
       @trade.seller = receiver if @trade.buyer == current_user && receiver
       # If it is the last step
-      if @trade.save && params[:id] == Trade.form_steps.keys.last
+      if @trade.save && step == Trade.form_steps.keys.last
         @trade.created_by_seller? ? @trade.update(seller_accepted: true) : @trade.update(buyer_accepted: true)
         receiver_infos = get_receiver_infos
         WhatsappCreateTradeJob.perform_later(phone: receiver_infos[:receiver_phone], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade, url: @url)
@@ -70,7 +71,7 @@ module StepsControllers
         uri_buyer = URI("https://viacep.com.br/ws/#{@trade.buyer_cep}/json/")
         res_buyer = Net::HTTP.get_response(uri_buyer)
         json_buyer = JSON.parse(res_buyer.body)
-        address_buyer = "#{json_buyer['logradouro']} #{json_buyer['localidade']}"
+        address_buyer = "#{json_buyer['logradouro']}, #{json_buyer['localidade']}"
         @trade.form_step = :location
         if Geocoder.search(address_buyer).first.present?
           coordinates = Geocoder.search(address_buyer).first.coordinates
@@ -80,23 +81,13 @@ module StepsControllers
         uri_seller = URI("https://viacep.com.br/ws/#{@trade.seller_cep}/json/")
         res_seller = Net::HTTP.get_response(uri_seller)
         json_seller = JSON.parse(res_seller.body)
-        address_seller = "#{json_seller['logradouro']} #{json_seller['localidade']}"
+        address_seller = "#{json_seller['logradouro']}, #{json_seller['localidade']}"
         if Geocoder.search(address_seller).first.present?
           coordinates = Geocoder.search(address_seller).first.coordinates
           @trade.update(lat_seller: coordinates[0], long_seller: coordinates[1])
         end
 
-        @markers_users = [{
-            lat: @trade.lat_seller,
-            lng: @trade.long_seller,
-            current: @trade.seller == current_user
-          },
-          {
-            lat: @trade.lat_buyer,
-            lng: @trade.long_buyer,
-            current: @trade.buyer == current_user
-          }
-        ]
+        get_markers_user
 
         if @trade.lat_seller.present? && @trade.long_seller.present? && @trade.lat_buyer.present? && @trade.long_buyer.present?
           order_by_loc(@trade)
@@ -118,6 +109,29 @@ module StepsControllers
       # Get the center point between the two users
       center_point = Geocoder::Calculations.geographic_center([[trade.lat_buyer, trade.long_buyer], [trade.lat_seller, trade.long_seller]])
       @carrefour_units = CarrefourUnit.near(center_point, 1_000_000, order: :distance)
+    end
+
+    def get_markers_user
+      @markers_users = [{
+        lat: @trade.lat_seller,
+        lng: @trade.long_seller,
+        current: @trade.seller == current_user
+      },
+      {
+        lat: @trade.lat_buyer,
+        lng: @trade.long_buyer,
+        current: @trade.buyer == current_user
+      }
+    ]
+    end
+
+    def get_trade_marker
+      @markers = [{
+        lat: @trade.carrefour_unit.latitude,
+        lng: @trade.carrefour_unit.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { unit: @trade.carrefour_unit }),
+        id: @trade.carrefour_unit.id
+      }]
     end
   end
 end

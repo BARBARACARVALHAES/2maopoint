@@ -38,7 +38,7 @@ end
     last_name: Faker::Name.last_name,
     cpf: Faker::Number.number(digits: 11),
     birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
-    phone: Faker::PhoneNumber.cell_phone_in_e164,
+    phone: "2100000000#{n}",
     address: Faker::Address.street_address,
     confirmed_at: Time.now,
     optin_ads: [true, false].sample,

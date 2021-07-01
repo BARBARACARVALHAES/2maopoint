@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(version: 2021_07_01_135522) do
     t.float "long_buyer"
     t.float "lat_seller"
     t.float "long_seller"
-    t.text "qr_code"
     t.string "receiver_email"
+    t.text "qr_code"
+    t.boolean "realized"
     t.index ["carrefour_unit_id"], name: "index_trades_on_carrefour_unit_id"
     t.index ["item_category_id"], name: "index_trades_on_item_category_id"
   end

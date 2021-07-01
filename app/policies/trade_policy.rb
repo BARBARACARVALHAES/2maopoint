@@ -14,10 +14,6 @@ class TradePolicy < ApplicationPolicy
     user.present?
   end
 
-  def confirm_screen?
-    confirm_presence?
-  end
-
   def update?
     user == record.seller || user == record.buyer || user == record.author
   end
@@ -26,7 +22,15 @@ class TradePolicy < ApplicationPolicy
     user == record.seller || user == record.buyer
   end
 
+  def realized_trade?
+    update?
+  end
+
   def confirm_presence?
     user == record.seller || user == record.buyer
+  end
+
+  def confirm_screen?
+    confirm_presence?
   end
 end

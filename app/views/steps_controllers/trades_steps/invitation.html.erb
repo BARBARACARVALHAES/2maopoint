@@ -14,9 +14,16 @@
   <p><strong>Unidade: </strong><%=@trade.carrefour_unit.name %></p>
   <p><strong>Endereço: </strong><%= @trade.carrefour_unit.address %></p>
   <p><strong>Data e horário: </strong><%=@trade.date.strftime("%d/%m/%Y às %Hh%M") %></p>
+  <div id="map"
+    data-markers="<%= @markers.to_json %>"
+    data-markers-users="<%= @markers_users.to_json %>"
+    data-mapbox-api-key="<%= Rails.application.credentials.mapbox[:api] %>"
+    data-map-target = 'mapbox'
+    data-draw-routes
+  >
 </div>
 
-<p class="subtitle"><strong>Envie o convite deste agendamento:</strong></p>
+<p class="subtitle mt-5"><strong>Envie o convite deste agendamento:</strong></p>
 <%= simple_form_for @trade, url: wizard_path do |f| %>
   <%= f.input :receiver_name, label: "NOME", placeholder: "Nome do convidado", wrapper_html: { class: "question" } %>
   <%= f.input :receiver_phone, label: "TELEFONE", placeholder: "(21) 00000-0000", wrapper_html: { class: "question" }, input_html: {class: "phone_with_ddd" }, hint: 'O outro usuário será avisado por WhatsApp' %>

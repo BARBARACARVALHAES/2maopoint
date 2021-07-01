@@ -16,13 +16,13 @@
       <div class="form-group select optional trade_carrefour_unit_id question">
         <label class="select optional" for="trade_carrefour_unit_id">UNIDADE DO CARREFOUR</label>
         <select class="form-control select optional" name="trade[carrefour_unit_id]" id="trade_carrefour_unit_id" data-map-target= 'select'>
-          <option value="" label="">Selecione uma unidade</option>
+          <option value="" label="" data-map-target='firstOption'>Selecione uma unidade</option>
           <% @carrefour_units.each do |unit| %>
             <option value= <%= unit.id %> data-address= <%= unit.address.gsub(' ', '&nbsp') %> ><%= unit.name %></option>
           <% end %>
         </select>
         <% if @geoloc_success %>
-          <small class="form-text text-muted">As unidades aparecem na ordem de proximidade entre você e o <%=  @trade.author_role == "Vendedor" ? "comprador" : "vendedor" %>.</small>
+          <small class="form-text text-muted">As unidades aparecem na ordem de proximidade entre você e o <%=  @trade.author_role == "Vendedor" ? "comprador" : "vendedor" %>. Você pode selecionar uma unidade na lista para ver aparecer o caminho mais rapido para chegar là.</small>
         <% else %>
           <small class="form-text" style='color: red'>A geolocalização não funcionou com os CEP registrados na etapa anterior, as lojas aparecem por nome (você pode voltar na página anterior para tentar mudar os CEPs).</small>
         <% end %>
