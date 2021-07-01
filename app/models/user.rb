@@ -9,7 +9,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :optin_privacy, presence: true
   after_create :link_user_to_trades
-
+  before_save :clean_phone
+  before_save :clean_cpf
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -28,4 +29,14 @@ class User < ApplicationRecord
       end
     end
   end
+
+
+  def clean_phone
+    self.phone = self.phone.delete("(").delete(")").delete("-")
+  end
+
+  def clean_cpf
+    self.cpf = self.cpf.delete("-").delete("-").delete(".")
+  end
+
 end

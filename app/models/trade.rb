@@ -4,6 +4,8 @@ class Trade < ApplicationRecord
   belongs_to :seller, class_name: "User", optional: true
   belongs_to :buyer, class_name: "User", optional: true
   belongs_to :author, class_name: "User"
+  before_save :clean_phone
+  before_save :clean_cpf
 
   ROLE = ["Vendedor", "Comprador"]
 
@@ -55,5 +57,14 @@ class Trade < ApplicationRecord
     # All fields from previous steps are required
     ordered_keys = self.class.form_steps.keys.map(&:to_sym)
     !!(ordered_keys.index(step) <= ordered_keys.index(form_step))
+  end
+
+  
+  def clean_phone
+    self.phone = self.phone.delete("(").delete(")").delete("-")
+  end
+
+  def clean_cpf
+    self.cpf = self.cpf.delete("-").delete("-").delete(".")
   end
 end
