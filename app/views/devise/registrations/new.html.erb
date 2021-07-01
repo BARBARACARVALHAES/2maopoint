@@ -34,7 +34,6 @@
                   autofocus: true,
                   input_html: { autocomplete: "phone", class:"phone_with_ddd" },
                   placeholder: "(21)00000-0000"
-                  %>
     <%= f.input  :birthdate,
                   required: true,
                   autofocus: true,
@@ -45,7 +44,7 @@
                   autofocus: true,
                   input_html: { autocomplete: "address" },
                   placeholder: "Meu endereço"
-                  %>                             
+                  %>
       <%= f.input :password,
                   required: true,
                   hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
@@ -53,6 +52,11 @@
       <%= f.input :password_confirmation,
                   required: true,
                   input_html: { autocomplete: "new-password" } %>
+      <%= f.input :optin_ads,
+                  label: "Gostaria de receber ofertas do Carrefour e parceiros" %>                                                          
+      <%= f.input :optin_privacy, 
+                  required: true,
+                  label: "Aceito os termos de uso e de privacidade" %>                                                          
     </div>
 
     <div class="form-actions">

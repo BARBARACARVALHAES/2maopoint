@@ -40,7 +40,9 @@ end
     birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
     phone: Faker::PhoneNumber.cell_phone_in_e164,
     address: Faker::Address.street_address,
-    confirmed_at: Time.now
+    confirmed_at: Time.now,
+    optin_ads: [true, false].sample,
+    optin_privacy: true
   )
   p "Create #{u.id} user"
 end

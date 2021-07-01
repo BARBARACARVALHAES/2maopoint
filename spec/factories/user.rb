@@ -9,5 +9,6 @@ FactoryBot.define do
     cpf { '00000000000' }
     phone { Faker::PhoneNumber.cell_phone_in_e164 }
     confirmed_at { Time.now }
+    optin_privacy { true }
   end
 end
