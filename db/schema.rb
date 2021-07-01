@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_145046) do
+ActiveRecord::Schema.define(version: 2021_07_01_135522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2021_06_30_145046) do
     t.float "long_buyer"
     t.float "lat_seller"
     t.float "long_seller"
-    t.string "receiver_email"
     t.text "qr_code"
+    t.string "receiver_email"
     t.index ["carrefour_unit_id"], name: "index_trades_on_carrefour_unit_id"
     t.index ["item_category_id"], name: "index_trades_on_item_category_id"
   end
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2021_06_30_145046) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.boolean "optin_ads"
+    t.boolean "optin_privacy"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
