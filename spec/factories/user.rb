@@ -9,5 +9,6 @@ FactoryBot.define do
     cpf { '00000000000' }
     phone { "119#{rand(10**8)}" }
     confirmed_at { Time.now }
+    optin_privacy { true }
   end
 end

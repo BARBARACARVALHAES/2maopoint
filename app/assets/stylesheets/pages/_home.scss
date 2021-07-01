@@ -1,40 +1,41 @@
 // Specific CSS for your home-page
-.img_banner {
-  height: 611px;
-  position: absolute;
-  left: 586px;
-  top: 77px;
-}
-
-.forte {
-  font-weight: 700;
-}
-
-.banner h1 {
-  font-size: 100px;
-  line-height: 108px;
-  color: #ffffff;
-  text-align: left;
-  border: 2px solid #ffffff;
-  box-sizing: border-box;
-  border-radius: 18px;
-  padding: 35px;
-}
-
 .banner {
-  height: 713px;
+  height: 80vh;
   background: linear-gradient(233.46deg, #1e5bc6 4.26%, #59b9af 84.51%);
   background-blend-mode: darken;
   mix-blend-mode: normal;
   margin-top: -90px;
+  display: flex;
+  position: relative;
+  .tittleBanner {
+    position: absolute;
+    width: 670px;
+    height: 300px;
+    right: 35%;
+    top: 18%;
+    left: 1%;
+    h1 {
+      font-size: 5.4rem;
+      line-height: 5.4rem;
+      color: #ffffff;
+      text-align: left;
+      border: 2px solid #ffffff;
+      box-sizing: border-box;
+      border-radius: 18px;
+      padding: 35px;
+    }
+  }
+  .img_banner {
+    height: 60vh;
+    bottom: 0;
+    right: -80px;
+    position: absolute;
+  }  
 }
 
-.tittleBanner {
-  position: absolute;
-  width: 673.8px;
-  height: 338.81px;
-  left: 200px;
-  top: 100px;
+
+.forte {
+  font-weight: 700;
 }
 
 .containerSegundo {
@@ -85,12 +86,18 @@
   width: 60%;
 }
 
-.maisVantagens h2 {
-  font-size: 78px;
-  line-height: 100px;
-  letter-spacing: 0.04em;
-  opacity: 0.36;
-  text-align: left;
+.maisVantagens { 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 2rem;
+  h2 {
+    font-size: 55px;
+    line-height: 100px;
+    letter-spacing: 0.04em;
+    opacity: 0.36;
+    text-align: left;
+  }
 }
 
 .teste {
@@ -146,7 +153,7 @@
   justify-content: space-between;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .img_banner {
     display: none;
   }
@@ -233,7 +240,7 @@
   }
 }
 
-@media (min-width: 601px) {
+@media (min-width: 751px) {
   .img_banner_mobile {
     display: none;
   }

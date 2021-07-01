@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :phone, presence: true, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :optin_privacy, presence: true
   after_create :link_user_to_trades
 
   # Include default devise modules. Others available are:
