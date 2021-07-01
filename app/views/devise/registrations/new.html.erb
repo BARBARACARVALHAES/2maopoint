@@ -26,21 +26,19 @@
       <%= f.input :cpf,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "cpf" },
+                  input_html: { autocomplete: "cpf", class: "cpf" },
                   placeholder: "000.000.000-00"
                   %>
     <%= f.input  :phone,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "phone" },
-                  placeholder: "(21)000000000"
-                  %>
+                  input_html: { autocomplete: "phone", class:"phone_with_ddd" },
+                  placeholder: "(21)00000-0000"
+                   %>
     <%= f.input  :birthdate,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "birthdate" },
-                  as: :string,
-                  input_html: { id: 'flat_date' }
+                  input_html: { autocomplete: "birthdate"}
                   %>
     <%= f.input  :address,
                   required: true,

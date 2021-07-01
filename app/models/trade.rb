@@ -5,6 +5,7 @@ class Trade < ApplicationRecord
   belongs_to :seller, class_name: "User", optional: true
   belongs_to :buyer, class_name: "User", optional: true
   belongs_to :author, class_name: "User"
+  before_save :clean_phone
 
   ROLE = ["Vendedor", "Comprador"]
 
@@ -59,6 +60,11 @@ class Trade < ApplicationRecord
     !!(ordered_keys.index(step) <= ordered_keys.index(form_step))
   end
 
+  
+  def clean_phone
+    self.receiver_phone = self.receiver_phone.delete("(").delete(")").delete("-") if self.receiver_phone.present?
+  end
+
   def verify_cep
     regexp_cep = /^\d{5}(-?)\d{3}$/
 
@@ -69,5 +75,6 @@ class Trade < ApplicationRecord
     unless seller_cep.present? && seller_cep.match?(regexp_cep)
       errors.add :seller_cep, "não é valido"
     end
+
   end
 end

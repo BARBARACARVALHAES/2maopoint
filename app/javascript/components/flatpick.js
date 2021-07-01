@@ -14,14 +14,19 @@ const initFlatpick = () => {
       locale: Portuguese,
     });
 
-    document.querySelector('.trade_date').childNodes[2].setAttribute('value', document.getElementById("flat_datetime").value)
+    document
+      .querySelector(".trade_date")
+      .childNodes[2].setAttribute(
+        "value",
+        document.getElementById("flat_datetime").value
+      );
   }
   if (document.getElementById("flat_date")) {
     const el = document.getElementById("flat_date");
     flatpickr(el, {
       enableTime: false,
       altInput: true,
-      altFormat: "F j, Y às h:i K",
+      altFormat: "F j, Y",
       dateFormat: "d-m-Y",
       locale: Portuguese,
     });

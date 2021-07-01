@@ -8,7 +8,7 @@ import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 // Stimulus
-import 'controllers';
+import "controllers";
 
 Rails.start();
 Turbolinks.start();
@@ -25,7 +25,8 @@ import "bootstrap";
 import { initSwal2 } from "../components/swal2";
 import { initFlatpick } from "../components/flatpick";
 import { initMapbox } from "../components/init_mapbox";
-import { loadingSpinner } from '../components/loading-spinner';
+import { loadingSpinner } from "../components/loading-spinner";
+import { initiMask } from "../components/mask";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -37,4 +38,5 @@ document.addEventListener("turbolinks:load", () => {
   initSwal2();
   initMapbox();
   loadingSpinner();
+  initiMask();
 });

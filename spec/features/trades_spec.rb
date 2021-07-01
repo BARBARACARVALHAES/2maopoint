@@ -64,10 +64,12 @@ RSpec.feature "Trades", type: :feature, js: true do
 
     scenario 'invitation' do
       visit(trade_step_path(trade_invitation, "invitation"))
-      fill_in('trade_receiver_phone', with: '+33650232096')
+      fill_in('trade_receiver_phone', with: '')
+      # Com a mascara ele espere um espaço na frente
+      fill_in('trade_receiver_phone', with: ' 21999999999')
       fill_in('trade_receiver_name', with: 'name Test')
       click_on(id: 'terminar')
-      expect(Trade.all.order(updated_at: :desc).first.receiver_phone).to eq("+33650232096")
+      expect(Trade.all.order(updated_at: :desc).first.receiver_phone).to eq("21999999999")
       expect(Trade.all.order(updated_at: :desc).first.receiver_name).to eq("name Test")
     end
 
