@@ -2,9 +2,8 @@ import $ from "jquery";
 import "jquery-mask-plugin";
 
 var initiMask = function () {
-  $(".date").mask("11/11/1111");
   $(".time").mask("00:00:00");
-  $(".date_time").mask("00/00/0000 00:00:00");
+  $(".date_time").mask("00/00/0000");
   $(".cep").mask("00000-000");
   $(".phone").mask("(00) (00000-0000");
   $(".phone_with_ddd").mask("+55 (00) 00000-0000");
