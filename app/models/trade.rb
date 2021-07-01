@@ -47,7 +47,7 @@ class Trade < ApplicationRecord
 
   with_options if: -> { required_for_step?(:invitation) } do
     validates :receiver_name, presence: true
-    validates :receiver_phone, presence: true, phone: true
+    validates :receiver_phone, presence: true
   end
 
   def required_for_step?(step)

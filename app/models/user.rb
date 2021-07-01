@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :address, presence: true
   validates :cpf, presence: true
   validates :birthdate, presence: true
-  validates :phone, presence: true, uniqueness: true, phone: true
+  validates :phone, presence: true, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   after_create :link_user_to_trades
