@@ -39,7 +39,7 @@ export default class extends Controller {
           .setText('Você està aqui')
           .addTo(map);
         }
-        if(marker.hasOwnProperty(lng) && marker.hasOwnProperty(lat)) {
+        if(marker.hasOwnProperty('lng') && marker.hasOwnProperty('lat')) {
           new mapboxgl.Marker({
             color: marker.current ? 'red' : 'purple',
           })
@@ -74,7 +74,7 @@ export default class extends Controller {
       fitMapToMarkers(map, markersAll);
 
       // Se o primeiro usuario tem lng and lat
-      if(markersUsers.length > 0 && markersUsers[0].hasOwnProperty(lng) && markersUsers[0].hasOwnProperty(lat)) {
+      if(markersUsers.length > 0 && markersUsers[0].hasOwnProperty('lng') && markersUsers[0].hasOwnProperty('lat')) {
         const responseSeller = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${markersUsers[0].lng},${markersUsers[0].lat};${selectedMarker.lng},${selectedMarker.lat}?geometries=geojson&access_token=${this.accessToken }`)
         .then(response => response.json())
 
@@ -135,7 +135,7 @@ export default class extends Controller {
       }
 
       // Se o segundo usuario tem lng and lat
-      if (markersUsers.length > 1 && (markersUsers[1].hasOwnProperty(lng) && markersUsers[1].hasOwnProperty(lat))) {
+      if (markersUsers.length > 1 && (markersUsers[1].hasOwnProperty('lng') && markersUsers[1].hasOwnProperty('lat'))) {
         const responseBuyer = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${markersUsers[1].lng},${markersUsers[1].lat};${selectedMarker.lng},${selectedMarker.lat}?geometries=geojson&access_token=${this.accessToken }`)
         .then(response => response.json())
 

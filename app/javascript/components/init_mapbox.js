@@ -30,7 +30,7 @@ const initMapbox = () => {
         .addTo(map);
       }
 
-      if(marker.hasOwnProperty(lng) && marker.hasOwnProperty(lat)) {
+      if(marker.hasOwnProperty('lng') && marker.hasOwnProperty('lat')) {
         new mapboxgl.Marker({
           color: marker.current ? 'red' : 'purple',
         })
