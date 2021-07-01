@@ -70,7 +70,7 @@ module StepsControllers
         uri_buyer = URI("https://viacep.com.br/ws/#{@trade.buyer_cep}/json/")
         res_buyer = Net::HTTP.get_response(uri_buyer)
         json_buyer = JSON.parse(res_buyer.body)
-        address_buyer = "#{json_buyer['logradouro']} #{json_buyer['localidade']}"
+        address_buyer = "#{json_buyer['logradouro']}, #{json_buyer['localidade']}"
         @trade.form_step = :location
         if Geocoder.search(address_buyer).first.present?
           coordinates = Geocoder.search(address_buyer).first.coordinates
@@ -80,7 +80,7 @@ module StepsControllers
         uri_seller = URI("https://viacep.com.br/ws/#{@trade.seller_cep}/json/")
         res_seller = Net::HTTP.get_response(uri_seller)
         json_seller = JSON.parse(res_seller.body)
-        address_seller = "#{json_seller['logradouro']} #{json_seller['localidade']}"
+        address_seller = "#{json_seller['logradouro']}, #{json_seller['localidade']}"
         if Geocoder.search(address_seller).first.present?
           coordinates = Geocoder.search(address_seller).first.coordinates
           @trade.update(lat_seller: coordinates[0], long_seller: coordinates[1])
