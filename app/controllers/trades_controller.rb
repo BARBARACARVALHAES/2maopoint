@@ -23,6 +23,8 @@ class TradesController < ApplicationController
 
   def edit
     order_by_loc
+    @carrefour_units = nil if @carrefour_units.empty?
+    @carrefour_units ||= CarrefourUnit.all
     get_markers
   end
 
@@ -66,6 +68,7 @@ class TradesController < ApplicationController
     # TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).confirm_trade.deliver_later
     redirect_to(confirm_screen_trade_path(@trade), success: "Você confirmou a sua presença para esse encontro !")
   end
+
 
   def set_reminder
     # WhatsappRememberTradeJob.set(wait_until: @trade.date.advance(days: -1)).perform_later.(phone: @trade.buyer.phone, name: @trade.buyer.first_name, other_trader: @trade.seller.first_name, trade: @trade, url: confirm_screen_trade_url(@trade))
