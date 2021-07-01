@@ -5,7 +5,7 @@
     <div class="d-flex flex-column">
         <h3>Olá,</hr><br><h3> <%= @user.first_name %></h3>
         <%= link_to "Novo Agendamento", new_trade_path, :class => "btn botoeProflile" %>
-        <%= link_to "Convites", invitations_profile_path(:user), :class => "btn botoeProflile" %>
+        <%= link_to "Agendamentos", invitations_profile_path(:user), :class => "btn botoeProflile" %>
         <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => "btn botoeProflile" %>
     </div>
 </div>
