@@ -23,7 +23,7 @@
   >
 </div>
 
-<p class="subtitle"><strong>Envie o convite deste agendamento:</strong></p>
+<p class="subtitle mt-5"><strong>Envie o convite deste agendamento:</strong></p>
 <%= simple_form_for @trade, url: wizard_path do |f| %>
   <%= f.input :receiver_name, label: "NOME", placeholder: "Nome do convidado", wrapper_html: { class: "question" } %>
   <%= f.input :receiver_phone, label: "TELEFONE", placeholder: "+5521000000000", wrapper_html: { class: "question" }, hint: 'O outro usuário será avisado por WhatsApp' %>
