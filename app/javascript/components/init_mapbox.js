@@ -21,7 +21,8 @@ const initMapbox = () => {
     // Seleciona só os 10 mais próximos
     const markersClose = markers.slice(0, 10)
 
-    const markersUsers = JSON.parse(mapElement.dataset.markersUsers);
+    let markersUsers = JSON.parse(mapElement.dataset.markersUsers);
+    markersUsers = markersUsers.filter(marker => marker.lat && marker.lng)
     markersUsers.forEach((marker) => {
       if(marker.current) {
         var popup = new mapboxgl.Popup()
@@ -29,12 +30,14 @@ const initMapbox = () => {
         .addTo(map);
       }
 
-      new mapboxgl.Marker({
-        color: marker.current ? 'red' : 'purple',
-      })
-        .setLngLat([ marker.lng, marker.lat ])
-        .addTo(map)
-        .setPopup(popup)
+      if(marker.hasOwnProperty(lng) && marker.hasOwnProperty(lat)) {
+        new mapboxgl.Marker({
+          color: marker.current ? 'red' : 'purple',
+        })
+          .setLngLat([ marker.lng, marker.lat ])
+          .addTo(map)
+          .setPopup(popup)
+      }
     });
   
     const addMarkersToMap = (map, markers) => {
@@ -56,7 +59,9 @@ const initMapbox = () => {
       });
     };
 
-    fitMapToMarkers(map, markersClose.concat(markersUsers));
+    const markersAll = markersClose.concat(markersUsers)
+
+    fitMapToMarkers(map, markersAll);
     addMarkersToMap(map, markersClose)
   }
 };
