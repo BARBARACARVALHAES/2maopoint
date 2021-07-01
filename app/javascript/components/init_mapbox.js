@@ -18,8 +18,8 @@ const initMapbox = () => {
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
-    // Seleciona só os 10 mais próximos
-    const markersClose = markers.slice(0, 10)
+    // Seleciona só os 3 mais próximos
+    const markersClose = markers.length > 3 ? markers.slice(0, 3) : markers
 
     const markersUsers = JSON.parse(mapElement.dataset.markersUsers);
     markersUsers.forEach((marker) => {
@@ -57,7 +57,131 @@ const initMapbox = () => {
     };
 
     fitMapToMarkers(map, markersClose.concat(markersUsers));
-    addMarkersToMap(map, markersClose)
+    addMarkersToMap(map, markersClose);
+
+    // Draw routes
+    const drawRoutes = async () => {
+      const selectedMarker = JSON.parse(mapElement.dataset.markers)[0]
+
+      const responseSeller = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${markersUsers[0].lng},${markersUsers[0].lat};${selectedMarker.lng},${selectedMarker.lat}?geometries=geojson&access_token=${mapElement.dataset.mapboxApiKey }`)
+          .then(response => response.json())
+  
+      const responseBuyer = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${markersUsers[1].lng},${markersUsers[1].lat};${selectedMarker.lng},${selectedMarker.lat}?geometries=geojson&access_token=${mapElement.dataset.mapboxApiKey }`)
+        .then(response => response.json())
+  
+      // Add path and labels on the map
+      map.on('load', function () {        
+        map.addLayer({
+          'id': 'routeSeller',
+          'type': 'line',
+          'source': {
+            'type': 'geojson',
+            'data': {
+              'type': 'Feature',
+              'properties': {},
+              'geometry': {
+                'type': 'LineString',
+                'coordinates': responseSeller.routes[0].geometry.coordinates
+              }
+            }
+          },
+          'paint': {
+            'line-width': 2,
+            'line-color': markersUsers[0].current ? 'red' : 'purple'
+          },
+        });
+  
+        map.addLayer({
+          'id': 'routeBuyer',
+          'type': 'line',
+          'source': {
+            'type': 'geojson',
+            'data': {
+              'type': 'Feature',
+              'properties': {},
+              'geometry': {
+                'type': 'LineString',
+                'coordinates': responseBuyer.routes[0].geometry.coordinates
+              }
+            }
+          },
+          'paint': {
+            'line-width': 2,
+            'line-color': markersUsers[1].current ? 'red' : 'purple'
+          }
+        });
+  
+        map.addLayer({
+          'id': 'label-route-seller',
+          'type': 'symbol',
+          'source': {
+            'type': 'geojson',
+            'data': {
+              'type': 'Feature',
+              'properties': {
+                'distance': `${Math.round(responseSeller.routes[0].distance / 100) / 10} km - ${Math.round(responseSeller.routes[0].duration / 60)} min`,
+                'icon': 'car-15'
+              },
+              'geometry': {
+                'type': 'Point',
+                // middle of the array
+                'coordinates': responseSeller.routes[0].geometry.coordinates[Math.floor(responseSeller.routes[0].geometry.coordinates.length / 2)]
+              }
+            }
+          },
+          'layout': {
+            'text-field': ['get', 'distance'],
+            'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+            'text-radial-offset': 0.5,
+            'text-justify': 'auto',
+            'icon-image': ['get', 'icon'],
+            'icon-size': 1.5
+          },
+          'paint': {
+            "text-halo-color": "white",
+            "text-halo-width": 5
+          }
+        });
+  
+        map.addLayer({
+          'id': 'label-route-buyer',
+          'type': 'symbol',
+          'source': {
+            'type': 'geojson',
+            'data': {
+              'type': 'Feature',
+              'properties': {
+                'distance': `${Math.round(responseBuyer.routes[0].distance / 100) / 10} km - ${Math.round(responseBuyer.routes[0].duration / 60)} min`,
+                'icon': 'car-15'
+              },
+              'geometry': {
+                'type': 'Point',
+                // middle of the array
+                'coordinates': responseBuyer.routes[0].geometry.coordinates[Math.floor(responseBuyer.routes[0].geometry.coordinates.length / 2)]
+              }
+            }
+          },
+          'layout': {
+            'text-field': ['get', 'distance'],
+            'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+            'text-radial-offset': 0.5,
+            'text-justify': 'auto',
+            'icon-image': ['get', 'icon'],
+            'icon-size': 1.5
+          },
+          'paint': {
+            "text-halo-color": "white",
+            "text-halo-width": 5,
+          }
+        });
+      });
+    }
+
+
+    if(mapElement.hasAttribute('data-draw-routes')) {
+      drawRoutes()
+    }
+    
   }
 };
 
