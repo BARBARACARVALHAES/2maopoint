@@ -26,13 +26,13 @@
       <%= f.input :cpf,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "cpf" },
+                  input_html: { autocomplete: "cpf", class: "cpf" },
                   placeholder: "000.000.000-00"
                   %>
     <%= f.input  :phone,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "phone" },
+                  input_html: { autocomplete: "phone", class:"phone_with_ddd" },
                   placeholder: "+5521000000000"
                   %>
     <%= f.input  :birthdate,
