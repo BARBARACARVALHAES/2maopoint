@@ -1,8 +1,9 @@
 class TradesController < ApplicationController
-  before_action :set_trade, only: %i[edit destroy update confirm_presence confirm_screen set_reminder]
+  before_action :set_trade, only: %i[edit destroy update confirm_presence confirm_screen set_reminder realized_trade]
   before_action :search_user, only: %i[update destroy confirm_presence]
   before_action :get_markers_users, only: %i[confirm_screen edit update]
   before_action :get_uniq_marker, only: %i[confirm_screen]
+  before_action :trade_params, only: [:realized_trade]
 
   def index
     @trades = policy_scope(Trade)
@@ -81,9 +82,16 @@ class TradesController < ApplicationController
     )
   end
 
+  def realized_trade
+    if trade_params[:realized] == 'realized'
+      @trade.update(realized: true)
+    elsif trade_params[:realized] == 'cancelled'
+      @trade.update(realized: false)
+    end
+    redirect_to confirm_screen_trade_path(@trade), succes: "O agendamento foi atualizado com sucesso"
+  end
 
   private
-
   def get_markers_users
     @markers_users = [{
       lat: @trade.lat_seller,
@@ -143,7 +151,7 @@ class TradesController < ApplicationController
   end
 
   def trade_params
-    params.require(:trade).permit(:carrefour_unit_id, :date)
+    params.require(:trade).permit(:carrefour_unit_id, :date, :realized)
   end
 
   def search_user

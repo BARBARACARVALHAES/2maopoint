@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_145046) do
+ActiveRecord::Schema.define(version: 2021_07_01_124543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_06_30_145046) do
     t.float "long_seller"
     t.string "receiver_email"
     t.text "qr_code"
+    t.boolean "realized"
     t.index ["carrefour_unit_id"], name: "index_trades_on_carrefour_unit_id"
     t.index ["item_category_id"], name: "index_trades_on_item_category_id"
   end

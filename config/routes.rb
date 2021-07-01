@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :steps, only: %i[show update], controller: 'steps_controllers/trades_steps'
     patch :confirm_presence, on: :member
     get :confirm_screen, on: :member
+    patch :realized_trade, on: :member
   end
 
   resources :profiles do

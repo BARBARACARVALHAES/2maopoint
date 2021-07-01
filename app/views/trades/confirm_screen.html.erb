@@ -2,13 +2,34 @@
   <%= link_to "<i class='far fa-arrow-alt-circle-left'></i> Voltar para os agendamentos".html_safe, invitations_profile_path(current_user), class: "text-decoration-none" %>
   <%# TODO: Evento já foi realizado: solicitar confirmação de presença %>
   <% if DateTime.now > @trade.date %>
-    <h1 class="title" style="margin-top:2rem;">Este encontro já foi realizado</h1>
-    <p class="subtitle">Confirme se este evento já foi realizado.</p>
-    <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="btn btn-primary rounded-button stacked-button">Sim, já realizei este encontro</div>
-      <div class="btn btn-primary rounded-button canceled stacked-button">Este evento foi cancelado</div>
-    </div>
-    
+    <h1 class="title" style="margin-top:2rem;">Este encontro já passou</h1>
+    <% if @trade.realized.nil? %>
+      <p class="subtitle">Confirme se este evento já foi realizado.</p>
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <%= form_with(model: @trade, url: realized_trade_trade_path, data: {confirm: 'Não será mais possível modificar essa informação depois'}) do |f| %>
+          <%= f.hidden_field :realized, as: :hidden, value: 'realized' %>
+          <%= f.submit 'Sim, já realizei este encontro', class: 'btn btn-primary rounded-button stacked-button' %>
+        <% end %>
+        <%= form_with(model: @trade, url: realized_trade_trade_path, data: {confirm: 'Não será mais possível modificar essa informação depois'}) do |f| %>
+          <%= f.hidden_field :realized, as: :hidden, value: 'cancelled' %>
+          <%= f.submit 'Este evento foi cancelado', class: 'btn btn-primary rounded-button canceled stacked-button' %>
+        <% end %>
+      </div>
+    <% elsif @trade.realized %>
+      <div class="d-flex align-items-center flex-column">
+        <div class="big-icon green">
+          <i class="far fa-check-circle"></i>
+        </div>
+        <p>Esse econtro foi realizado com sucesso</p>
+      </div>
+    <% else %>
+      <div class="d-flex align-items-center flex-column">
+        <div class="big-icon red">
+          <i class="fas fa-ban"></i>
+        </div>
+        <p>Infelizmente esse econtro foi cancelado</p>
+      </div>
+    <% end %>
   
   <% else %> <%# Evento ainda não foi realizado %>
     <% if @trade.author == current_user %>
