@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 
 
 export default class extends Controller {
-  static targets = [ "select", "mapbox", 'text', 'h1' ]
+  static targets = [ "select", "mapbox", 'text', 'h1', 'firstOption' ]
 
   connect() {
     this.markers = JSON.parse(this.mapboxTarget.dataset.markers)
@@ -197,12 +197,13 @@ export default class extends Controller {
 
       // Change text at the top of the page
       this.changeText()
+      this.firstOptionTarget.innerText = 'Ver as 3 opções mais perto de vocês'
     } 
-    // Se nada for selecionado botamos de novo as 10 opções mais próximas
+    // Se nada for selecionado botamos de novo as 3 opções mais próximas
     else 
     {
-      // Seleciona só os 10 mais próximos
-      const markersClose = this.markers.slice(0, 10)
+      // Seleciona só os 3 mais próximos
+      const markersClose = this.markers.length > 3 ? this.markers.slice(0, 3) : markers
       markersClose.forEach((marker) => {
       // Add carrefour unit ID to the marker
         const popup = new mapboxgl.Popup().setHTML(marker.info_window); // add this
