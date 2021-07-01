@@ -86,8 +86,6 @@ module StepsControllers
           @trade.update(lat_seller: coordinates[0], long_seller: coordinates[1])
         end
 
-        binding.pry
-
         @markers_users = [{
             lat: @trade.lat_seller,
             lng: @trade.long_seller,
