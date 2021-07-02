@@ -10,9 +10,8 @@ const initFlatpick = () => {
       minDate: "today",
       altFormat: "F j, Y - h:i K",
       dateFormat: "d-m-Y H:i",
-      minuteIncrement: 1,
       locale: Portuguese,
-      minuteIncrement: 30
+      minuteIncrement: 15,
     });
 
     document

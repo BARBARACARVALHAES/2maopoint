@@ -37,8 +37,8 @@
     <%= f.input  :phone,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "phone" },
-                  placeholder: "+55(00)000000000"
+                  input_html: { autocomplete: "phone", class:"phone_with_ddd" },
+                  placeholder: "(00)00000-0000"
                   %>
     <%= f.input  :birthdate,
                   required: true,
