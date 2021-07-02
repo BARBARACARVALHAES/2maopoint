@@ -44,7 +44,7 @@ class TwilioClient
       from: 'whatsapp:+14155238886',
       to: "whatsapp:+55#{args[:phone]}",
       body: "
-        Olà #{args[:receiver_name]},\nO seu agendamento da 2ª Mão Point Carrefour com *#{args[:sender_user].first_name}* para #{args[:sender_user] == args[:trade].buyer ? "vender" : "comprar"} *#{args[:trade].item}* foi *confirmado* !\n*#{args[:trade].carrefour_unit.name}*\n*#{args[:trade].date.strftime("%d/%m/%Y")}*\n*#{args[:trade].date.strftime("%H:%M")}*\nVocê devera apresnetar um QR no dia do encontro que você pode achar nesse link : #{args[:url]}\n.
+        Olà #{args[:receiver_name]},\nO seu agendamento da 2ª Mão Point Carrefour com *#{args[:sender_user].first_name}* para #{args[:sender_user] == args[:trade].buyer ? "vender" : "comprar"} *#{args[:trade].item}* foi *confirmado* !\n*#{args[:trade].carrefour_unit.name}*\n*#{args[:trade].date.strftime("%d/%m/%Y")}*\n*#{args[:trade].date.strftime("%H:%M")}*\nVocê devera apresentar um QR code no dia do encontro que você pode achar nesse link : #{args[:url]}\n.
       "
     )
   end
