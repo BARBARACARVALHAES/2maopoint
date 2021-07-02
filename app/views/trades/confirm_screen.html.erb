@@ -34,10 +34,10 @@
   <% else %> <%# Evento ainda não foi realizado %>
     <% if @trade.author == current_user %>
     <h1 class="title" style="margin-top:2rem;">Você tem um agendamento!</h1>
-      <p class="subtitle mb-5"><strong>Olá <%= current_user ? current_user.first_name : @trade.receiver_name %></strong>, você tem um agendamento marcado para a transação do <%= @trade.item %> no 2ª Mão Point. Confira a data, horário e local.
+      <p class="subtitle mb-5"><strong>Olá <%= current_user ? current_user.first_name : @trade.receiver_name %></strong>, você tem um agendamento marcado para a seguinte transação : <%= @trade.item %> no 2ª Mão Point. Confira a data, horário e local.
     <% else %>
     <h1 class="title" style="margin-top: 2rem;">Você recebeu um convite!</h1>  
-      <p class="subtitle mb-5"><strong>Olá <%= current_user ? current_user.first_name : @trade.receiver_name %></strong>, você recebeu um convite para realizar a transação do <%= @trade.item %>. Confira a data, horário e local.
+      <p class="subtitle mb-5"><strong>Olá <%= current_user ? current_user.first_name : @trade.receiver_name %></strong>, você recebeu um convite para a seguinte transação : <%= @trade.item %>. Confira a data, horário e local.
     <% end %>
     
     <div class="confirmation-card mb-5 text-center">
@@ -59,12 +59,12 @@
 
     <% if @trade.confirmed? %>
       <div class="confirmation-card d-flex flex-column align-items-center mb-5">
-        <p class="mt-4 subtitle">Para sua segurança, você deve apresentar este QR Code ao chegar no 2ª Mão Point. Você também receberá por Whatsapp no dia do encontro. </p>
+        <p class="mt-4 subtitle">Para sua segurança, você deve apresentar este QR Code ao chegar no 2ª Mão Point. Você também receberá por Whatsapp no dia do encontro.</p>
           <%= @svg.html_safe %>
       </div>
     <% else %>
       <div class="confirmation-card d-flex flex-column align-items-center mb-5">
-        <p style='color: red;'>Você receberá um QR code uma vez que as duas partes tenham aceitado o agendamento</p>
+        <p style='color: red;'>Você receberá um QR code uma vez que as duas partes tenham aceitado o agendamento.</p>
       </div>
     <% end %>
     
