@@ -10,6 +10,28 @@
   }
 }
 
+.rounded-outline-button {
+  border-radius: 4em;
+  color: #1f8ad1;
+  background-color: white;
+  border: 1px #1f8ad1 solid;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  height: fit-content;
+  margin: 0px 4px;
+  &:hover {
+    text-decoration: none;
+    border: 1px #1E5EC3 solid;
+    color: #1E5EC3;
+  }
+}
+
+@media(max-width: 600px) {
+  .rounded-outline-button, .rounded-button {
+    font-size: 14px;
+  }
+}
+
 .rounded-button-secondary {
   border-radius: 4em;
   background: linear-gradient(260.18deg, #aaacad 47.59%, #bababb 99.01%);
