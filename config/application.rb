@@ -13,6 +13,9 @@ module Carrefour2aMao
 
     config.i18n.default_locale = :'pt-BR'
 
+    # Handle custom errors
+    config.exceptions_app = self.routes # Add this line
+
     config.generators do |generate|
       generate.assets false
       generate.helper false
