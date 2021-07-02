@@ -35,6 +35,9 @@ gem "rqrcode", "~> 2.0"
 # Fake Seeds
 gem 'faker'
 
+# Schedule rake tasks
+gem 'whenever', require: false
+
 # Twillio
 gem 'twilio-ruby', '~> 5.55.0'
 gem 'phonelib'
