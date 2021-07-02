@@ -29,7 +29,7 @@
   <%= f.input :receiver_phone, label: "TELEFONE", placeholder: "(00) 00000-0000", wrapper_html: { class: "question" }, input_html: {class: "phone_with_ddd" }, hint: 'O outro usuário será avisado por WhatsApp' %>
   <%= f.input :receiver_email, label: "E-MAIL (OPCIONAL)", placeholder: "joao@carrefour.com", wrapper_html: { class: "question" }, hint: 'O outro usuário será avisado por email' %>
   <div class="d-flex justify-content-around">
-  <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-primary btn-action rounded-button" %>
+  <%= link_to 'Voltar', trade_step_path(@trade, "location"), class: "btn btn-primary btn-action rounded-outline-button" %>
   <%= f.submit "Concluir", class: "btn btn-primary rounded-button", id: 'terminar' %>
   </div>
 <% end %>
