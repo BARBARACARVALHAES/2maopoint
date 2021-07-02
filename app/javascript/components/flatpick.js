@@ -12,6 +12,7 @@ const initFlatpick = () => {
       dateFormat: "d-m-Y H:i",
       minuteIncrement: 1,
       locale: Portuguese,
+      minuteIncrement: 30
     });
 
     document
