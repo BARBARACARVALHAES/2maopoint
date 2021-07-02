@@ -28,7 +28,7 @@
   .img_banner {
     height: 60vh;
     bottom: 0;
-    right: -80px;
+    right: -30px;
     position: absolute;
   }  
 }
@@ -206,6 +206,7 @@
 
   .agendamentoHome {
     padding: 24px;
+    text-align: center;
   }
   .icone {
     margin-right: 0px;
@@ -230,6 +231,7 @@
   }
   .maisVantagens {
     max-width: 100%;
+    margin-left: 0;
   }
   .maisVantagens h2 {
     text-align: center;
@@ -244,4 +246,10 @@
   .img_banner_mobile {
     display: none;
   }
+}
+
+@media (min-width: 1200px) {
+  .img_banner {
+    right: 200px !important;
+  }  
 }
