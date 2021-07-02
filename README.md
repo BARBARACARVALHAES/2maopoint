@@ -8,11 +8,9 @@ O site foi desenvolvido com Ruby on Rails (6.1.0) e Ruby (3.0.1). Gems e plugins
 - Autorização: Pundit
 - Geolocalização: Geocoder, Mapbox
 - Envio de mensagens de Whatsapp: Twilio, Phonelib
-- Formulário wizard: Wicked
-- Input de data em formulários: Flatpickr
 - Alertas: SweetAlert2
 - Estilo: Bootstrap
-- Formulários: SimpleForm, JS-Mask
+- Formulários: Wicked, SimpleForm, JS-Mask, Flatpickr
 - Testes: Rspec, Capybara, Factory Bot
 - Seeds: Faker
 - QR Code: RQRCode
