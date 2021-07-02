@@ -13,7 +13,7 @@
     <%= f.input :item_category_id, as: :select, label: "TIPO DE PRODUTO", collection: ItemCategory.all, wrapper_html: { class: "question" } %>
     <%= f.input :item, label: "NOME DO PRODUTO", wrapper_html: { class: "question" } %>
     <div class="d-flex justify-content-end">
-      <%= f.submit "Avançar", class: "btn btn-primary rounded-button", id: 'avançar' %>
+      <%= f.submit "Avançar", class: "btn btn-primary rounded-button unic", id: 'avançar' %>
     </div>
   <% end %>
 

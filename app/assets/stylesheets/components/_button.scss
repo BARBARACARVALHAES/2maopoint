@@ -1,6 +1,6 @@
 .rounded-button {
   border-radius: 4em;
-  background: linear-gradient(260.18deg, #1E5EC3 47.59%, #249ef0 99.01%);
+  background: linear-gradient(260.18deg, #1e5ec3 47.59%, #249ef0 99.01%);
   border: none;
   padding: 10px 20px;
   font-size: 1.2rem;
@@ -27,7 +27,7 @@
   &:hover {
     background: linear-gradient(260.18deg, #c70b0b 47.59%, #811010 99.01%);
   }
-} 
+}
 
 .stacked-button {
   max-width: 300px;
@@ -53,4 +53,8 @@
   &:hover {
     cursor: grab !important;
   }
+}
+
+.unic {
+  margin-right: 1rem;
 }

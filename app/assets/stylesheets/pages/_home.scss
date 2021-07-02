@@ -1,19 +1,22 @@
 // Specific CSS for your home-page
+
+.involteBanner {
+  background: linear-gradient(233.46deg, #1e5bc6 4.26%, #59b9af 84.51%);
+}
 .banner {
   height: 80vh;
-  background: linear-gradient(233.46deg, #1e5bc6 4.26%, #59b9af 84.51%);
   background-blend-mode: darken;
   mix-blend-mode: normal;
   margin-top: -90px;
   display: flex;
   position: relative;
+  width: 100%;
   .tittleBanner {
     position: absolute;
-    width: 670px;
     height: 300px;
     right: 35%;
     top: 18%;
-    left: 1%;
+    left: 4%;
     h1 {
       font-size: 5.4rem;
       line-height: 5.4rem;
@@ -23,16 +26,15 @@
       box-sizing: border-box;
       border-radius: 18px;
       padding: 35px;
+      width: 50%;
     }
   }
   .img_banner {
-    height: 60vh;
+    height: 70vh;
     bottom: 0;
-    right: -30px;
     position: absolute;
-  }  
+  }
 }
-
 
 .forte {
   font-weight: 700;
@@ -86,7 +88,7 @@
   width: 60%;
 }
 
-.maisVantagens { 
+.maisVantagens {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -248,8 +250,26 @@
   }
 }
 
+@media only (min-width: 601px) {
+  .img_banner {
+    left: 400px;
+  }
+  .involteBanner {
+    align-items: center;
+  }
+  .banner .tittleBanner h1 {
+    width: 70%;
+  }
+}
+
 @media (min-width: 1200px) {
   .img_banner {
-    right: 200px !important;
-  }  
+    right: 171px !important;
+  }
+  .involteBanner {
+    align-items: center;
+  }
+  .banner .tittleBanner h1 {
+    width: 50% !important;
+  }
 }
