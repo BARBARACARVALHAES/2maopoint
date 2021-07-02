@@ -1,6 +1,6 @@
 class TradesController < ApplicationController
   before_action :set_trade, only: %i[edit destroy update confirm_presence confirm_screen set_reminder realized_trade]
-  before_action :search_user, only: %i[update destroy confirm_presence]
+  before_action :get_url, only: %i[update destroy confirm_presence]
   before_action :get_markers_users, only: %i[confirm_screen edit update]
   before_action :get_uniq_marker, only: %i[confirm_screen]
   before_action :trade_params, only: [:realized_trade]
@@ -63,7 +63,6 @@ class TradesController < ApplicationController
     receiver_infos = get_receiver_infos
     if @trade.buyer_accepted == true && @trade.seller_accepted == true
       WhatsappConfirmTradeJob.perform_now(phone: receiver_infos[:receiver_phone], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade, url: @url)
-      # set_reminder
     end
     # TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).confirm_trade.deliver_later
     redirect_to(confirm_screen_trade_path(@trade), success: "Você confirmou a sua presença para esse encontro !")
@@ -157,8 +156,7 @@ class TradesController < ApplicationController
     params.require(:trade).permit(:carrefour_unit_id, :date, :realized)
   end
 
-  def search_user
-    user = User.find_by(phone: @trade.receiver_phone)
-    @url = user ? confirm_screen_trade_url(@trade) : new_user_registration_url
+  def get_url
+    @url = confirm_screen_trade_url(@trade)
   end
 end

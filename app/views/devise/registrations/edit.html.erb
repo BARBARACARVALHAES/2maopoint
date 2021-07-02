@@ -66,6 +66,11 @@
                 hint: "Precisamos da sua senha atual para confirmar as mudançãs",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
+    <%= f.input :optin_ads,
+                  label: "Gostaria de receber ofertas do Carrefour e parceiros" %>                                                          
+      <%= f.input :optin_privacy, 
+                  required: true,
+                  label: "Aceito os termos de uso e de privacidade" %>      
   </div>
 
   <div class="form-actions">

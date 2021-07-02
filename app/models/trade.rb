@@ -6,7 +6,6 @@ class Trade < ApplicationRecord
   belongs_to :buyer, class_name: "User", optional: true
   belongs_to :author, class_name: "User"
   before_save :clean_phone
-  before_save :clean_cpf
 
   ROLE = ["Vendedor", "Comprador"]
 
@@ -63,11 +62,8 @@ class Trade < ApplicationRecord
 
   
   def clean_phone
-    self.phone = self.phone.delete("(").delete(")").delete("-")
+    self.receiver_phone = self.receiver_phone.delete("(").delete(")").delete("-") if self.receiver_phone.present?
   end
-
-  def clean_cpf
-    self.cpf = self.cpf.delete("-").delete("-").delete(".")
 
   def verify_cep
     regexp_cep = /^\d{5}(-?)\d{3}$/
