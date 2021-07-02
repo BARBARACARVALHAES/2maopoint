@@ -27,7 +27,7 @@
 }
 
 @media(max-width: 600px) {
-  .rounded-outline-button, .rounded-button {
+  .rounded-outline-button, .rounded-button, .rounded-button-waiting, .rounded-button-confirmed {
     font-size: 14px;
   }
 }
