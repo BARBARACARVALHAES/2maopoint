@@ -10,15 +10,19 @@
   }
 }
 
-.rounded-button-secondary {
+.rounded-outline-button {
   border-radius: 4em;
-  background: linear-gradient(260.18deg, #aaacad 47.59%, #bababb 99.01%);
-  border: none;
+  color: #1f8ad1;
+  background-color: white;
+  border: 1px #1f8ad1 solid;
   padding: 10px 20px;
-  color: white;
   font-size: 1.2rem;
+  height: fit-content;
+  margin-right: 4px;
   &:hover {
-    background: linear-gradient(260.18deg, #9a9c9c 47.59%, #a0a0a1 99.01%);
+    text-decoration: none;
+    border: 1px #1E5EC3 solid;
+    color: #1E5EC3;
   }
 }
 
@@ -55,6 +59,38 @@
   }
 }
 
+
 .unic {
   margin-right: 1rem;
 }
+
+@media(max-width: 600px) {
+  .rounded-outline-button, .rounded-button, .rounded-button-waiting, .rounded-button-confirmed {
+    font-size: 14px;
+  }
+}
+
+.rounded-button-secondary {
+  border-radius: 4em;
+  background: linear-gradient(260.18deg, #aaacad 47.59%, #bababb 99.01%);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1.2rem;
+  &:hover {
+    background: linear-gradient(260.18deg, #9a9c9c 47.59%, #a0a0a1 99.01%);
+  }
+}
+
+.canceled {
+  background: linear-gradient(260.18deg, #c70b0b 47.59%, #811010 99.01%);
+  &:hover {
+    background: linear-gradient(260.18deg, #c70b0b 47.59%, #811010 99.01%);
+  }
+} 
+
+.stacked-button {
+  max-width: 300px;
+  margin-bottom: 2rem;
+}
+

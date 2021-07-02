@@ -33,14 +33,14 @@
                   required: true,
                   autofocus: true,
                   input_html: { autocomplete: "phone", class:"phone_with_ddd" },
-                  placeholder: "(21)00000-0000"
+                  placeholder: "(00)00000-0000"
                    %>
     <%= f.input  :birthdate,
                   required: true,
                   autofocus: true,
                   input_html: { autocomplete: "birthdate"},
                   start_year: Date.today.year - 110, 
-                  end_year: Date.today.year
+                  end_year: Date.today.year - 18
                   %>
     <%= f.input  :address,
                   required: true,

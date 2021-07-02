@@ -1,0 +1,22 @@
+.container-error {
+  height: 100vh;
+  background: linear-gradient(233.46deg, #1e5bc6 4.26%, #59b9af 84.51%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 68px;
+  text-align: center;
+  img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.link-error {
+  color: white;
+  &hover {
+    text-decoration: none;
+    color: rgb(187, 187, 187);
+  }
+}
