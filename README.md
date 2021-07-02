@@ -19,7 +19,7 @@ O site foi desenvolvido com Ruby on Rails (6.1.0) e Ruby (3.0.1). O stack é:
 ## Desenvolvimento local
 Se você não tem, deve instalar:
 - ruby 3.0.1 `rbenv install 3.0.1` && `rbenv global 3.0.1`
-- NodeJS (version 14.15, you may use nvm if you have several versions)
+- NodeJS (versão 14.15, use o nvm caso tenha várias versões)
 - yarn `npm i -g yarn`
 
 Não esqueça de executar `bundle install` e `yarn install` antes de rodar o servidor local `rails s` pela primeira vez.
