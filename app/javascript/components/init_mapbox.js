@@ -14,7 +14,13 @@ const initMapbox = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v10'
+      style: 'mapbox://styles/mapbox/streets-v10',
+      width: '400px'
+    });
+
+    map.on('load', function () {
+      // Resize canva no map
+      map.resize()
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
