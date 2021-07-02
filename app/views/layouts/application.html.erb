@@ -28,10 +28,11 @@
   </head>
 
   <body <%= "class=bg-white" if root_path%>>
-    <%= render 'shared/navbar' %>
+    <% if params['controller'] != 'errors' %>
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/footer' %>
+    <% end %>
     <%= render 'shared/flashes' %>
-    <%= render 'shared/footer' %>
-
     <%= yield %>
   </body>
 </html>
