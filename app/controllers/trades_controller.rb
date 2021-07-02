@@ -62,8 +62,14 @@ class TradesController < ApplicationController
     current_user == @trade.buyer ? @trade.update(buyer_accepted: true) : @trade.update(seller_accepted: true)
     receiver_infos = get_receiver_infos
     if @trade.buyer_accepted == true && @trade.seller_accepted == true
+      @qr_code = RQRCode::QRCode.new("http://segunda-mao-carrefour.herokuapp.com/trades/#{@trade.id}/confirm_screen")
+      @svg = @qr_code.as_svg(
+        standalone: true,
+        use_path: true,
+        viewbox: true,
+        offset: 15
+      )
       WhatsappConfirmTradeJob.perform_now(phone: receiver_infos[:receiver_phone], receiver_name: receiver_infos[:receiver_name], sender_user: current_user, trade: @trade, url: @url)
-      # set_reminder
     end
     # TradeMailer.with(receiver_email: @trade.receiver_email, receiver_name: @trade.receiver_name, sender_user: current_user, trade: @trade).confirm_trade.deliver_later
     redirect_to(confirm_screen_trade_path(@trade), success: "Você confirmou a sua presença para esse encontro !")
@@ -159,6 +165,6 @@ class TradesController < ApplicationController
 
   def search_user
     user = User.find_by(phone: @trade.receiver_phone)
-    @url = user ? confirm_screen_trade_url(@trade) : new_user_registration_url
+    @url = confirm_screen_trade_url(@trade)
   end
 end
